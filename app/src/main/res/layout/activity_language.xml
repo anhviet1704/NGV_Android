@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF"
+    android:orientation="vertical">
+
+
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/roundRectView5"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shape_roundRect_borderColor="#73809B"
+        app:shape_roundRect_borderWidth="0dp"
+        app:shape_roundRect_bottomLeftRadius="0dp"
+        app:shape_roundRect_bottomRightRadius="0dp"
+        app:shape_roundRect_topLeftRadius="0dp"
+        app:shape_roundRect_topRightRadius="0dp">
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F8FAFF"
+            android:gravity="center"
+            android:text="@string/tv_setting_014"
+            android:textColor="#1C2D51"
+            android:textSize="16sp"
+            app:typeFace="HelveticaNeue_Regular.otf" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="13dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_back" />
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+    <ImageView
+        android:id="@+id/iv_vn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundRectView5"
+        app:srcCompat="@drawable/ic_vn_select" />
+
+    <com.ivankocijan.magicviews.views.MagicTextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="@string/tv_setting_012"
+        android:textColor="#223254"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/iv_vn"
+        app:layout_constraintStart_toStartOf="@+id/iv_vn"
+        app:layout_constraintTop_toBottomOf="@+id/iv_vn"
+        app:typeFace="HelveticaNeue_Regular.otf" />
+
+    <ImageView
+        android:id="@+id/iv_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="54dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_vn"
+        app:layout_constraintTop_toTopOf="@+id/iv_vn"
+        app:srcCompat="@drawable/ic_us" />
+
+    <com.ivankocijan.magicviews.views.MagicTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/tv_setting_013"
+        android:textColor="#223254"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_content"
+        app:layout_constraintEnd_toEndOf="@+id/iv_en"
+        app:layout_constraintStart_toStartOf="@+id/iv_en"
+        app:typeFace="HelveticaNeue_Regular.otf" />
+
+    <com.ivankocijan.magicviews.views.MagicButton
+        android:id="@+id/bt_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/gradient_6dp"
+        android:elevation="1dp"
+        android:gravity="center"
+        android:paddingBottom="14dp"
+        android:paddingEnd="118dp"
+        android:paddingStart="118dp"
+        android:paddingTop="16dp"
+        android:text="@string/tv_setting_015"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_close"
+        app:typeFace="HelveticaNeue_Medium.otf" />
+
+</android.support.constraint.ConstraintLayout>

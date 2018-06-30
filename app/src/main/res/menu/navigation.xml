@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Trang chủ" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Bảng điểm" />
+
+    <item
+        android:id="@+id/navigation_contact"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Danh bạ" />
+    <item
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Cài đặt" />
+</menu>

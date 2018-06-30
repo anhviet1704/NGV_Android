@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/view_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="#aaa"
+                    app:layout_constraintDimensionRatio="H,3:2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:padding="2dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:piv_animationType="fill"
+                    app:piv_dynamicCount="true"
+                    app:piv_selectedColor="#84B8FF"
+                    app:piv_strokeWidth="2dp"
+                    app:piv_unselectedColor="#84B8FF"
+                    app:piv_viewPager="@id/viewPager"
+                    attrs:piv_padding="14dp"
+                    attrs:piv_radius="8dp" />
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_back_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:id="@+id/view_waiting_job"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:elevation="1dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shape_roundRect_borderColor="#84B8FF"
+                    app:shape_roundRect_borderWidth="0dp"
+                    app:shape_roundRect_bottomLeftRadius="6dp"
+                    app:shape_roundRect_bottomRightRadius="6dp"
+                    app:shape_roundRect_topLeftRadius="6dp"
+                    app:shape_roundRect_topRightRadius="6dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#84B8FF"
+                        android:gravity="center"
+                        android:paddingBottom="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:text="@string/tv_work_009"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp"
+                        app:typeFace="HelveticaNeue_Regular.otf" />
+
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_work_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_toolbar"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="9dp"
+                    android:text="Tìm người thân"
+                    android:textColor="#223254"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPager"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_work_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="6dp"
+                    android:text="Tìm người thân"
+                    android:textColor="#F45F79"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_work_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_work_name"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="8dp"
+                    android:elevation="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_work_price"
+                    app:layout_constraintStart_toEndOf="@+id/tv_work_price"
+                    app:layout_constraintTop_toTopOf="@+id/tv_work_price"
+                    app:shape_roundRect_borderColor="#F45F79"
+                    app:shape_roundRect_borderWidth="0dp"
+                    app:shape_roundRect_bottomLeftRadius="6dp"
+                    app:shape_roundRect_bottomRightRadius="6dp"
+                    app:shape_roundRect_topLeftRadius="6dp"
+                    app:shape_roundRect_topRightRadius="6dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_work_price_sum"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#F45F79"
+                        android:gravity="center"
+                        android:paddingBottom="2dp"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="12dp"
+                        android:paddingTop="2dp"
+                        android:text="1tr/ giờ"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp"
+                        app:typeFace="HelveticaNeue_Light.otf" />
+
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_work_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="6dp"
+                    android:text="Tìm người thân"
+                    android:textColor="#98A2B0"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_work_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_work_price"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/stroke_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_work_time">
+
+                    <ImageView
+                        android:id="@+id/iv_user_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/ic_avatar"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_user_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/view_toolbar"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="12dp"
+                        android:text="Tìm người thân"
+                        android:textColor="#1C2D51"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/iv_user_avatar"
+                        app:layout_constraintTop_toTopOf="@+id/iv_user_avatar"
+                        app:typeFace="HelveticaNeue_Medium.otf" />
+
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_user_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="2dp"
+                        android:text="Tìm người thân"
+                        android:textColor="#98A2B0"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tv_user_name"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_user_name"
+                        app:typeFace="HelveticaNeue_Light.otf" />
+                </android.support.constraint.ConstraintLayout>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:paddingBottom="16dp"
+                    android:paddingTop="20dp"
+                    android:text="Công ty Cổ Phần 1989 Địa chỉ: xx , Tp.Hồ chí Minh Cân tuyển nhân viên vào bao sản phẩm cho công ty Số lượng: 02 người - Mô tả công việc: + Chủ yếu vào bao sản phẩm cho Công "
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/stroke_gray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_content">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:src="@drawable/ic_clock"
+                        app:layout_constraintEnd_toStartOf="@+id/magicTextView7"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/magicTextView7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/tv_work_002"
+                        android:textColor="#98A2B0"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_job_time"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="@+id/imageView4"
+                        app:typeFace="HelveticaNeue_Light.otf" />
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_job_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/tv_work_002"
+                        android:textColor="#1C89FF"
+                        android:textSize="13sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/magicTextView7"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/magicTextView7"
+                        app:typeFace="HelveticaNeue_Light.otf" />
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_job_address"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/tv_work_004"
+                        android:textColor="#98A2B0"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+                        app:layout_constraintStart_toStartOf="@+id/magicTextView7"
+                        app:layout_constraintTop_toBottomOf="@+id/magicTextView7"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:typeFace="HelveticaNeue_Light.otf" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_pin"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_job_address"
+                        app:layout_constraintEnd_toStartOf="@+id/magicTextView7"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="@+id/tv_job_address"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:src="@drawable/ic_stress"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_job_address"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_job_address" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/magicTextView12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/view_toolbar"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/tv_work_003"
+                    android:textColor="#223254"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="78dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/magicTextView12" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        \
+
+        <com.loopeer.shadow.ShadowView
+            android:id="@+id/shadow_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerHorizontal="true"
+            android:elevation="5dp"
+            android:foreground="?attr/selectableItemBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:shadowColor="#cfcbcb"
+            app:shadowMarginTop="6dp"
+            app:shadowRadius="5dp">
+
+            <LinearLayout
+                android:id="@+id/tv_resend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:orientation="horizontal">
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#84B8FF"
+                    android:gravity="center"
+                    android:paddingBottom="18dp"
+                    android:paddingTop="20dp"
+                    android:text="@string/tv_work_001"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
+
+                <ImageView
+                    android:id="@+id/iv_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_chat" />
+
+                <ImageView
+                    android:id="@+id/iv_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_call" />
+            </LinearLayout>
+        </com.loopeer.shadow.ShadowView>
+    </RelativeLayout>
+</layout>

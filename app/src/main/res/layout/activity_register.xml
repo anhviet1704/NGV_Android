@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/view_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8FAFF"
+        android:orientation="vertical">
+
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            app:shape_roundRect_borderColor="#73809B"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="0dp"
+            app:shape_roundRect_bottomRightRadius="0dp"
+            app:shape_roundRect_topLeftRadius="0dp"
+            app:shape_roundRect_topRightRadius="0dp">
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F8FAFF"
+                android:gravity="center"
+                android:text="@string/tv_register_001"
+                android:textColor="#1C2D51"
+                android:textSize="18sp"
+                app:typeFace="HelveticaNeue_Regular.otf" />
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="13dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_back" />
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="36dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp"
+                    android:text="@string/tv_register_002"
+                    android:textColor="#223254"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_share_info"
+                    app:layout_constraintStart_toEndOf="@+id/iv_share_info"
+                    app:layout_constraintTop_toTopOf="@+id/iv_share_info"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:background="#FFFFFF"
+                    android:drawablePadding="24dp"
+                    android:drawableStart="@drawable/ic_one"
+                    android:paddingBottom="13dp"
+                    android:paddingStart="22dp"
+                    android:paddingTop="13dp"
+                    android:text="@string/tv_register_003"
+                    android:textColor="#84B8FF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_share_info"
+                    app:layout_constraintStart_toEndOf="@+id/iv_share_info"
+                    app:layout_constraintTop_toTopOf="@+id/iv_share_info"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicEditText
+                    android:id="@+id/et_name"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:hint="@string/tv_register_004"
+                    android:text="Bùi Đức Vinh"
+                    android:inputType="textPersonName"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/et_birthday"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:hint="@string/tv_register_005"
+                    android:inputType="textPersonName"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_country"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_more"
+                    android:hint="@string/tv_register_007"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicEditText
+                    android:id="@+id/et_phone"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:hint="@string/tv_register_006"
+                    android:text="0933533776"
+                    android:inputType="phone"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicEditText
+                    android:id="@+id/et_email"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:hint="@string/tv_register_008"
+                    android:text="buiducvinh13@gmail.com"
+                    android:inputType="textPersonName"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="36dp"
+                    android:background="#FFFFFF"
+                    android:drawablePadding="24dp"
+                    android:drawableStart="@drawable/ic_two"
+                    android:paddingBottom="13dp"
+                    android:paddingStart="22dp"
+                    android:paddingTop="13dp"
+                    android:text="@string/tv_register_009"
+                    android:textColor="#84B8FF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_share_info"
+                    app:layout_constraintStart_toEndOf="@+id/iv_share_info"
+                    app:layout_constraintTop_toTopOf="@+id/iv_share_info"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_department"
+                    style="@style/EdittextStyle"
+                    android:layout_marginBottom="16dp"
+                    android:drawableEnd="@drawable/ic_more"
+                    android:hint="@string/tv_register_010"
+                    android:inputType="textPersonName"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:paddingEnd="16dp"
+                    android:paddingStart="16dp">
+
+                    <RelativeLayout
+                        android:id="@+id/view_front_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="166dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_gray_6dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_camera" />
+
+                        <com.ivankocijan.magicviews.views.MagicTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="13sp"
+                            android:hint="@string/tv_register_011"
+                            app:typeFace="HelveticaNeue_Light.otf" />
+
+                        <ImageView
+                            android:id="@+id/iv_front_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/view_back_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="166dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/stroke_gray_6dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_camera" />
+
+                        <com.ivankocijan.magicviews.views.MagicTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="13sp"
+                            android:hint="@string/tv_register_012"
+                            app:typeFace="HelveticaNeue_Light.otf" />
+
+                        <ImageView
+                            android:id="@+id/iv_back_card"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:drawablePadding="24dp"
+                    android:drawableStart="@drawable/ic_three"
+                    android:paddingBottom="13dp"
+                    android:paddingStart="22dp"
+                    android:paddingTop="13dp"
+                    android:text="@string/tv_register_028"
+                    android:textColor="#84B8FF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_share_info"
+                    app:layout_constraintStart_toEndOf="@+id/iv_share_info"
+                    app:layout_constraintTop_toTopOf="@+id/iv_share_info"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_work"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="22dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.ivankocijan.magicviews.views.MagicButton
+                    android:id="@+id/bt_finish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/gradient_6dp"
+                    android:elevation="1dp"
+                    android:gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingEnd="118dp"
+                    android:paddingStart="118dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/tv_register_013"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>

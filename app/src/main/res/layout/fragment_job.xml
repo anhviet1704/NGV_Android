@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_job"
+        android:orientation="vertical">
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:id="@+id/tv_work_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_toolbar"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            android:text="6:30 - 15:00"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toStartOf="@+id/roundRectView"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:typeFace="HelveticaNeue_Medium.otf" />
+
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/roundRectView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="16dp"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_work_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_work_time"
+            app:layout_constraintTop_toTopOf="@+id/tv_work_time"
+            app:shape_roundRect_borderColor="#F45F79"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="6dp"
+            app:shape_roundRect_bottomRightRadius="6dp"
+            app:shape_roundRect_topLeftRadius="6dp"
+            app:shape_roundRect_topRightRadius="6dp">
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#6AE05A"
+                android:gravity="center"
+                android:paddingBottom="13dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:text="@string/tv_work_005"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Medium.otf" />
+
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Hôm nay"
+            android:textColor="#DFE5ED"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_work_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_work_time"
+            app:typeFace="HelveticaNeue_Light.otf" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_login_small"
+            app:layout_constraintStart_toStartOf="@+id/tv_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time" />
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:id="@+id/tv_job_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:text="Dọn dẹp văn phòng vào buổi sáng và buổi chiều"
+            android:textColor="#DFE5ED"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
+            app:typeFace="HelveticaNeue_Medium.otf" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_pin"
+            app:layout_constraintStart_toStartOf="@+id/imageView3"
+            app:layout_constraintTop_toBottomOf="@+id/tv_job_name" />
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:id="@+id/tv_job_place"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Dọn dẹp văn phòng vào buổi sáng và buổi chiều"
+            android:textColor="#E5F0FF"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_job_name"
+            app:layout_constraintTop_toTopOf="@+id/imageView6"
+            app:layout_constraintVertical_bias="0.0"
+            app:typeFace="HelveticaNeue_Light.otf" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_job_place">
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_job_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FF869B"
+                android:gravity="center"
+                android:paddingBottom="18dp"
+                android:paddingTop="19dp"
+                android:text="@string/tv_work_006"
+                android:textColor="#E5F0FF"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Regular.otf" />
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_job_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_weight="1"
+                android:background="#5F80B0"
+                android:gravity="center"
+                android:paddingBottom="18dp"
+                android:paddingEnd="0.5dp"
+                android:paddingStart="0.5dp"
+                android:paddingTop="19dp"
+                android:text="@string/tv_work_007"
+                android:textColor="#E5F0FF"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Regular.otf" />
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_job_finish"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#5F80B0"
+                android:gravity="center"
+                android:paddingBottom="18dp"
+                android:paddingTop="19dp"
+                android:text="@string/tv_work_008"
+                android:textColor="#E5F0FF"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Regular.otf" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/view_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#223254"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

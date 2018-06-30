@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="3dp"
+        app:shape_roundRect_borderColor="#F8FAFF"
+        app:shape_roundRect_borderWidth="0dp"
+        app:shape_roundRect_bottomLeftRadius="0dp"
+        app:shape_roundRect_bottomRightRadius="0dp"
+        app:shape_roundRect_topLeftRadius="0dp"
+        app:shape_roundRect_topRightRadius="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F8FAFF"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.ivankocijan.magicviews.views.MagicEditText
+                android:id="@+id/et_seach"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13sp"
+                android:layout_weight="1"
+                android:background="@drawable/box_light_blue_full_6dp"
+                android:drawablePadding="12dp"
+                android:drawableStart="@drawable/ic_search"
+                android:paddingBottom="7dp"
+                android:hint="@string/tv_home_009"
+                android:paddingEnd="12dp"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:textColor="#1C2D51"
+                android:textColorHint="#98A2B0"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Light.otf" />
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/tv_home_008"
+                android:textColor="#223254"
+                android:textSize="14sp"
+                app:typeFace="HelveticaNeue_Light.otf" />
+        </LinearLayout>
+
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+

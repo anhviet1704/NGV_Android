@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/viewpagertab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:stl_defaultTabTextAllCaps="false"
+                    app:stl_defaultTabTextColor="#73809B"
+                    app:stl_defaultTabTextHorizontalPadding="30dp"
+                    app:stl_defaultTabTextSize="16sp"
+                    app:stl_distributeEvenly="false"
+                    app:stl_dividerThickness="0dp"
+                    app:stl_indicatorColor="#1C89FF"
+                    app:stl_indicatorCornerRadius="1.5dp"
+                    app:stl_indicatorInterpolation="linear"
+                    app:stl_indicatorThickness="1dp"
+                    app:stl_indicatorWidth="auto"
+                    app:stl_indicatorWithoutPadding="false"
+                    app:stl_underlineColor="@color/transparent" />
+
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toRightOf="@id/viewpagertab"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_search" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>

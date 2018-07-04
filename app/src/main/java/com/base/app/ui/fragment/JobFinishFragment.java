@@ -1,8 +1,10 @@
 package com.base.app.ui.fragment;
 
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,26 +14,37 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.databinding.FragmentNotificationBinding;
+import com.base.app.model.JobCurrentItem;
+import com.base.app.model.LoginItem;
+import com.base.app.model.ResponseObj;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobFinishAdapter;
+import com.base.app.ui.adapter.JobRegisterAdapter;
 import com.base.app.ui.adapter.TimeLineAdapter;
 import com.base.app.ui.adapter.WorkAdapter;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobFinishFragmentVM;
 import com.base.app.viewmodel.JobFinishFragmentVM;
 import com.base.app.viewmodel.JobFinishFragmentVM;
+import com.base.app.viewmodel.JobRegisterFragmentVM;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, FragmentJobListBinding> {
 
-    private List<WorkItem> mWorkItems = new ArrayList<>();
+    @Inject
+    LoginItem mLoginItem;
 
-    public static JobFinishFragment newInstance() {
+    private List<JobCurrentItem> mDataList = new ArrayList<>();
+
+    public static JobRegisterFragment newInstance() {
         Bundle bundle = new Bundle();
-        JobFinishFragment fragment = new JobFinishFragment();
+        JobRegisterFragment fragment = new JobRegisterFragment();
         //fragment.setArguments(bundle);
         return fragment;
     }
@@ -47,24 +60,8 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
     }
 
     @Override
-    protected void onCreate(Bundle instance, JobFinishFragmentVM viewModel) {
-        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                updateUI(binding, user);
-            }
-        });*/
-        mWorkItems = new ArrayList<>();
-        mWorkItems.add(new WorkItem(1, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(2, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(4, "askjdhakjs"));
-        JobFinishAdapter mWorkAdapter = new JobFinishAdapter(getContext(), mWorkItems, new OnClickItem() {
+    protected void onInit(Bundle instance) {
+        final JobFinishAdapter mWorkAdapter = new JobFinishAdapter(getContext(), mDataList, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
                 Intent intent = new Intent(getContext(), WorkDetailActivity.class);
@@ -75,5 +72,15 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvJob.setItemAnimator(new DefaultItemAnimator());
         bind.rvJob.setAdapter(mWorkAdapter);
+        //STATUS CODE :  === 1:waiting ,:2: approved, 3:complete, 4:cancel
+        viewModel.getListJobFinish(mLoginItem.getId(), 1).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
+            @Override
+            public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
+                if (listResponseObj.getResponse() == Response.SUCCESS) {
+                    mDataList = listResponseObj.getObj();
+                    mWorkAdapter.onUpdateData(mDataList);
+                }
+            }
+        });
     }
 }

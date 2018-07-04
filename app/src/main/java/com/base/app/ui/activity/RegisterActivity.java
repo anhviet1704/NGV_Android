@@ -69,7 +69,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     }
 
     @Override
-    protected void onCreate(Bundle instance, final RegisterActivityVM viewModel) {
+    protected void onInit(Bundle instance) {
         KeyboardUtils.hideSoftInput(this);
         onSetupDialog();
         bind.etBirthday.setOnClickListener(new View.OnClickListener() {

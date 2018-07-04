@@ -5,10 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.base.app.R;
-import com.base.app.model.WorkItem;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.utils.VectorDrawableUtils;
 import com.github.vipulasri.timelineview.TimelineView;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -21,12 +20,12 @@ import butterknife.ButterKnife;
 
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLineViewHolder> {
 
-    private List<WorkItem> mFeedList;
+    private List<JobCurrentItem> mDatas;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
 
-    public TimeLineAdapter(List<WorkItem> feedList) {
-        mFeedList = feedList;
+    public TimeLineAdapter(List<JobCurrentItem> datas) {
+        mDatas = datas;
     }
 
     @Override
@@ -44,16 +43,16 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
     @Override
     public void onBindViewHolder(TimeLineViewHolder holder, int position) {
-        WorkItem item = mFeedList.get(position);
+        JobCurrentItem item = mDatas.get(position);
         holder.timeMarker.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker));
-        holder.tvTime.setText("ngah hom nay");
-        holder.tvName.setText("ngah hom nay");
-        holder.tvAddress.setText("ngah hom nay");
+        holder.tvTime.setText(item.getStartTime());//not format
+        holder.tvName.setText(item.getName());
+        holder.tvAddress.setText(item.getAddress());
     }
 
     @Override
     public int getItemCount() {
-        return (mFeedList != null ? mFeedList.size() : 0);
+        return (mDatas != null ? mDatas.size() : 0);
     }
 
     public class TimeLineViewHolder extends RecyclerView.ViewHolder {
@@ -73,5 +72,10 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
             ButterKnife.bind(this, itemView);
             timeMarker.initLine(viewType);
         }
+    }
+
+    public void onUpdateData(List<JobCurrentItem> items) {
+        this.mDatas = items;
+        notifyDataSetChanged();
     }
 }

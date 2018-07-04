@@ -39,7 +39,7 @@ public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBindin
 
     protected abstract Class<T> getViewModel();
 
-    protected abstract void onCreate(Bundle instance, T viewModel);
+    protected abstract void onInit(Bundle instance);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,8 +54,8 @@ public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBindin
         super.onActivityCreated(savedInstanceState);
         AndroidSupportInjection.inject(this);
         //AndroidInjection.inject(this);
-        ViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
-        onCreate(savedInstanceState, (T) viewModel);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
+        onInit(savedInstanceState);
     }
 
     @Subscribe

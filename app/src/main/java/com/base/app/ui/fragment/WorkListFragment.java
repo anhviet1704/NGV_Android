@@ -53,7 +53,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
     }
 
     @Override
-    protected void onCreate(Bundle instance, WorkListFragmentVM viewModel) {
+    protected void onInit(Bundle instance) {
         mWorkAdapter = new WorkAdapter(getContext(), mWorkItems, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {

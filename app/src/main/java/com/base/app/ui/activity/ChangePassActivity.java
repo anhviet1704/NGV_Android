@@ -26,7 +26,7 @@ public class ChangePassActivity extends BaseActivity<ChangePassActivityVM, Activ
     }
 
     @Override
-    protected void onCreate(Bundle instance, final ChangePassActivityVM viewModel) {
+    protected void onInit(Bundle instance) {
         bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

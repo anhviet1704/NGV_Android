@@ -1,8 +1,10 @@
 package com.base.app.ui.fragment;
 
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,12 +14,16 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.databinding.FragmentNotificationBinding;
+import com.base.app.model.JobCurrentItem;
+import com.base.app.model.LoginItem;
+import com.base.app.model.ResponseObj;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobFinishAdapter;
 import com.base.app.ui.adapter.JobRegisterAdapter;
 import com.base.app.ui.adapter.TimeLineAdapter;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobListFragmentVM;
 import com.base.app.viewmodel.JobRegisterFragmentVM;
 import com.base.app.viewmodel.JobRegisterFragmentVM;
@@ -25,9 +31,13 @@ import com.base.app.viewmodel.JobRegisterFragmentVM;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, FragmentJobListBinding> {
+import javax.inject.Inject;
 
-    private List<WorkItem> mWorkItems = new ArrayList<>();
+public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, FragmentJobListBinding> {
+    @Inject
+    LoginItem mLoginItem;
+
+    private List<JobCurrentItem> mDataList = new ArrayList<>();
 
     public static JobRegisterFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -47,24 +57,8 @@ public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, Fra
     }
 
     @Override
-    protected void onCreate(Bundle instance, JobRegisterFragmentVM viewModel) {
-        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                updateUI(binding, user);
-            }
-        });*/
-        mWorkItems = new ArrayList<>();
-        mWorkItems.add(new WorkItem(1, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(2, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(4, "askjdhakjs"));
-        JobRegisterAdapter mWorkAdapter = new JobRegisterAdapter(getContext(), mWorkItems, new OnClickItem() {
+    protected void onInit(Bundle instance) {
+        final JobRegisterAdapter mWorkAdapter = new JobRegisterAdapter(getContext(), mDataList, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
                 Intent intent = new Intent(getContext(), WorkDetailActivity.class);
@@ -75,5 +69,15 @@ public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, Fra
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvJob.setItemAnimator(new DefaultItemAnimator());
         bind.rvJob.setAdapter(mWorkAdapter);
+        //STATUS CODE :  === 1:waiting ,:2: approved, 3:complete, 4:cancel
+        viewModel.getListJobRegister(mLoginItem.getId(), 1).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
+            @Override
+            public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
+                if (listResponseObj.getResponse() == Response.SUCCESS) {
+                    mDataList = listResponseObj.getObj();
+                    mWorkAdapter.onUpdateData(mDataList);
+                }
+            }
+        });
     }
 }

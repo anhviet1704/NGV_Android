@@ -214,7 +214,6 @@ public class DialogHelper<T> {
             @Override
             public void onClick(View view) {
                 mClick.onClickItem();
-                mDialog.dismiss();
             }
         });
 
@@ -243,7 +242,6 @@ public class DialogHelper<T> {
             @Override
             public void onClick(View v) {
                 mClick.onClickItem();
-                mDialog.dismiss();
             }
         });
         mBtNo.setOnClickListener(new View.OnClickListener() {

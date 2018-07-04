@@ -1,7 +1,9 @@
 package com.base.app.ui.fragment;
 
 
+import android.arch.lifecycle.Observer;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -9,17 +11,25 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.databinding.FragmentNotificationBinding;
+import com.base.app.model.JobCurrentItem;
+import com.base.app.model.LoginItem;
+import com.base.app.model.ResponseObj;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.adapter.TimeLineAdapter;
+import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobListFragmentVM;
 import com.base.app.viewmodel.JobListFragmentVM;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJobListBinding> {
 
-    private List<WorkItem> mDataList = new ArrayList<>();
+    @Inject
+    LoginItem mLoginItem;
+    private List<JobCurrentItem> mDataList = new ArrayList<>();
 
     public static JobListFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -39,26 +49,21 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
     }
 
     @Override
-    protected void onCreate(Bundle instance, JobListFragmentVM viewModel) {
-        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                updateUI(binding, user);
-            }
-        });*/
-        mDataList.add(new WorkItem(1, "askjdhakjs"));
-        mDataList.add(new WorkItem(2, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-
+    protected void onInit(Bundle instance) {
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         bind.rvJob.setHasFixedSize(true);
-        TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList);
+        final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList);
         bind.rvJob.setAdapter(mTimeLineAdapter);
+        viewModel.getJobCurent(mLoginItem.getId()).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
+            @Override
+            public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
+                if (listResponseObj.getResponse() == Response.SUCCESS) {
+                    mDataList = listResponseObj.getObj();
+                    mTimeLineAdapter.onUpdateData(mDataList);
+                }
+            }
+        });
+
+
     }
 }

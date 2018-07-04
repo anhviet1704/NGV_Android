@@ -29,6 +29,7 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
     ViewModelProvider.Factory viewModelFactory;
 
     public B bind;
+    public T viewModel;
 
     protected abstract
     @LayoutRes
@@ -36,7 +37,7 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
 
     protected abstract Class<T> getViewModel();
 
-    protected abstract void onCreate(Bundle instance, T viewModel);
+    protected abstract void onInit(Bundle instance);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,9 +45,9 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
         AndroidInjection.inject(this);
         EventBus.getDefault().register(this);
         bind = DataBindingUtil.setContentView(this, getLayoutResId());
-        ViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
         ButterKnife.bind(this);
-        onCreate(savedInstanceState, (T) viewModel);
+        onInit(savedInstanceState);
         ImageView ivBack = findViewById(R.id.iv_back);
         if (ivBack != null) {
             ivBack.setOnClickListener(new View.OnClickListener() {

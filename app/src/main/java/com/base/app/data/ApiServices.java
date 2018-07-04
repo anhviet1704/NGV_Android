@@ -4,6 +4,7 @@ import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
 import com.base.app.model.CountryResponse;
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.JobItem;
 import com.base.app.model.LoginItem;
@@ -53,7 +54,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/cancel")
-    Observable<BaseList<JobItem>> getMaidCancelJob(@Field("id") String id, @Field("osin_id") String osin_id);
+    Completable getMaidJobCancel(@Field("id") int id, @Field("osin_id") int osin_id);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/detail")
@@ -61,7 +62,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/current")
-    Observable<BaseObj<JobDetail>> getMaidJobCurrent(@Field("osin_id") String osin_id);
+    Observable<BaseList<JobCurrentItem>> getMaidJobCurrent(@Field("osin_id") int osin_id);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/cancel")
@@ -73,13 +74,13 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/history")
-    Observable<BaseList<JobItem>> getMaidJobHistory(@Field("osin_id") String osin_id, @Field("status") String status);
+    Observable<BaseList<JobCurrentItem>> getMaidJobHistory(@Field("osin_id") int osin_id, @Field("status") int status);
 
     @FormUrlEncoded
     @POST("api/vi/job/register")
-    Observable<BaseObj<JobDetail>> getMaidJobRegister(@Field("job_id") String job_id,
-                                                      @Field("sub_job_id") String sub_job_id,
-                                                      @Field("osin_id") int osin_id);
+    Completable getMaidJobRegister(@Field("job_id") int job_id,
+                                   @Field("sub_job_id") int sub_job_id,
+                                   @Field("osin_id") int osin_id);
 
     //JOB
     @FormUrlEncoded

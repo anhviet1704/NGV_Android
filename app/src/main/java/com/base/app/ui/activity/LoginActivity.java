@@ -47,7 +47,6 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
     private DialogLoading mDialogLoading;
     private String userName;
     private String passWord;
-    private LoginActivityVM viewModel;
     private boolean isSplashShow = true;
 
     @Override
@@ -61,7 +60,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
     }
 
     @Override
-    protected void onCreate(Bundle instance, LoginActivityVM viewModel) {
+    protected void onInit(Bundle instance) {
         this.viewModel = viewModel;
         mDialogLoading = new DialogLoading(this, bind.viewRoot);
         keyboardHeightProvider = new KeyboardHeightProvider(this);

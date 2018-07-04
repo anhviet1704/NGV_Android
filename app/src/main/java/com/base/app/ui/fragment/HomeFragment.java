@@ -43,7 +43,7 @@ public class HomeFragment extends BaseFragment<WorkListFragmentVM, FragmentHomeB
     }
 
     @Override
-    protected void onCreate(Bundle instance, WorkListFragmentVM viewModel) {
+    protected void onInit(Bundle instance) {
         /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {

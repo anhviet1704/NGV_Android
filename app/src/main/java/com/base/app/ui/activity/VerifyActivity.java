@@ -24,7 +24,7 @@ public class VerifyActivity extends BaseActivity<VerifyActivityVM, ActivityVerif
     }
 
     @Override
-    protected void onCreate(Bundle instance, final VerifyActivityVM viewModel) {
+    protected void onInit(Bundle instance) {
         bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

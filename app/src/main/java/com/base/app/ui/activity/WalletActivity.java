@@ -36,7 +36,7 @@ public class WalletActivity extends BaseActivity<WalletActivityVM, ActivityWalle
     }
 
     @Override
-    protected void onCreate(Bundle instance, final WalletActivityVM viewModel) {
+    protected void onInit(Bundle instance) {
         /*bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

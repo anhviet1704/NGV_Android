@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
@@ -40,7 +41,6 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     @Inject
     LoginItem mLoginItem;
     private JobLastDetailItem mJobLastDetailItem;
-    private WorkDetailActivityVM viewmodel;
 
     private List<String> listItem = new ArrayList<>();
     private ViewpagerWorkAdapter fragmentAdapter;
@@ -59,8 +59,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     }
 
     @Override
-    protected void onCreate(Bundle instance, final WorkDetailActivityVM viewModel) {
-        viewmodel = viewModel;
+    protected void onInit(Bundle instance) {
         viewModel.getJobDetail(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<JobDetail> response) {
@@ -72,31 +71,52 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         });
         onSetupViewPager();
         onSetupRvUser();
-
         bind.tvSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isAlreadyRegister) {
-                    DialogHelper mDialogConfirm = new DialogHelper(WorkDetailActivity.this);
+                    final DialogHelper mDialogConfirm = new DialogHelper(WorkDetailActivity.this);
                     mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickFinish() {
                         @Override
                         public void onClickItem() {
-                            isAlreadyRegister = false;
-                            bind.tvSubmit.setTextColor(Color.parseColor("#FFFFFF"));
-                            bind.tvSubmit.setBackgroundColor(Color.parseColor("#84B8FF"));
-                            bind.viewWaitingJob.setVisibility(View.GONE);
+                            viewModel.cancelJob(mJobLastDetailItem.getJobId(), mLoginItem.getId())
+                                    .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
+                                        @Override
+                                        public void onChanged(@Nullable ResponseObj response) {
+                                            if (response.getResponse() == Response.SUCCESS) {
+                                                isAlreadyRegister = false;
+                                                bind.tvSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+                                                bind.tvSubmit.setBackgroundColor(Color.parseColor("#84B8FF"));
+                                                bind.viewWaitingJob.setVisibility(View.GONE);
+                                                mDialogConfirm.dismiss();
+                                            } else {
+                                                Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                         }
                     });
                     mDialogConfirm.show();
                 } else {
-                    DialogHelper mDialogRegisterJob = new DialogHelper(WorkDetailActivity.this);
+                    final DialogHelper mDialogRegisterJob = new DialogHelper(WorkDetailActivity.this);
                     mDialogRegisterJob.onShowRegisterJob(new OnClickFinish() {
                         @Override
                         public void onClickItem() {
-                            isAlreadyRegister = true;
-                            bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
-                            bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
-                            bind.viewWaitingJob.setVisibility(View.VISIBLE);
+                            viewModel.registerJob(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId())
+                                    .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
+                                        @Override
+                                        public void onChanged(@Nullable ResponseObj response) {
+                                            if (response.getResponse() == Response.SUCCESS) {
+                                                isAlreadyRegister = true;
+                                                bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
+                                                bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
+                                                bind.viewWaitingJob.setVisibility(View.VISIBLE);
+                                                mDialogRegisterJob.dismiss();
+                                            } else {
+                                                Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                         }
                     });
                     mDialogRegisterJob.show();
@@ -173,7 +193,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     @Override
     protected void onDestroy() {
-        viewmodel.onClearData();
+        viewModel.onClearData();
         super.onDestroy();
     }
 }

@@ -27,7 +27,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     }
 
     @Override
-    protected void onCreate(Bundle instance, WorkMapFragmentVM viewModel) {
+    protected void onInit(Bundle instance) {
         SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override

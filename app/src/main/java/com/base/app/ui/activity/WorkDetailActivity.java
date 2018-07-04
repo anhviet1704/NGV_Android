@@ -1,7 +1,9 @@
 package com.base.app.ui.activity;
 
+import android.arch.lifecycle.Observer;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,26 +12,40 @@ import android.view.View;
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityWorkDetailBinding;
-import com.base.app.model.WorkItem;
+import com.base.app.model.JobDetail;
+import com.base.app.model.LoginItem;
+import com.base.app.model.OsinItem;
+import com.base.app.model.ResponseObj;
+import com.base.app.model.joblasted.JobLastDetailItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.DialogHelper;
+import com.base.app.utils.Response;
 import com.base.app.utils.SpacesItemDecoration;
 import com.base.app.viewmodel.WorkDetailActivityVM;
 import com.blankj.utilcode.util.ConvertUtils;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 
 public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, ActivityWorkDetailBinding> {
+    @Inject
+    LoginItem mLoginItem;
+    private JobLastDetailItem mJobLastDetailItem;
+    private WorkDetailActivityVM viewmodel;
 
     private List<String> listItem = new ArrayList<>();
     private ViewpagerWorkAdapter fragmentAdapter;
-    private WorkUserAdapter mWorkUserAdapter;
-    private List<WorkItem> mWorkItems;
+    private WorkUserAdapter mUserAdapter;
+    private List<OsinItem> mOsinItems;
     private boolean isAlreadyRegister = false;
 
     @Override
@@ -44,20 +60,16 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     @Override
     protected void onCreate(Bundle instance, final WorkDetailActivityVM viewModel) {
-        /*bind.btFinish.setOnClickListener(new View.OnClickListener() {
+        viewmodel = viewModel;
+        viewModel.getJobDetail(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
             @Override
-            public void onClick(View view) {
-
-                *//*viewModel.updatePassWord(bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ApiResponse<SchoolYearItem>>() {
-                    @Override
-                    public void onChanged(@Nullable ApiResponse<SchoolYearItem> schoolYearItemApiResponse) {
-                        Intent intent = new Intent(NewPassActivity.this, RegisterConfirmActivity.class);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.btFinish, 0, 0, 0, 0);
-                        startActivity(intent, options.toBundle());
+            public void onChanged(@Nullable ResponseObj<JobDetail> response) {
+                if (response != null)
+                    if (response.getResponse() == Response.SUCCESS) {
+                        onUpdateUI(response.getObj());
                     }
-                });*//*
             }
-        });*/
+        });
         onSetupViewPager();
         onSetupRvUser();
 
@@ -95,6 +107,20 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     }
 
+    private void onUpdateUI(JobDetail obj) {
+        String time = obj.getStartDate() + obj.getStartTime() + "-" + obj.getEndTime();
+        bind.tvWorkName.setText(obj.getJobName());
+        bind.tvWorkPrice.setText(obj.getFee());
+        bind.tvWorkTime.setText(obj.getStartDate());
+        bind.tvUserName.setText(obj.getOwnerFullName());
+        bind.tvUserAddress.setText(obj.getOwnerAddress());
+        bind.tvContent.setText(obj.getDescription());
+        bind.tvJobTime.setText(time);
+        bind.tvJobAddress.setText(String.format(getString(R.string.tv_work_004), obj.getJobAddress()));
+        mOsinItems = obj.getOsin();
+        mUserAdapter.onUpdateData(mOsinItems);
+    }
+
     private void onSetupViewPager() {
         listItem.add("https://i.imgur.com/PpZlIRy.jpg");
         listItem.add("https://i.imgur.com/USo6P0c.jpg");
@@ -125,17 +151,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     }
 
     private void onSetupRvUser() {
-        mWorkItems = new ArrayList<>();
-        mWorkItems.add(new WorkItem(1, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(2, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(3, "askjdhakjs"));
-        mWorkItems.add(new WorkItem(4, "askjdhakjs"));
-        mWorkUserAdapter = new WorkUserAdapter(this, mWorkItems, new OnClickItem() {
+        mUserAdapter = new WorkUserAdapter(this, mOsinItems, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
                 DialogHelper mDialogHelper = new DialogHelper(WorkDetailActivity.this);
@@ -147,6 +163,17 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         bind.rvUser.setItemAnimator(new DefaultItemAnimator());
         SpacesItemDecoration decoration = new SpacesItemDecoration(ConvertUtils.dp2px(8), ConvertUtils.dp2px(8));
         bind.rvUser.addItemDecoration(decoration);
-        bind.rvUser.setAdapter(mWorkUserAdapter);
+        bind.rvUser.setAdapter(mUserAdapter);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(JobLastDetailItem event) {
+        mJobLastDetailItem = event;
+    }
+
+    @Override
+    protected void onDestroy() {
+        viewmodel.onClearData();
+        super.onDestroy();
     }
 }

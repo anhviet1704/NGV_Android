@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.WorkItem;
+import com.base.app.model.OsinItem;
+import com.base.app.model.OsinItem;
+import com.base.app.model.joblasted.JobLastDetailItem;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class WorkUserAdapter extends RecyclerView.Adapter<WorkUserAdapter.MyViewHolder> {
 
-    private List<WorkItem> mWorkItems;
+    private List<OsinItem> mOsinItems;
     private Context context;
     private OnClickItem clickItem;
 
@@ -37,10 +40,15 @@ public class WorkUserAdapter extends RecyclerView.Adapter<WorkUserAdapter.MyView
         }
     }
 
-    public WorkUserAdapter(Context context, List<WorkItem> mWorkItems, OnClickItem clickItem) {
+    public WorkUserAdapter(Context context, List<OsinItem> mOsinItems, OnClickItem clickItem) {
         this.clickItem = clickItem;
         this.context = context;
-        this.mWorkItems = mWorkItems;
+        if (mOsinItems == null) {
+            this.mOsinItems = new ArrayList<>();
+        } else {
+            this.mOsinItems = mOsinItems;
+        }
+
     }
 
     @Override
@@ -51,8 +59,8 @@ public class WorkUserAdapter extends RecyclerView.Adapter<WorkUserAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        WorkItem mWorkItem = mWorkItems.get(position);
-        holder.tvName.setText(mWorkItem.getValue());
+        OsinItem mOsinItem = mOsinItems.get(position);
+        holder.tvName.setText(mOsinItem.getOsinFullName());
         String url = "https://camo.mybb.com/e01de90be6012adc1b1701dba899491a9348ae79/687474703a2f2f7777772e6a71756572797363726970742e6e65742f696d616765732f53696d706c6573742d526573706f6e736976652d6a51756572792d496d6167652d4c69676874626f782d506c7567696e2d73696d706c652d6c69676874626f782e6a7067";
         Glide.with(context).load(url).apply(NGVUtils.onGetCircleCrop()).into(holder.ivAvatar);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +73,11 @@ public class WorkUserAdapter extends RecyclerView.Adapter<WorkUserAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return mWorkItems.size();
+        return mOsinItems.size();
+    }
+
+    public void onUpdateData(List<OsinItem> mWorkItems) {
+        this.mOsinItems = mWorkItems;
+        notifyDataSetChanged();
     }
 }

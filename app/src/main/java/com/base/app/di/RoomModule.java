@@ -6,6 +6,7 @@ import android.arch.persistence.room.Room;
 import com.base.app.dao.UserDao;
 import com.base.app.data.ApiServices;
 import com.base.app.module.AppDatabase;
+import com.base.app.repo.JobRepo;
 import com.base.app.repo.RegisterRepo;
 import com.base.app.repo.UserRepository;
 
@@ -40,5 +41,11 @@ public class RoomModule {
     @Provides
     RegisterRepo providesRegisterRepo(Retrofit retrofit, AppDatabase db, ApiServices apiServices) {
         return new RegisterRepo(apiServices, db);
+    }
+
+    @Singleton
+    @Provides
+    JobRepo providesjobRepo(Retrofit retrofit, AppDatabase db, ApiServices apiServices) {
+        return new JobRepo(apiServices, db);
     }
 }

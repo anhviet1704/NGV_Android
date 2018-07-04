@@ -4,9 +4,12 @@ import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
 import com.base.app.model.CountryResponse;
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.JobDetail;
+import com.base.app.model.JobItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.RoleItem;
+import com.base.app.model.joblasted.JobLasted;
 import com.base.app.model.postobj.RegisterObj;
 
 import io.reactivex.Completable;
@@ -43,8 +46,54 @@ public interface ApiServices {
     @GET("api/vi/osin/roles")
     Observable<BaseList<RoleItem>> getRoles();
 
-
     @GET("api/vi/uploadSingleImage")
     Observable<BaseObj<Object>> uploadFile();
+
+    //Info job
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/cancel")
+    Observable<BaseList<JobItem>> getMaidCancelJob(@Field("id") String id, @Field("osin_id") String osin_id);
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/detail")
+    Observable<BaseObj<JobDetail>> getMaidJobDetail(@Field("job_id") int job_id, @Field("sub_job_id") int sub_job_id, @Field("osin_id") int osin_id);
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/current")
+    Observable<BaseObj<JobDetail>> getMaidJobCurrent(@Field("osin_id") String osin_id);
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/cancel")
+    Observable<BaseObj<JobDetail>> getJobCancel(@Field("id") int id, @Field("osin_id") String osin_id);
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/listLastedJob")
+    Observable<BaseObj<JobLasted>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode);
+
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/history")
+    Observable<BaseList<JobItem>> getMaidJobHistory(@Field("osin_id") String osin_id, @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("api/vi/job/register")
+    Observable<BaseObj<JobDetail>> getMaidJobRegister(@Field("job_id") String job_id,
+                                                      @Field("sub_job_id") String sub_job_id,
+                                                      @Field("osin_id") int osin_id);
+
+    //JOB
+    @FormUrlEncoded
+    @POST("api/vi/job/getLastedJob")
+    Observable<BaseList<JobItem>> getJobLast();
+
+
+    @FormUrlEncoded
+    @POST("api/vi/job/register")
+    Observable<BaseObj<JobDetail>> postJobRegister(@Field("name") String name,
+                                                   @Field("description") String description,
+                                                   @Field("rank") int rank,
+                                                   @Field("tool") int tool,
+                                                   @Field("lat") double latidute,
+                                                   @Field("long") double longtidute);
 
 }

@@ -9,11 +9,13 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.WorkItem;
+import com.base.app.model.joblasted.JobLastDetailItem;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> {
 
-    private List<WorkItem> mWorkItems;
+    private List<JobLastDetailItem> mWorkItems;
     private Context context;
     private OnClickItem clickItem;
 
@@ -43,10 +45,14 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         }
     }
 
-    public WorkAdapter(Context context, List<WorkItem> mWorkItems, OnClickItem clickItem) {
+    public WorkAdapter(Context context, List<JobLastDetailItem> mWorkItems, OnClickItem clickItem) {
         this.clickItem = clickItem;
         this.context = context;
-        this.mWorkItems = mWorkItems;
+        if (mWorkItems == null) {
+            this.mWorkItems = new ArrayList<>();
+        } else {
+            this.mWorkItems = mWorkItems;
+        }
     }
 
     @Override
@@ -58,11 +64,11 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        WorkItem mWorkItem = mWorkItems.get(position);
-        holder.tvName.setText(mWorkItem.getValue());
-        holder.tvPrice.setText(mWorkItem.getValue());
-        holder.tvTime.setText(mWorkItem.getValue() + "|");
-        holder.tvDistrict.setText(mWorkItem.getValue());
+        JobLastDetailItem mWorkItem = mWorkItems.get(position);
+        holder.tvName.setText(mWorkItem.getName());
+        holder.tvPrice.setText(mWorkItem.getFee());
+        holder.tvTime.setText(mWorkItem.getDiffTime() + "|");
+        holder.tvDistrict.setText(mWorkItem.getDistrict());
         String url = "https://camo.mybb.com/e01de90be6012adc1b1701dba899491a9348ae79/687474703a2f2f7777772e6a71756572797363726970742e6e65742f696d616765732f53696d706c6573742d526573706f6e736976652d6a51756572792d496d6167652d4c69676874626f782d506c7567696e2d73696d706c652d6c69676874626f782e6a7067";
         Glide.with(context).load(url).apply(NGVUtils.onGetRound(6)).into(holder.ivDes);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -76,5 +82,10 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return mWorkItems.size();
+    }
+
+    public void onUpdateData(List<JobLastDetailItem> mWorkItems) {
+        this.mWorkItems = mWorkItems;
+        notifyDataSetChanged();
     }
 }

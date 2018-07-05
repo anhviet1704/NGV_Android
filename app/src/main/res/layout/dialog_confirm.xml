@@ -4,7 +4,7 @@
     android:id="@+id/bottomBlurView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
+    android:layout_gravity="center"
     android:elevation="3dp"
     android:outlineProvider="bounds"
     app:blurOverlayColor="@color/color_blur">
@@ -24,7 +24,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/blurring_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shape_roundRect_borderColor="#D2DFE8"

@@ -64,6 +64,12 @@
     <string name="tv_work_012">Có</string>
     <string name="tv_work_013">Không</string>
     <string name="tv_work_014">Đang làm việc</string>
+    <string name="tv_work_015">Bản tin đã hết hạn</string>
+    <string name="tv_work_016">Liên hệ chủ nhà</string>
+    <string name="tv_work_017">Tìm đường</string>
+    <string name="tv_work_018">Tôi đã hoàn thành công việc này</string>
+    <string name="tv_work_019">Xong</string>
+    <string name="tv_work_020"><u>Hủy công việc này</u></string>
 
     <string name="tv_setting_001">Ví thanh toán</string>
     <string name="tv_setting_002">Đổi mật khẩu</string>

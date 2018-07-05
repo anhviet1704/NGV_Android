@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.base.app.R;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.fivehundredpx.android.blur.BlurringView;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 
 
@@ -31,8 +30,8 @@ public class DialogLoading {
         mDialog.setCancelable(false);
 
         mViewLoading = (RoundRectView) mDialog.findViewById(R.id.view_loading);
-        BlurringView mBlurLayout = (BlurringView) mDialog.findViewById(R.id.blurring_view);
-        mBlurLayout.setBlurredView(root);
+        //BlurringView mBlurLayout = (BlurringView) mDialog.findViewById(R.id.blurring_view);
+        //mBlurLayout.setBlurredView(root);
     }
 
     public void show() {

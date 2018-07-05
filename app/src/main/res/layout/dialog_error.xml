@@ -8,14 +8,6 @@
     android:background="@android:color/transparent"
     android:orientation="vertical">
 
-    <com.fivehundredpx.android.blur.BlurringView
-        android:id="@+id/blurring_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:blurRadius="1"
-        app:downsampleFactor="1"
-        app:overlayColor="#00FFFFFF" />
 
     <com.github.florent37.shapeofview.shapes.RoundRectView
         android:id="@+id/view_loading"

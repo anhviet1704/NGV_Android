@@ -1,183 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<eightbitlab.com.blurview.BlurView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomBlurView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#223254"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:elevation="3dp"
+    android:outlineProvider="bounds"
+    app:blurOverlayColor="@color/color_blur">
 
-    <com.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/roundRectView2"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/roundRectView3"
-        app:layout_constraintDimensionRatio="H,5:3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shape_roundRect_borderColor="#D2DFE8"
-        app:shape_roundRect_borderWidth="0dp"
-        app:shape_roundRect_bottomLeftRadius="6dp"
-        app:shape_roundRect_bottomRightRadius="6dp"
-        app:shape_roundRect_topLeftRadius="6dp"
-        app:shape_roundRect_topRightRadius="6dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/roundRectView2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_info">
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/roundRectView3"
+            app:layout_constraintDimensionRatio="H,5:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shape_roundRect_borderColor="#D2DFE8"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="6dp"
+            app:shape_roundRect_bottomRightRadius="6dp"
+            app:shape_roundRect_topLeftRadius="6dp"
+            app:shape_roundRect_topRightRadius="6dp">
 
-            <ImageView
-                android:id="@+id/iv_avatar"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="32dp"
-                android:src="@drawable/ic_avatar"
-                app:layout_constraintBottom_toTopOf="@+id/tv_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_info">
 
-            <com.ivankocijan.magicviews.views.MagicTextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="Tìm người thân"
-                android:textColor="#1C2D51"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_status"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
-                app:typeFace="HelveticaNeue_Medium.otf" />
+                <ImageView
+                    android:id="@+id/iv_avatar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/ic_avatar"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
 
-            <com.ivankocijan.magicviews.views.MagicTextView
-                android:id="@+id/tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="3dp"
-                android:text="@string/tv_user_001"
-                android:textColor="#9098A9"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toTopOf="@+id/tv_birthday"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                app:typeFace="HelveticaNeue_Light.otf" />
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:text="Tìm người thân"
+                    android:textColor="#1C2D51"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_status"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_avatar"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
 
-            <com.ivankocijan.magicviews.views.MagicTextView
-                android:id="@+id/tv_birthday"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="3dp"
-                android:text="Tìm người thân"
-                android:textColor="#223254"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_status"
-                app:typeFace="HelveticaNeue_Light.otf" />
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:text="@string/tv_user_001"
+                    android:textColor="#9098A9"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_birthday"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    app:typeFace="HelveticaNeue_Light.otf" />
 
-        </android.support.constraint.ConstraintLayout>
-    </com.github.florent37.shapeofview.shapes.RoundRectView>
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginTop="3dp"
+                    android:text="Tìm người thân"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_status"
+                    app:typeFace="HelveticaNeue_Light.otf" />
 
-    <com.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/roundRectView3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/view_close"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roundRectView2"
-        app:shape_roundRect_borderColor="#D2DFE8"
-        app:shape_roundRect_borderWidth="0dp"
-        app:shape_roundRect_bottomLeftRadius="6dp"
-        app:shape_roundRect_bottomRightRadius="6dp"
-        app:shape_roundRect_topLeftRadius="6dp"
-        app:shape_roundRect_topRightRadius="6dp">
+            </android.support.constraint.ConstraintLayout>
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
 
-        <LinearLayout
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/roundRectView3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/view_close"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roundRectView2"
+            app:shape_roundRect_borderColor="#D2DFE8"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="6dp"
+            app:shape_roundRect_bottomRightRadius="6dp"
+            app:shape_roundRect_topLeftRadius="6dp"
+            app:shape_roundRect_topRightRadius="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#DBE7F6"
+                    android:paddingBottom="13dp"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="16dp"
+                    android:paddingTop="13dp"
+                    android:text="@string/tv_user_002"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_work"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF" />
+            </LinearLayout>
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/view_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/roundRectView3"
+            app:shape_roundRect_borderColor="#D2DFE8"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="6dp"
+            app:shape_roundRect_bottomRightRadius="6dp"
+            app:shape_roundRect_topLeftRadius="6dp"
+            app:shape_roundRect_topRightRadius="6dp">
 
             <com.ivankocijan.magicviews.views.MagicTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#DBE7F6"
+                android:gravity="center"
                 android:paddingBottom="13dp"
                 android:paddingEnd="8dp"
                 android:paddingStart="16dp"
                 android:paddingTop="13dp"
-                android:text="@string/tv_user_002"
+                android:text="@string/tv_user_003"
                 android:textColor="#223254"
                 android:textSize="14sp"
-                app:typeFace="HelveticaNeue_Regular.otf" />
+                app:typeFace="HelveticaNeue_Medium.otf" />
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_work"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF" />
-        </LinearLayout>
-    </com.github.florent37.shapeofview.shapes.RoundRectView>
+    </android.support.constraint.ConstraintLayout>
 
-    <com.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/view_close"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:elevation="2dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roundRectView3"
-        app:shape_roundRect_borderColor="#D2DFE8"
-        app:shape_roundRect_borderWidth="0dp"
-        app:shape_roundRect_bottomLeftRadius="6dp"
-        app:shape_roundRect_bottomRightRadius="6dp"
-        app:shape_roundRect_topLeftRadius="6dp"
-        app:shape_roundRect_topRightRadius="6dp">
+</eightbitlab.com.blurview.BlurView>
 
-        <com.ivankocijan.magicviews.views.MagicTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#DBE7F6"
-            android:gravity="center"
-            android:paddingBottom="13dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="16dp"
-            android:paddingTop="13dp"
-            android:text="@string/tv_user_003"
-            android:textColor="#223254"
-            android:textSize="14sp"
-            app:typeFace="HelveticaNeue_Medium.otf" />
-    </com.github.florent37.shapeofview.shapes.RoundRectView>
-
-</android.support.constraint.ConstraintLayout>

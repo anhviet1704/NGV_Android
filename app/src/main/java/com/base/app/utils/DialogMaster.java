@@ -17,7 +17,6 @@ import com.base.app.model.CountryItem;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickMaster;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.fivehundredpx.android.blur.BlurringView;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;

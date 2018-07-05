@@ -99,7 +99,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.show();
                 } else {
                     final DialogHelper mDialogRegisterJob = new DialogHelper(WorkDetailActivity.this);
-                    mDialogRegisterJob.onShowRegisterJob(new OnClickFinish() {
+                    mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, new OnClickFinish() {
                         @Override
                         public void onClickItem() {
                             viewModel.registerJob(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId())
@@ -175,7 +175,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             @Override
             public void onClickItem(View v, int pos) {
                 DialogHelper mDialogHelper = new DialogHelper(WorkDetailActivity.this);
-                mDialogHelper.onShowUserInfo();
+                mDialogHelper.onShowUserInfo(bind.viewRoot);
                 mDialogHelper.show();
             }
         });

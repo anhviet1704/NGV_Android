@@ -20,7 +20,6 @@ import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.fivehundredpx.android.blur.BlurringView;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
@@ -30,6 +29,8 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import eightbitlab.com.blurview.BlurView;
+import eightbitlab.com.blurview.RenderScriptBlur;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -144,7 +145,7 @@ public class DialogHelper<T> {
     }
 
 
-    public void onShowUserInfo() {
+    public void onShowUserInfo(ViewGroup root) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -163,6 +164,12 @@ public class DialogHelper<T> {
         MagicTextView tvBirthday = mDialog.findViewById(R.id.tv_birthday);
         RoundRectView viewClose = mDialog.findViewById(R.id.view_close);
         RecyclerView rvWork = mDialog.findViewById(R.id.rv_work);
+        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
+        mBlurView.setupWith(root)
+                //.windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(mContext))
+                .blurRadius(10f)
+                .setHasFixedTransformationMatrix(true);
 
         mAdapter = new MasterAdapter(new OnClickMaster() {
             @Override
@@ -182,7 +189,7 @@ public class DialogHelper<T> {
         });
     }
 
-    public void onShowRegisterJob(final OnClickFinish mClick) {
+    public void onShowRegisterJob(ViewGroup root, final OnClickFinish mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -204,6 +211,12 @@ public class DialogHelper<T> {
         MagicTextView tvTimeJob = mDialog.findViewById(R.id.tv_time_job);
         MagicEditText etSumPrice = mDialog.findViewById(R.id.et_sum_price);
         MagicButton btFinish = mDialog.findViewById(R.id.bt_finish);
+        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
+        mBlurView.setupWith(root)
+                .blurAlgorithm(new RenderScriptBlur(mContext))
+                .blurRadius(10f)
+                .setHasFixedTransformationMatrix(true);
+
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,7 +233,7 @@ public class DialogHelper<T> {
 
     }
 
-    public void onShowDialogConfirm(View root, final OnClickFinish mClick) {
+    public void onShowDialogConfirm(ViewGroup root, final OnClickFinish mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -235,8 +248,12 @@ public class DialogHelper<T> {
 
         MagicTextView mBtYes = mDialog.findViewById(R.id.bt_yes);
         MagicTextView mBtNo = mDialog.findViewById(R.id.bt_no);
-        BlurringView mBlurLayout = mDialog.findViewById(R.id.blurring_view);
-        mBlurLayout.setBlurredView(root);
+        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
+        mBlurView.setupWith(root)
+                //.windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(mContext))
+                .blurRadius(10f)
+                .setHasFixedTransformationMatrix(true);
 
         mBtYes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,11 +265,6 @@ public class DialogHelper<T> {
             @Override
             public void onClick(View v) {
                 mDialog.dismiss();
-            }
-        });
-        mBlurLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
             }
         });
     }

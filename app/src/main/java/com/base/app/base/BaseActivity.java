@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.base.app.R;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,6 +31,7 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
 
     public B bind;
     public T viewModel;
+    public MaterialDialog mDialogLoading;
 
     protected abstract
     @LayoutRes
@@ -57,6 +59,11 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
                 }
             });
         }
+        mDialogLoading = new MaterialDialog.Builder(this)
+                //.title(R.string.tv_login_005)
+                .content(R.string.tv_login_005)
+                .progress(true, 0)
+                .build();
 
     }
 

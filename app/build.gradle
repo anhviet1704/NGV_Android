@@ -93,7 +93,7 @@ dependencies {
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.florent37:shapeofview:1.1.0'
     implementation 'com.blankj:utilcode:1.13.5'
-    implementation 'me.zhanghai.android.materialprogressbar:library:1.4.2'
+    implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     implementation "com.andkulikov:transitionseverywhere:1.7.9"
     implementation 'com.fivehundredpx:blurringview:1.0.0'
 
@@ -105,4 +105,5 @@ dependencies {
     implementation 'com.loopeer.lib:shadow:0.0.4-beta3'
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.github.vipulasri:timelineview:1.0.6'
+    implementation 'com.jaychang:simplerecyclerview:2.0.4'
 }

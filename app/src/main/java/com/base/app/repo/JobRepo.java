@@ -80,12 +80,12 @@ public class JobRepo {
         return mJobRegister;
     }
 
-    public SingleLiveEvent<ResponseObj> cancelJob(int job_id, int osin_id) {
+    public SingleLiveEvent<ResponseObj> cancelJob(int job_id, int sub_job_id, int osin_id) {
         if (mJobCancel.getValue() != null) {
             if (mJobCancel.getValue().getResponse() == Response.FAILED)
-                onCancelJobFromServer(job_id, osin_id);
+                onCancelJobFromServer(job_id, sub_job_id, osin_id);
         } else {
-            onCancelJobFromServer(job_id, osin_id);
+            onCancelJobFromServer(job_id, sub_job_id, osin_id);
         }
         return mJobCancel;
     }
@@ -164,19 +164,19 @@ public class JobRepo {
 
                     @Override
                     public void onComplete() {
-                        mJobDetail.setValue(new ResponseObj(null, Response.SUCCESS));
+                        mJobRegister.setValue(new ResponseObj(null, Response.SUCCESS));
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mJobDetail.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        mJobRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
 
     }
 
-    private void onCancelJobFromServer(int job_id, int osin_id) {
-        mApiServices.getMaidJobCancel(job_id, osin_id)
+    private void onCancelJobFromServer(int job_id, int sub_job_id, int osin_id) {
+        mApiServices.getMaidJobCancel(job_id, sub_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

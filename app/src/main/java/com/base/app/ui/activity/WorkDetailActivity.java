@@ -79,7 +79,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickFinish() {
                         @Override
                         public void onClickItem() {
-                            viewModel.cancelJob(mJobLastDetailItem.getJobId(), mLoginItem.getId())
+                            viewModel.cancelJob(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId())
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {

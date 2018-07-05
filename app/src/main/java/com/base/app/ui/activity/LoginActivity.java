@@ -61,7 +61,6 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
 
     @Override
     protected void onInit(Bundle instance) {
-        this.viewModel = viewModel;
         mDialogLoading = new DialogLoading(this, bind.viewRoot);
         keyboardHeightProvider = new KeyboardHeightProvider(this);
         bind.viewRoot.post(new Runnable() {
@@ -73,6 +72,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
         userName = mPrefHelper.getString(AppCons.LOGIN_USERNAME);
         passWord = mPrefHelper.getString(AppCons.LOGIN_PASSWORD);
         if (!userName.equals("")) {
+            mDialogLoading.show();
             bind.etUsername.setText(userName);
             bind.etPassword.setText(passWord);
             bind.ivLogin.performClick();
@@ -120,8 +120,10 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.ivLogin, 0, 0, 0, 0);
                                         startActivity(intent, options.toBundle());
+                                        mDialogLoading.dismiss();
                                         finish();
                                     } else {
+                                        mDialogLoading.dismiss();
                                         Toast.makeText(LoginActivity.this, loginItemResponseObj.getErr(), Toast.LENGTH_SHORT).show();
                                     }
                                 }

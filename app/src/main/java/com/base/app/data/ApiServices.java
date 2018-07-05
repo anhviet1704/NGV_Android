@@ -54,7 +54,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/cancel")
-    Completable getMaidJobCancel(@Field("id") int id, @Field("osin_id") int osin_id);
+    Completable getMaidJobCancel(@Field("job_id") int job_id, @Field("sub_job_id") int sub_job_id, @Field("osin_id") int osin_id);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/detail")
@@ -65,10 +65,6 @@ public interface ApiServices {
     Observable<BaseList<JobCurrentItem>> getMaidJobCurrent(@Field("osin_id") int osin_id);
 
     @FormUrlEncoded
-    @POST("api/vi/osin/job/cancel")
-    Observable<BaseObj<JobDetail>> getJobCancel(@Field("id") int id, @Field("osin_id") String osin_id);
-
-    @FormUrlEncoded
     @POST("api/vi/osin/job/listLastedJob")
     Observable<BaseObj<JobLasted>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode);
 
@@ -77,7 +73,7 @@ public interface ApiServices {
     Observable<BaseList<JobCurrentItem>> getMaidJobHistory(@Field("osin_id") int osin_id, @Field("status") int status);
 
     @FormUrlEncoded
-    @POST("api/vi/job/register")
+    @POST("api/vi/osin/job/register")
     Completable getMaidJobRegister(@Field("job_id") int job_id,
                                    @Field("sub_job_id") int sub_job_id,
                                    @Field("osin_id") int osin_id);

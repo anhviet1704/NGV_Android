@@ -10,6 +10,7 @@
     <string name="tv_login_002">Số điện thoại</string>
     <string name="tv_login_003">Mật khẩu</string>
     <string name="tv_login_004">Quên mật khẩu</string>
+    <string name="tv_login_005">Đang tải dữ liệu</string>
 
     <string name="tv_register_001">Đăng ký tài khoản</string>
     <string name="tv_register_002">Xin chào, để bắt đầu tham gia bạn vui lòng cung cấp một vài thông tin!</string>

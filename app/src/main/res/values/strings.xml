@@ -24,7 +24,7 @@
     <string name="tv_register_010">Văn phòng đăng ký</string>
     <string name="tv_register_011">Ảnh CMND mặt trước</string>
     <string name="tv_register_012">Ảnh CMND mặt sau</string>
-    <string name="tv_register_013">Gửi chào giá</string>
+    <string name="tv_register_013">Hoàn tât</string>
     <string name="tv_register_014">Quá trình đăng ký hoàn tất, chúng tôi sẽ sớm liên lạc với bạn để kích hoạt.</string>
     <string name="tv_register_015">Đăng nhập</string>
     <string name="tv_register_016">Quên mật khẩu</string>
@@ -39,6 +39,7 @@
     <string name="tv_register_025">lấy mã xác nhận</string>
     <string name="tv_register_027">Nhập số điện thoại bạn dùng đăng ký trước đó với hệ thống!</string>
     <string name="tv_register_028">Chọn công việc thực hiện</string>
+    <string name="tv_register_029">Gửi chào giá</string>
 
     <string name="tv_home_001">Danh sách</string>
     <string name="tv_home_002">Bản đồ</string>

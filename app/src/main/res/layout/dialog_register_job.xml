@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottomBlurView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
+    android:layout_height="match_parent"
     android:elevation="3dp"
     android:outlineProvider="bounds"
     app:blurOverlayColor="@color/color_blur">
@@ -322,7 +321,7 @@
             android:paddingEnd="118dp"
             android:paddingStart="118dp"
             android:paddingTop="16dp"
-            android:text="@string/tv_register_013"
+            android:text="@string/tv_register_029"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="14sp"

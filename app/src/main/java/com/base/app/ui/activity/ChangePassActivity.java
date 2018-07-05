@@ -8,7 +8,6 @@ import android.view.View;
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityChangePassBinding;
-import com.base.app.databinding.ActivityForgotPassBinding;
 import com.base.app.viewmodel.ChangePassActivityVM;
 
 

@@ -2,9 +2,6 @@ package com.base.app.ui.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 
 import com.base.app.R;
@@ -12,11 +9,8 @@ import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentHomeBinding;
 import com.base.app.model.RoleItem;
 import com.base.app.ui.callback.OnClickItem;
-import com.base.app.ui.callback.OnClickMaster;
-import com.base.app.utils.DialogHelper;
 import com.base.app.utils.DialogSearch;
 import com.base.app.viewmodel.WorkListFragmentVM;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentStatePagerItemAdapter;
 

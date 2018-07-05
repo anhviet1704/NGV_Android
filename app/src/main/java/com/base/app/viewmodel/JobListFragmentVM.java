@@ -29,4 +29,8 @@ public class JobListFragmentVM extends ViewModel {
         mJobCurrent = mRepository.getJobCurent(osin_id);
         return mJobCurrent;
     }
+
+    public void onClearData() {
+        mJobCurrent.setValue(null);
+    }
 }

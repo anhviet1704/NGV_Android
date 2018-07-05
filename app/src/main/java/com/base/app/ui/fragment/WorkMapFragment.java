@@ -5,17 +5,13 @@ import android.os.Bundle;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
-import com.base.app.databinding.FragmentHomeBinding;
 import com.base.app.databinding.FragmentWorkMapBinding;
-import com.base.app.viewmodel.MainActivityVM;
-import com.base.app.viewmodel.WorkListFragmentVM;
 import com.base.app.viewmodel.WorkMapFragmentVM;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWorkMapBinding> {

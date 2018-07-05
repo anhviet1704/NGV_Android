@@ -4,9 +4,7 @@ package com.base.app.ui.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,7 +17,6 @@ import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
@@ -27,10 +24,6 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
 
     @BindView(R.id.tv_work_time)
     MagicTextView tvWorkTime;
-    @BindView(R.id.tv_finish)
-    MagicTextView tvFinish;
-    @BindView(R.id.roundRectView)
-    RoundRectView roundRectView;
     @BindView(R.id.tv_time)
     MagicTextView tvTime;
     @BindView(R.id.imageView3)
@@ -91,22 +84,21 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
     }
 
     private void onClearSelectBottomBar() {
-        tvJobList.setTextColor(Color.parseColor("#98A2B0"));
-        tvJobRegister.setTextColor(Color.parseColor("#98A2B0"));
-        tvJobFinish.setTextColor(Color.parseColor("#98A2B0"));
-        tvJobList.setBackgroundColor(Color.parseColor("#5F80B0"));
-        tvJobRegister.setBackgroundColor(Color.parseColor("#5F80B0"));
-        tvJobFinish.setBackgroundColor(Color.parseColor("#5F80B0"));
+        tvJobList.setTextColor(Color.parseColor("#E5F0FF"));
+        tvJobRegister.setTextColor(Color.parseColor("#E5F0FF"));
+        tvJobFinish.setTextColor(Color.parseColor("#E5F0FF"));
+        tvJobList.setBackgroundColor(Color.parseColor("#B8CBE5"));
+        tvJobRegister.setBackgroundColor(Color.parseColor("#B8CBE5"));
+        tvJobFinish.setBackgroundColor(Color.parseColor("#B8CBE5"));
     }
 
-    @OnClick({R.id.tv_finish, R.id.tv_job_list, R.id.tv_job_register, R.id.tv_job_finish})
+    @OnClick({R.id.tv_job_list, R.id.tv_job_register, R.id.tv_job_finish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_finish:
-                break;
+
             case R.id.tv_job_list:
                 onClearSelectBottomBar();
-                tvJobList.setBackgroundColor(Color.parseColor("#FF869B"));
+                tvJobList.setBackgroundColor(Color.parseColor("#84B8FF"));
                 tvJobList.setTextColor(Color.parseColor("#FFFFFF"));
                 getChildFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -115,7 +107,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
                 break;
             case R.id.tv_job_register:
                 onClearSelectBottomBar();
-                tvJobRegister.setBackgroundColor(Color.parseColor("#FF869B"));
+                tvJobRegister.setBackgroundColor(Color.parseColor("#84B8FF"));
                 tvJobRegister.setTextColor(Color.parseColor("#FFFFFF"));
                 getChildFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -124,7 +116,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
                 break;
             case R.id.tv_job_finish:
                 onClearSelectBottomBar();
-                tvJobFinish.setBackgroundColor(Color.parseColor("#FF869B"));
+                tvJobFinish.setBackgroundColor(Color.parseColor("#84B8FF"));
                 tvJobFinish.setTextColor(Color.parseColor("#FFFFFF"));
                 getChildFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

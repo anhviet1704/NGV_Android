@@ -32,7 +32,7 @@ public class JobRepo {
     private SingleLiveEvent<ResponseObj> mJobRegister;
     private SingleLiveEvent<ResponseObj> mJobCancel;
     private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobCurent;
-    private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobStatus;
+    private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobStatusRegister;
 
     private ApiServices mApiServices;
     private Disposable disposable;
@@ -45,7 +45,7 @@ public class JobRepo {
         this.mJobRegister = new SingleLiveEvent<>();
         this.mJobCancel = new SingleLiveEvent<>();
         this.mJobCurent = new SingleLiveEvent<>();
-        this.mJobStatus = new SingleLiveEvent<>();
+        this.mJobStatusRegister = new SingleLiveEvent<>();
         this.mApiServices = mApiServices;
         this.mAppDatabase = mDatabase;
     }
@@ -241,13 +241,13 @@ public class JobRepo {
 
     public SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> getJobStatus(int osin_id, int status) {
         //1:waiting ,:2: approved, 3:complete, 4:cancel
-        if (mJobStatus.getValue() != null) {
-            if (mJobStatus.getValue().getResponse() == Response.FAILED)
+        if (mJobStatusRegister.getValue() != null) {
+            if (mJobStatusRegister.getValue().getResponse() == Response.FAILED)
                 onGetJobStatusJobFromServer(osin_id, status);
         } else {
             onGetJobStatusJobFromServer(osin_id, status);
         }
-        return mJobStatus;
+        return mJobStatusRegister;
     }
 
     private void onGetJobStatusJobFromServer(int osin_id, int status) {
@@ -263,14 +263,14 @@ public class JobRepo {
                     @Override
                     public void onNext(BaseList<JobCurrentItem> repsonse) {
                         if (repsonse.getSuccess())
-                            mJobStatus.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                            mJobStatusRegister.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         else
-                            mJobStatus.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                            mJobStatusRegister.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mJobStatus.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        mJobStatusRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override

@@ -7,11 +7,9 @@ import android.view.View;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
-import com.base.app.databinding.FragmentJobBinding;
 import com.base.app.databinding.FragmentNotificationBinding;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.adapter.NotificationAdapter;
-import com.base.app.ui.adapter.TimeLineAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.viewmodel.WorkListFragmentVM;
 

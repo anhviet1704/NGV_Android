@@ -13,19 +13,13 @@ import android.view.View;
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobListBinding;
-import com.base.app.databinding.FragmentNotificationBinding;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.WorkItem;
 import com.base.app.ui.activity.WorkDetailActivity;
-import com.base.app.ui.adapter.JobFinishAdapter;
 import com.base.app.ui.adapter.JobRegisterAdapter;
-import com.base.app.ui.adapter.TimeLineAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.Response;
-import com.base.app.viewmodel.JobListFragmentVM;
-import com.base.app.viewmodel.JobRegisterFragmentVM;
 import com.base.app.viewmodel.JobRegisterFragmentVM;
 
 import java.util.ArrayList;
@@ -73,11 +67,18 @@ public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, Fra
         viewModel.getListJobRegister(mLoginItem.getId(), 1).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
-                if (listResponseObj.getResponse() == Response.SUCCESS) {
-                    mDataList = listResponseObj.getObj();
-                    mWorkAdapter.onUpdateData(mDataList);
-                }
+                if (listResponseObj != null)
+                    if (listResponseObj.getResponse() == Response.SUCCESS) {
+                        mDataList = listResponseObj.getObj();
+                        mWorkAdapter.onUpdateData(mDataList);
+                    }
             }
         });
+    }
+
+    @Override
+    public void onStop() {
+        viewModel.onClearData();
+        super.onStop();
     }
 }

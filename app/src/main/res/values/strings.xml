@@ -63,6 +63,7 @@
     <string name="tv_work_011">Bạn đang chờ chủ công việc xác nhận, thao tác này sẽ huỷ bỏ đăng ký trước đó. Bạn có muốn thực hiện không?</string>
     <string name="tv_work_012">Có</string>
     <string name="tv_work_013">Không</string>
+    <string name="tv_work_014">Đang làm việc</string>
 
     <string name="tv_setting_001">Ví thanh toán</string>
     <string name="tv_setting_002">Đổi mật khẩu</string>

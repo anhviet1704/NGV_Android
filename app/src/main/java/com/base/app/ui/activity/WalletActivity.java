@@ -1,21 +1,16 @@
 package com.base.app.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
-import com.base.app.databinding.ActivityNewPassBinding;
 import com.base.app.databinding.ActivityWalletBinding;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.adapter.HistoryAdapter;
-import com.base.app.ui.adapter.JobFinishAdapter;
 import com.base.app.ui.callback.OnClickItem;
-import com.base.app.viewmodel.ForgotPassActivityVM;
 import com.base.app.viewmodel.WalletActivityVM;
 
 import java.util.ArrayList;

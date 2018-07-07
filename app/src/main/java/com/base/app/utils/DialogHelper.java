@@ -150,7 +150,7 @@ public class DialogHelper<T> {
         MagicTextView tvName = mDialog.findViewById(R.id.tv_name);
         MagicTextView tvStatus = mDialog.findViewById(R.id.tv_status);
         MagicTextView tvBirthday = mDialog.findViewById(R.id.tv_birthday);
-        RoundRectView viewClose = mDialog.findViewById(R.id.view_close);
+        MagicButton viewClose = mDialog.findViewById(R.id.viewClose);
         RecyclerView rvWork = mDialog.findViewById(R.id.rv_work);
         BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
         mBlurView.setupWith(root)

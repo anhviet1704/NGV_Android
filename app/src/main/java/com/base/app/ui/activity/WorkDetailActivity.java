@@ -7,12 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityWorkDetailBinding;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.LoginItem;
 import com.base.app.model.OsinItem;
@@ -20,6 +22,7 @@ import com.base.app.model.ResponseObj;
 import com.base.app.model.joblasted.JobLastDetailItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
+import com.base.app.ui.callback.OnClickDialog;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.DialogHelper;
@@ -47,6 +50,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     private WorkUserAdapter mUserAdapter;
     private List<OsinItem> mOsinItems;
     private boolean isAlreadyRegister = false;
+    private DialogHelper mDialogUserInfo;
 
     @Override
     protected int getLayoutResId() {
@@ -174,9 +178,23 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         mUserAdapter = new WorkUserAdapter(this, mOsinItems, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
-                DialogHelper mDialogHelper = new DialogHelper(WorkDetailActivity.this);
-                mDialogHelper.onShowUserInfo(bind.viewRoot);
-                mDialogHelper.show();
+                mDialogUserInfo = new DialogHelper(WorkDetailActivity.this);
+                mDialogUserInfo.onShowUserInfo(bind.viewRoot, new OnClickDialog() {
+                    @Override
+                    public void onClicClose() {
+                        viewModel.onClearHistory();
+                    }
+                });
+                viewModel.getListJobHistory(mLoginItem.getId(), 3).observe(WorkDetailActivity.this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
+                    @Override
+                    public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
+                        if (listResponseObj != null)
+                            if (listResponseObj.getResponse() == Response.SUCCESS) {
+                                mDialogUserInfo.setData(listResponseObj.getObj());
+                            }
+                    }
+                });
+                mDialogUserInfo.show();
             }
         });
         bind.rvUser.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));

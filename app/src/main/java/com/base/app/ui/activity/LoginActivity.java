@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
 
     @Inject
     PrefHelper mPrefHelper;
-    private DialogLoading mDialogLoading;
+    //private DialogLoading mDialogLoading;
     private String userName;
     private String passWord;
     private boolean isSplashShow = true;
@@ -61,7 +61,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
 
     @Override
     protected void onInit(Bundle instance) {
-        mDialogLoading = new DialogLoading(this, bind.viewRoot);
+        //mDialogLoading = new DialogLoading(this, bind.viewRoot);
         keyboardHeightProvider = new KeyboardHeightProvider(this);
         bind.viewRoot.post(new Runnable() {
             public void run() {

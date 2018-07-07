@@ -49,6 +49,11 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
         bind = DataBindingUtil.setContentView(this, getLayoutResId());
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(getViewModel());
         ButterKnife.bind(this);
+        mDialogLoading = new MaterialDialog.Builder(this)
+                //.title(R.string.tv_login_005)
+                .content(R.string.tv_login_005)
+                .progress(true, 0)
+                .build();
         onInit(savedInstanceState);
         ImageView ivBack = findViewById(R.id.iv_back);
         if (ivBack != null) {
@@ -59,11 +64,6 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
                 }
             });
         }
-        mDialogLoading = new MaterialDialog.Builder(this)
-                //.title(R.string.tv_login_005)
-                .content(R.string.tv_login_005)
-                .progress(true, 0)
-                .build();
 
     }
 

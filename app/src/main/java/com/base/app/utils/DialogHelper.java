@@ -1,41 +1,33 @@
 package com.base.app.utils;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.media.Image;
-import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Group;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
-import com.base.app.ui.adapter.SearchAdapter;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.ui.callback.OnClickFinish;
-import com.base.app.ui.callback.OnClickItem;
+import com.base.app.ui.callback.OnClickDialog;
 import com.base.app.ui.callback.OnClickMaster;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class DialogHelper<T> {
@@ -77,8 +69,8 @@ public class DialogHelper<T> {
     }
 
     public void setData(List<T> data) {
-        mDatas = data;
-        mAdapter.onUpdateData(mDatas);
+        //mDatas = data;
+        mAdapter.onUpdateData(data);
     }
 
 
@@ -93,15 +85,12 @@ public class DialogHelper<T> {
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public MagicTextView mTvName;
-            public ConstraintLayout mViewRoot;
 
             public MyViewHolder(View view) {
                 super(view);
                 mTvName = view.findViewById(R.id.tv_name);
-                mViewRoot = view.findViewById(R.id.view_root);
             }
         }
-
 
         public MasterAdapter(OnClickMaster click) {
             onClick = click;
@@ -109,35 +98,33 @@ public class DialogHelper<T> {
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_master_data, parent, false);
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_job_history, parent, false);
             return new MyViewHolder(itemView);
         }
 
         @Override
         public void onBindViewHolder(MyViewHolder holder, final int position) {
             if (mDatas != null && mDatas.size() > 0) {
-                if (mDatas.get(0) instanceof BaseValueItem) {
-                    BaseValueItem item = (BaseValueItem) mDatas.get(position);
-                    holder.mTvName.setText(item.getValue());
-                } else if (mDatas.get(0) instanceof CountryItem) {
-                    CountryItem item = (CountryItem) mDatas.get(position);
-                    holder.mTvName.setText(item.getName());
+                if (mDatas.get(0) instanceof JobCurrentItem) {
+                    JobCurrentItem item = (JobCurrentItem) mDatas.get(position);
+                    holder.mTvName.setText(Html.fromHtml(String.format(mContext.getResources().getString(R.string.tv_user_008, item.getName()))));
                 }
-                holder.mViewRoot.setOnClickListener(new View.OnClickListener() {
+                /*holder.mViewRoot.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         onClick.onClickItem(position);
                         mDialog.dismiss();
                     }
-                });
+                });*/
 
             }
 
         }
 
         public void onUpdateData(List<T> datas) {
+            mDatas.clear();
             mDatas = datas;
-            notifyDataSetChanged();
+            mAdapter.notifyDataSetChanged();
         }
 
         @Override
@@ -146,8 +133,7 @@ public class DialogHelper<T> {
         }
     }
 
-
-    public void onShowUserInfo(ViewGroup root) {
+    public void onShowUserInfo(ViewGroup root, final OnClickDialog mclick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -187,6 +173,7 @@ public class DialogHelper<T> {
             @Override
             public void onClick(View v) {
                 mDialog.dismiss();
+                mclick.onClicClose();
             }
         });
     }

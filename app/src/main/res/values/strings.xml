@@ -95,6 +95,9 @@
     <string name="tv_user_005">Thời gian công việc</string>
     <string name="tv_user_006">Thành tiền (Có thể chỉnh sửa giá theo mong muốn)</string>
     <string name="tv_user_007">Nhập số tiền</string>
+    <string name="tv_user_008">
+    <![CDATA[      <p><font color="#98A2B0"  size="13">Đã hoàn thành công việc</font> %s.</p>    ]]>
+</string>
 
     <string name="tv_wallet_001">Ngân hàng\nliên kết</string>
     <string name="tv_wallet_002">Nạp tiền\nvào ví</string>

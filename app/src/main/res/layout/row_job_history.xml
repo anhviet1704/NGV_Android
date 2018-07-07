@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <com.ivankocijan.magicviews.views.MagicTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:gravity="center_vertical"
+        android:text="@string/tv_user_008"
+        android:textColor="#223254"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:typeFace="HelveticaNeue_Regular.otf" />
+
+
+</LinearLayout>

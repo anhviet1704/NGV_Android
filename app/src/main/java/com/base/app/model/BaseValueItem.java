@@ -7,11 +7,10 @@ import com.google.gson.annotations.SerializedName;
 @Generated("com.robohorse.robopojogenerator")
 public class BaseValueItem {
 
-    @SerializedName("value")
-    private String value;
-
     @SerializedName("id:")
     private int id;
+    @SerializedName("value")
+    private String value;
 
 
     public void setValue(String value) {

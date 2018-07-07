@@ -59,7 +59,7 @@
             app:typeFace="HelveticaNeue_Light.otf" />
 
         <com.ivankocijan.magicviews.views.MagicEditText
-            android:id="@+id/et_password"
+            android:id="@+id/et_old_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/magicTextView2"
@@ -88,7 +88,7 @@
             android:id="@+id/magicTextView213122"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_password"
+            android:layout_below="@+id/et_old_password"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="38dp"
@@ -99,7 +99,7 @@
             app:typeFace="HelveticaNeue_Light.otf" />
 
         <com.ivankocijan.magicviews.views.MagicEditText
-            android:id="@+id/et_passworsd"
+            android:id="@+id/et_new_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/magicTextView213122"
@@ -124,7 +124,7 @@
             android:id="@+id/magicTextView21sss3122"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/et_passworsd"
+            android:layout_below="@+id/et_new_password"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
@@ -135,7 +135,7 @@
             app:typeFace="HelveticaNeue_Light.otf" />
 
         <com.ivankocijan.magicviews.views.MagicEditText
-            android:id="@+id/et_passwsssssorsd"
+            android:id="@+id/et_confirm_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/magicTextView21sss3122"

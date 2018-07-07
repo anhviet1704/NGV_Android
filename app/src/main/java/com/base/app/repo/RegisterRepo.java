@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -40,6 +41,7 @@ public class RegisterRepo {
     private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles;
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister;
     private SingleLiveEvent<ResponseObj<LoginItem>> mLogin;
+    private SingleLiveEvent<ResponseObj> mChangePass;
     private ApiServices mApiServices;
     private Disposable disposable;
     private AppDatabase mAppDatabase;
@@ -51,6 +53,7 @@ public class RegisterRepo {
         this.mOffices = new MutableLiveData<>();
         this.mRegister = new MutableLiveData<>();
         this.mLogin = new SingleLiveEvent<>();
+        this.mChangePass = new SingleLiveEvent<>();
         this.mApiServices = mApiServices;
         this.mAppDatabase = mDatabase;
     }
@@ -95,6 +98,7 @@ public class RegisterRepo {
         return mLogin;
     }
 
+
     private void postLoginServer(String phone, String pass) {
         mApiServices.postLogin(phone, pass)
                 .subscribeOn(Schedulers.io())
@@ -126,37 +130,51 @@ public class RegisterRepo {
                 });
     }
 
+    public SingleLiveEvent<ResponseObj> onChangePassword(int id, String oldPass, String newPass) {
+        onChangePassFromServer(id, oldPass, newPass);
+        return mChangePass;
+    }
+
+    private void onChangePassFromServer(int id, String oldPass, String newPass) {
+        mApiServices.postChangePasss(id, oldPass, newPass, newPass)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<BaseObj>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseObj repsonse) {
+                        if (repsonse.getSuccess())
+                            mChangePass.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                        else {
+                            mChangePass.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mChangePass.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                    }
+                });
+    }
+
     private void getCountriesFromServer() {
         mApiServices.getCountries()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseObj<CountryResponse>>() {
+                .subscribe(new Observer<BaseList<BaseValueItem>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable = d;
                     }
 
                     @Override
-                    public void onNext(BaseObj<CountryResponse> repsonse) {
+                    public void onNext(BaseList<BaseValueItem> repsonse) {
                         if (repsonse.getSuccess()) {
-                            String[] temp = repsonse.getData().toString().replace("{", "").replace("}", "").replaceAll("'", "").split(",");
-                            List<CountryItem> mCountryItems = new ArrayList<>();
-                            for (int i = 0; i < temp.length; i++) {
-                                try {
-                                    String[] a = temp[i].split("=");
-                                    CountryItem item = new CountryItem(a[0], a[1]);
-                                    mCountryItems.add(item);
-                                } catch (Exception e) {
-                                }
-                                if (i == temp.length - 1) {
-                                    Collections.sort(mCountryItems, new Comparator<CountryItem>() {
-                                        public int compare(CountryItem obj1, CountryItem obj2) {
-                                            return obj1.getName().compareToIgnoreCase(obj2.getName());
-                                        }
-                                    });
-                                    mCountries.setValue(new ResponseObj(mCountryItems, Response.SUCCESS));
-                                }
-                            }
+                            mCountries.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         } else
                             mCountries.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
 

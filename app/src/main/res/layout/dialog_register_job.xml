@@ -265,7 +265,7 @@
             android:paddingEnd="8dp"
             android:paddingStart="16dp"
             android:text="@string/tv_user_006"
-            android:textColor="#DFE5ED"
+            android:textColor="#223254"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

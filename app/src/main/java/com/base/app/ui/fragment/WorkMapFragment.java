@@ -24,21 +24,23 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
 
     @Override
     protected void onInit(Bundle instance) {
-        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap googleMap) {
-                mMap = googleMap;
-                LatLng seattle = new LatLng(10.813831, 106.6691083);
-                mMap.addMarker(new MarkerOptions().position(seattle).title("Công ty"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(seattle));
-                mMap.setMinZoomPreference(5);
-                mMap.setMaxZoomPreference(20);
-            }
-        });
-        getChildFragmentManager().beginTransaction().replace(R.id.google_map, mapFragment).commit();
-         /*viewModel.getPopularMovies()
-                .observe(this, listResource -> dataBinding.setResource(listResource));*/
+        //SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+        SupportMapFragment mMapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
+        if (mMapFragment == null) {
+            mMapFragment = SupportMapFragment.newInstance();
+            getChildFragmentManager().beginTransaction().replace(R.id.google_map, mMapFragment).commit();
+            mMapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
+                    mMap = googleMap;
+                    LatLng seattle = new LatLng(10.813831, 106.6691083);
+                    mMap.addMarker(new MarkerOptions().position(seattle).title("Công ty"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(seattle));
+                    mMap.setMinZoomPreference(5);
+                    mMap.setMaxZoomPreference(20);
+                }
+            });
+        }
     }
 
     @Override

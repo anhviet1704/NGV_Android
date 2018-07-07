@@ -40,6 +40,7 @@
     <string name="tv_register_027">Nhập số điện thoại bạn dùng đăng ký trước đó với hệ thống!</string>
     <string name="tv_register_028">Chọn công việc thực hiện</string>
     <string name="tv_register_029">Gửi chào giá</string>
+    <string name="tv_register_030">Mật khẩu cũ</string>
 
     <string name="tv_home_001">Danh sách</string>
     <string name="tv_home_002">Bản đồ</string>

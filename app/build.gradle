@@ -111,4 +111,5 @@ dependencies {
     implementation 'com.jaychang:simplerecyclerview:2.0.4'
     implementation 'com.eightbitlab:blurview:1.4.0'
     implementation 'com.github.florent37:rxgps:1.0.2'
+    implementation 'com.facebook.android:account-kit-sdk:4.+'//facebook
 }

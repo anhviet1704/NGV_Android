@@ -136,11 +136,14 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
         bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (StringUtils.isTrimEmpty(bind.etName.getText().toString())
+                if (StringUtils.isTrimEmpty(bind.etPhone.getText().toString())
+                        || TextUtils.isEmpty(bind.etPassword.getText().toString())
+                        || TextUtils.isEmpty(bind.etPasswordConfirm.getText().toString())
+                        || TextUtils.isEmpty(bind.etName.getText().toString())
                         || TextUtils.isEmpty(bind.etBirthday.getText().toString())
+                        || TextUtils.isEmpty(bind.tvGender.getText().toString())
+                        || TextUtils.isEmpty(bind.etAddress.getText().toString())
                         || TextUtils.isEmpty(bind.tvCountry.getText().toString())
-                        || TextUtils.isEmpty(bind.etPhone.getText().toString())
-                        || TextUtils.isEmpty(bind.etEmail.getText().toString())
                         || TextUtils.isEmpty(bind.tvDepartment.getText().toString())) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.tv_error_01), Toast.LENGTH_SHORT).show();
                 } else {
@@ -160,11 +163,11 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     registerObj.setOffice(String.valueOf(mOffices.get(mPosOfOffice).getId()));
                     registerObj.setStatus(1);//set active
                     //null param
-                    registerObj.setAddress("46 Bach Dang");
+                    registerObj.setAddress(bind.etAddress.getText().toString());
                     registerObj.setAvatar("");
                     registerObj.setDescription("");
                     registerObj.setFamily_register_img("");
-                    registerObj.setGender(0);
+                    registerObj.setGender(mGenderValue);
                     registerObj.setIdentity_id("");
                     registerObj.setIdentity_img("");
                     registerObj.setProfile_img("");

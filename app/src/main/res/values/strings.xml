@@ -4,6 +4,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <string name="FACEBOOK_APP_ID">319409295264859</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">fdd999d2726df1108d8ac99951055e25</string>
+
     <string name="tv_error_01">Vui lòng nhập đủ thông tin</string>
 
     <string name="tv_login_001"><u>Đăng ký tài khoản</u></string>

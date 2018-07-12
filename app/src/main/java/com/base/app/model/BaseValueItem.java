@@ -8,10 +8,14 @@ import com.google.gson.annotations.SerializedName;
 public class BaseValueItem {
 
     @SerializedName("id:")
-    private int id;
+    private String id;
     @SerializedName("value")
     private String value;
 
+    public BaseValueItem(String id, String value) {
+        this.id = id;
+        this.value = value;
+    }
 
     public void setValue(String value) {
         this.value = value;
@@ -21,11 +25,11 @@ public class BaseValueItem {
         return value;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

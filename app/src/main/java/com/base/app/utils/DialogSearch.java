@@ -3,26 +3,17 @@ package com.base.app.utils;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
 import com.base.app.ui.adapter.SearchAdapter;
-import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
-import com.base.app.ui.callback.OnClickMaster;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.StringUtils;
-import com.github.florent37.shapeofview.shapes.RoundRectView;
-import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -31,11 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 

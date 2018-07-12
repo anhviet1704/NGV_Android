@@ -39,7 +39,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/changePassword")
-    Single<BaseObj> postChangePasss(@Field("id") int id, @Field("old_password") String old_password, @Field("new_password") String new_password, @Field("new_password_confirmation") String new_password_confirmation);
+    Single<BaseObj> postChangePasss(@Field("osin_id") int osin_id, @Field("old_password") String old_password, @Field("new_password") String new_password, @Field("new_password_confirmation") String new_password_confirmation);
 
     @GET("api/vi/office/list")
     Observable<BaseList<BaseValueItem>> getOffices();

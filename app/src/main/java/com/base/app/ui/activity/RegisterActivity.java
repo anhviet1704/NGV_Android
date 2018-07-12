@@ -18,7 +18,6 @@ import com.base.app.R;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityRegisterBinding;
 import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
 import com.base.app.model.CountryResponse;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
@@ -48,12 +47,15 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     private int mPosOfImage = -1;
     private int mPosOfOffice = -1;
     private int mPosOfCountry = -1;
+    private int mGenderValue = -1;
     private CountryResponse mCountryItem;
     private List<RoleItem> mRoles = new ArrayList<>();
     private List<BaseValueItem> mOffices = new ArrayList<>();
-    private List<CountryItem> mCountries = new ArrayList<>();
+    private List<BaseValueItem> mGender = new ArrayList<>();
+    private List<BaseValueItem> mCountries = new ArrayList<>();
     private DialogMaster mDialogOffices;
     private DialogMaster mDialogCountries;
+    private DialogMaster mDialogGender;
     private WorkTypeAdapter mWorkAdapter;
 
     @Override
@@ -90,13 +92,19 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                 onOpenGallery();
             }
         });
+        bind.tvGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDialogGender.show();
+            }
+        });
         bind.tvCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mDialogCountries.show();
-                viewModel.getCountries().observe(RegisterActivity.this, new android.arch.lifecycle.Observer<ResponseObj<List<CountryItem>>>() {
+                viewModel.getCountries().observe(RegisterActivity.this, new android.arch.lifecycle.Observer<ResponseObj<List<BaseValueItem>>>() {
                     @Override
-                    public void onChanged(@Nullable ResponseObj<List<CountryItem>> countryItemResponseObj) {
+                    public void onChanged(@Nullable ResponseObj<List<BaseValueItem>> countryItemResponseObj) {
                         if (countryItemResponseObj.getResponse() == Response.SUCCESS) {
                             mCountries = countryItemResponseObj.getObj();
                             mDialogCountries.setData(mCountries);
@@ -145,7 +153,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     RegisterObj registerObj = new RegisterObj();
                     registerObj.setFullname(bind.etName.getText().toString());
                     registerObj.setBirthday(bind.etBirthday.getText().toString());
-                    registerObj.setCountry(mCountries.get(mPosOfCountry).getId());
+                    registerObj.setCountry(String.valueOf(mCountries.get(mPosOfCountry).getId()));
                     registerObj.setPhone(bind.etPhone.getText().toString());
                     registerObj.setEmail(bind.etEmail.getText().toString());
                     registerObj.setRole(upRoles.substring(1));
@@ -212,10 +220,23 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
             @Override
             public void onClickItem(int pos) {
                 mPosOfCountry = pos;
-                bind.tvCountry.setText(mCountries.get(pos).getName());
+                bind.tvCountry.setText(mCountries.get(pos).getValue());
             }
         });
         mDialogCountries.setTitle(getString(R.string.tv_register_007));
+
+        mDialogGender = new DialogMaster(this);
+        mDialogGender.onShowMasterData(new OnClickMaster() {
+            @Override
+            public void onClickItem(int pos) {
+                mGenderValue = Integer.parseInt(mGender.get(pos).getId());
+                bind.tvGender.setText(mGender.get(pos).getValue());
+            }
+        });
+        mGender.add(new BaseValueItem("1", getString(R.string.tv_register_032)));
+        mGender.add(new BaseValueItem("2", getString(R.string.tv_register_033)));
+        mDialogGender.setData(mGender);
+        mDialogGender.setTitle(getString(R.string.tv_register_031));
     }
 
     private void onShowDate() {

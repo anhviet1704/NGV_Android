@@ -41,6 +41,11 @@
     <string name="tv_register_028">Chọn công việc thực hiện</string>
     <string name="tv_register_029">Gửi chào giá</string>
     <string name="tv_register_030">Mật khẩu cũ</string>
+    <string name="tv_register_031">Giới tính</string>
+    <string name="tv_register_032">Nam</string>
+    <string name="tv_register_033">Nữ</string>
+    <string name="tv_register_034">Tài khoản</string>
+    <string name="tv_register_035">Địa chỉ</string>
 
     <string name="tv_home_001">Danh sách</string>
     <string name="tv_home_002">Bản đồ</string>

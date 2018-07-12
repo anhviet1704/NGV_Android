@@ -13,13 +13,8 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
-import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickMaster;
 import com.blankj.utilcode.util.ScreenUtils;
-import com.github.florent37.shapeofview.shapes.RoundRectView;
-import com.ivankocijan.magicviews.views.MagicButton;
-import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
 import java.util.ArrayList;
@@ -107,9 +102,9 @@ public class DialogMaster<T> {
                 if (mDatas.get(0) instanceof BaseValueItem) {
                     BaseValueItem item = (BaseValueItem) mDatas.get(position);
                     holder.mTvName.setText(item.getValue());
-                } else if (mDatas.get(0) instanceof CountryItem) {
-                    CountryItem item = (CountryItem) mDatas.get(position);
-                    holder.mTvName.setText(item.getName());
+                } else if (mDatas.get(0) instanceof BaseValueItem) {
+                    BaseValueItem item = (BaseValueItem) mDatas.get(position);
+                    holder.mTvName.setText(item.getValue());
                 }
                 holder.mViewRoot.setOnClickListener(new View.OnClickListener() {
                     @Override

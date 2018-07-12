@@ -1,5 +1,6 @@
 package com.base.app.ui.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
@@ -28,6 +29,8 @@ import com.base.app.utils.keyboard.KeyboardHeightProvider;
 import com.base.app.viewmodel.LoginActivityVM;
 import com.blankj.utilcode.util.StringUtils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.tbruyelle.rxpermissions2.Permission;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.transitionseverywhere.Fade;
 import com.transitionseverywhere.TransitionManager;
 import com.transitionseverywhere.TransitionSet;
@@ -68,6 +71,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
                 keyboardHeightProvider.start();
             }
         });
+        onCheckPermission();
         onSetupClick();
         userName = mPrefHelper.getString(AppCons.LOGIN_USERNAME);
         passWord = mPrefHelper.getString(AppCons.LOGIN_PASSWORD);
@@ -77,6 +81,22 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
             bind.etPassword.setText(passWord);
             bind.ivLogin.performClick();
         }
+    }
+
+    private void onCheckPermission() {
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions
+                .requestEach(Manifest.permission.CAMERA,
+                        Manifest.permission.CALL_PHONE,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .subscribe(new Consumer<Permission>() {
+                    @Override
+                    public void accept(Permission permission) throws Exception {
+
+                    }
+                });
     }
 
 

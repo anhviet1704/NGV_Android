@@ -5,8 +5,6 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
-import com.base.app.model.CountryResponse;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
@@ -21,7 +19,7 @@ import javax.inject.Inject;
 public class RegisterActivityVM extends ViewModel {
 
     private RegisterRepo mRepository;
-    private MutableLiveData<ResponseObj<List<CountryItem>>> mCountries = new MutableLiveData<>();
+    private MutableLiveData<ResponseObj<List<BaseValueItem>>> mCountries = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles = new MutableLiveData<>();
@@ -33,7 +31,7 @@ public class RegisterActivityVM extends ViewModel {
     }
 
 
-    public LiveData<ResponseObj<List<CountryItem>>> getCountries() {
+    public LiveData<ResponseObj<List<BaseValueItem>>> getCountries() {
         mCountries = mRepository.getCounties();
         return mCountries;
     }

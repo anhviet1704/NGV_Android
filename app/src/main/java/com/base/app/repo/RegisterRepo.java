@@ -2,14 +2,11 @@ package com.base.app.repo;
 
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
 import com.base.app.data.ApiServices;
 import com.base.app.model.BaseValueItem;
-import com.base.app.model.CountryItem;
-import com.base.app.model.CountryResponse;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
@@ -19,12 +16,8 @@ import com.base.app.module.AppDatabase;
 import com.base.app.utils.Response;
 import com.base.app.utils.SingleLiveEvent;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observer;
@@ -36,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
 @Singleton
 public class RegisterRepo {
 
-    private MutableLiveData<ResponseObj<List<CountryItem>>> mCountries;
+    private MutableLiveData<ResponseObj<List<BaseValueItem>>> mCountries;
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices;
     private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles;
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister;
@@ -58,7 +51,7 @@ public class RegisterRepo {
         this.mAppDatabase = mDatabase;
     }
 
-    public MutableLiveData<ResponseObj<List<CountryItem>>> getCounties() {
+    public MutableLiveData<ResponseObj<List<BaseValueItem>>> getCounties() {
         if (mCountries.getValue() != null) {
             if (mCountries.getValue().getResponse() == Response.FAILED)
                 getCountriesFromServer();
@@ -177,7 +170,6 @@ public class RegisterRepo {
                             mCountries.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         } else
                             mCountries.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
-
                     }
 
                     @Override

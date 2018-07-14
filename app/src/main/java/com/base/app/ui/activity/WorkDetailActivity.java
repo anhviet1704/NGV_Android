@@ -31,6 +31,7 @@ import com.base.app.utils.SpacesItemDecoration;
 import com.base.app.viewmodel.WorkDetailActivityVM;
 import com.blankj.utilcode.util.ConvertUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -44,6 +45,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     @Inject
     LoginItem mLoginItem;
     private JobNewDetailItem mJobLastDetailItem;
+    private JobCurrentItem mJobCurrentItem;
 
     private List<String> listItem = new ArrayList<>();
     private ViewpagerWorkAdapter fragmentAdapter;
@@ -64,7 +66,13 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     @Override
     protected void onInit(Bundle instance) {
-        viewModel.getJobDetail(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
+        int owner_job_id;
+        if (mJobLastDetailItem != null) {
+            owner_job_id = mJobLastDetailItem.getOwnerJobId();
+        } else {
+            owner_job_id = mJobCurrentItem.getOwnerJobId();
+        }
+        viewModel.getJobDetail(owner_job_id, mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<JobDetail> response) {
                 if (response != null)
@@ -83,15 +91,13 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickFinish() {
                         @Override
                         public void onClickItem() {
-                            viewModel.cancelJob(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId())
+                            viewModel.cancelJob(owner_job_id, mLoginItem.getId())
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
                                             if (response.getResponse() == Response.SUCCESS) {
                                                 isAlreadyRegister = false;
-                                                bind.tvSubmit.setTextColor(Color.parseColor("#FFFFFF"));
-                                                bind.tvSubmit.setBackgroundColor(Color.parseColor("#84B8FF"));
-                                                bind.viewWaitingJob.setVisibility(View.GONE);
+                                                onUpdateUIStatusJob(0);
                                                 mDialogConfirm.dismiss();
                                             } else {
                                                 Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
@@ -106,15 +112,13 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, new OnClickRegisterJob() {
                         @Override
                         public void onClickRegister(String deal) {
-                            viewModel.registerJob(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId(), deal)
+                            viewModel.registerJob(owner_job_id, mLoginItem.getId(), deal)
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
                                             if (response.getResponse() == Response.SUCCESS) {
                                                 isAlreadyRegister = true;
-                                                bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
-                                                bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
-                                                bind.viewWaitingJob.setVisibility(View.VISIBLE);
+                                                onUpdateUIStatusJob(1);
                                                 mDialogRegisterJob.dismiss();
                                             } else {
                                                 Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
@@ -132,6 +136,11 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     }
 
     private void onUpdateUI(JobDetail obj) {
+        //1:waiting ,:2: approved, 3:complete, 4:cancel
+        if (obj.getOsinJobStatus() == 1) {
+            isAlreadyRegister = true;
+        }
+        onUpdateUIStatusJob(obj.getOsinJobStatus());
         String time = obj.getStartDate() + obj.getStartTime() + "-" + obj.getEndTime();
         bind.tvWorkName.setText(obj.getJobName());
         bind.tvWorkPrice.setText(obj.getFee());
@@ -179,7 +188,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             @Override
             public void onClickItem(View v, int pos) {
                 mDialogUserInfo = new DialogHelper(WorkDetailActivity.this);
-                mDialogUserInfo.onShowUserInfo(bind.viewRoot, new OnClickDialog() {
+                mDialogUserInfo.onShowUserInfo(bind.viewRoot, mOsinItems.get(pos), new OnClickDialog() {
                     @Override
                     public void onClicClose() {
                         viewModel.onClearHistory();
@@ -209,9 +218,29 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         mJobLastDetailItem = event;
     }
 
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(JobCurrentItem event) {
+        mJobCurrentItem = event;
+    }
+
     @Override
     protected void onDestroy() {
+        EventBus.getDefault().removeAllStickyEvents();
         viewModel.onClearData();
         super.onDestroy();
+    }
+
+    private void onUpdateUIStatusJob(int status) {
+        if (status == 1) {
+            bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
+            bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
+            bind.viewWaitingJob.setVisibility(View.VISIBLE);
+            bind.tvSubmit.setText(getString(R.string.tv_work_021));
+        } else {
+            bind.tvSubmit.setTextColor(Color.parseColor("#FFFFFF"));
+            bind.tvSubmit.setBackgroundColor(Color.parseColor("#84B8FF"));
+            bind.viewWaitingJob.setVisibility(View.GONE);
+            bind.tvSubmit.setText(getString(R.string.tv_work_001));
+        }
     }
 }

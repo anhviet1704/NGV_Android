@@ -1,8 +1,11 @@
 package com.base.app.model;
 
-import javax.annotation.Generated;
-
+import com.base.app.model.joblasted.JobImg;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
+import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
 public class JobCurrentItem {
@@ -10,111 +13,155 @@ public class JobCurrentItem {
     @SerializedName("end_date")
     private String endDate;
 
-    @SerializedName("job_img")
-    private Object jobImg;
-
-    @SerializedName("start_time")
-    private String startTime;
-
     @SerializedName("address")
     private String address;
 
-    @SerializedName("job_id")
-    private int jobId;
+    @SerializedName("osin_job_id")
+    private int osinJobId;
+
+    @SerializedName("owner_id")
+    private int ownerId;
 
     @SerializedName("fee")
-    private String fee;
-
-    @SerializedName("name")
-    private String name;
+    private int fee;
 
     @SerializedName("end_time")
     private String endTime;
 
-    @SerializedName("sub_job_id")
-    private int subJobId;
+    @SerializedName("created_at")
+    private String createdAt;
+
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("owner_job_id")
+    private int ownerJobId;
+
+    @SerializedName("job_img")
+    private List<JobImg> jobImg;
+
+    @SerializedName("start_time")
+    private String startTime;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("owner_fullname")
+    private String ownerFullname;
 
     @SerializedName("start_date")
     private String startDate;
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
 
     public String getEndDate() {
         return endDate;
     }
 
-    public void setJobImg(Object jobImg) {
-        this.jobImg = jobImg;
-    }
-
-    public Object getJobImg() {
-        return jobImg;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public int getJobId() {
-        return jobId;
+    public int getOsinJobId() {
+        return osinJobId;
     }
 
-    public void setFee(String fee) {
-        this.fee = fee;
+    public void setOsinJobId(int osinJobId) {
+        this.osinJobId = osinJobId;
     }
 
-    public String getFee() {
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public int getFee() {
         return fee;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setFee(int fee) {
+        this.fee = fee;
     }
 
     public String getEndTime() {
         return endTime;
     }
 
-    public void setSubJobId(int subJobId) {
-        this.subJobId = subJobId;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public int getSubJobId() {
-        return subJobId;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getOwnerJobId() {
+        return ownerJobId;
+    }
+
+    public void setOwnerJobId(int ownerJobId) {
+        this.ownerJobId = ownerJobId;
+    }
+
+    public List<JobImg> getJobImg() {
+        return jobImg;
+    }
+
+    public void setJobImg(List<JobImg> jobImg) {
+        this.jobImg = jobImg;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getOwnerFullname() {
+        return ownerFullname;
+    }
+
+    public void setOwnerFullname(String ownerFullname) {
+        this.ownerFullname = ownerFullname;
     }
 
     public String getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -122,14 +169,18 @@ public class JobCurrentItem {
         return
                 "JobCurrentItem{" +
                         "end_date = '" + endDate + '\'' +
+                        ",address = '" + address + '\'' +
+                        ",osin_job_id = '" + osinJobId + '\'' +
+                        ",owner_id = '" + ownerId + '\'' +
+                        ",fee = '" + fee + '\'' +
+                        ",end_time = '" + endTime + '\'' +
+                        ",created_at = '" + createdAt + '\'' +
+                        ",title = '" + title + '\'' +
+                        ",owner_job_id = '" + ownerJobId + '\'' +
                         ",job_img = '" + jobImg + '\'' +
                         ",start_time = '" + startTime + '\'' +
-                        ",address = '" + address + '\'' +
-                        ",job_id = '" + jobId + '\'' +
-                        ",fee = '" + fee + '\'' +
                         ",name = '" + name + '\'' +
-                        ",end_time = '" + endTime + '\'' +
-                        ",sub_job_id = '" + subJobId + '\'' +
+                        ",owner_fullname = '" + ownerFullname + '\'' +
                         ",start_date = '" + startDate + '\'' +
                         "}";
     }

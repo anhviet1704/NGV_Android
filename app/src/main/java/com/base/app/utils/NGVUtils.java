@@ -3,13 +3,11 @@ package com.base.app.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.constraint.Group;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 
 import com.base.app.R;
-import com.base.app.ui.activity.LanguageActivity;
 import com.base.app.ui.callback.OnClickGroup;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.bumptech.glide.load.MultiTransformation;
@@ -20,13 +18,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Observable;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
@@ -43,6 +41,11 @@ public class NGVUtils {
             e.printStackTrace();
         }
         return "";
+    }
+
+    public static String formatCurrency(Context ctx, double value) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        return formatter.format(value) + ctx.getResources().getString(R.string.tv_work_022);
     }
 
     public static ArrayList<Integer> getIntegerArray(ArrayList<String> stringArray) {

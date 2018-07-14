@@ -80,6 +80,8 @@
     <string name="tv_work_018">Tôi đã hoàn thành công việc này</string>
     <string name="tv_work_019">Xong</string>
     <string name="tv_work_020"><u>Hủy công việc này</u></string>
+    <string name="tv_work_021">Hủy đăng ký</string>
+    <string name="tv_work_022">đ/ giờ</string>
 
     <string name="tv_setting_001">Ví thanh toán</string>
     <string name="tv_setting_002">Đổi mật khẩu</string>
@@ -105,7 +107,7 @@
     <string name="tv_user_006">Thành tiền (Có thể chỉnh sửa giá theo mong muốn)</string>
     <string name="tv_user_007">Nhập số tiền</string>
     <string name="tv_user_008">
-    <![CDATA[      <p><font color="#98A2B0"  size="13">Đã hoàn thành công việc</font> %s.</p>    ]]>
+    <![CDATA[<p><font color="#98A2B0"  size="13">Đã hoàn thành công việc</font> %1s.</p>    ]]>
 </string>
 
     <string name="tv_wallet_001">Ngân hàng\nliên kết</string>

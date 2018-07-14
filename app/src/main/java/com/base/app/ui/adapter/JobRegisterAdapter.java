@@ -9,7 +9,6 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
-import com.base.app.model.JobCurrentItem;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
@@ -63,8 +62,12 @@ public class JobRegisterAdapter extends RecyclerView.Adapter<JobRegisterAdapter.
         JobCurrentItem mJobCurrentItem = mItems.get(position);
         holder.tvName.setText(mJobCurrentItem.getName());
         holder.tvTime.setText(mJobCurrentItem.getStartTime());
-        String url = "https://camo.mybb.com/e01de90be6012adc1b1701dba899491a9348ae79/687474703a2f2f7777772e6a71756572797363726970742e6e65742f696d616765732f53696d706c6573742d526573706f6e736976652d6a51756572792d496d6167652d4c69676874626f782d506c7567696e2d73696d706c652d6c69676874626f782e6a7067";
-        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6)).into(holder.ivDes);
+        String url = "";
+        try {
+            url = mJobCurrentItem.getJobImg().get(0).getValue();
+        } catch (Exception e) {
+        }
+        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(holder.ivDes);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

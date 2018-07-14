@@ -65,7 +65,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         JobNewDetailItem mWorkItem = mWorkItems.get(position);
         holder.tvName.setText(mWorkItem.getJobName());
-        holder.tvPrice.setText(mWorkItem.getFee());
+        holder.tvPrice.setText(NGVUtils.formatCurrency(context, mWorkItem.getFee()));
         holder.tvTime.setText(mWorkItem.getDiffTime() + " |");
         holder.tvDistrict.setText(mWorkItem.getDistrict());
         String url = "";

@@ -297,7 +297,7 @@
                 android:drawableEnd="@drawable/ic_edit"
                 android:drawablePadding="12dp"
                 android:hint="@string/tv_user_007"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 android:paddingBottom="16dp"
                 android:paddingEnd="12dp"
                 android:paddingStart="12dp"

@@ -31,7 +31,7 @@ public class JobNewDetailItem {
     private String district;
 
     @SerializedName("fee")
-    private String fee;
+    private double fee;
 
     @SerializedName("created_at")
     private String createdAt;
@@ -101,11 +101,11 @@ public class JobNewDetailItem {
         return district;
     }
 
-    public String getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 

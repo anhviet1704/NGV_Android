@@ -47,7 +47,7 @@ public class JobDetail {
     private String startTime;
 
     @SerializedName("osin_job_status")
-    private String osinJobStatus;
+    private int osinJobStatus = -1;
 
     @SerializedName("job_name")
     private String jobName;
@@ -157,11 +157,11 @@ public class JobDetail {
         this.startTime = startTime;
     }
 
-    public String getOsinJobStatus() {
+    public int getOsinJobStatus() {
         return osinJobStatus;
     }
 
-    public void setOsinJobStatus(String osinJobStatus) {
+    public void setOsinJobStatus(int osinJobStatus) {
         this.osinJobStatus = osinJobStatus;
     }
 

@@ -1,5 +1,6 @@
 package com.base.app.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.constraint.Group;
@@ -14,11 +15,13 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
+import com.base.app.model.OsinItem;
 import com.base.app.ui.callback.OnClickDialog;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.bumptech.glide.Glide;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
@@ -80,6 +83,54 @@ public class DialogHelper<T> {
         mTvTitle.setText(mTitle);
     }
 
+    public void onShowUserInfo(ViewGroup root, OsinItem osinItem, final OnClickDialog mclick) {
+        int width = ScreenUtils.getScreenWidth();
+        int height = ScreenUtils.getScreenHeight();
+        mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_user, null);
+        ViewGroup.LayoutParams params = mDialog.getWindow().getAttributes();
+        params.width = width;
+        params.height = height;// - BarUtils.getStatusBarHeight();
+        view.setLayoutParams(params);
+        mDialog.setContentView(view);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.setCancelable(false);
+
+        ImageView ivAvatar = mDialog.findViewById(R.id.iv_avatar);
+        MagicTextView tvName = mDialog.findViewById(R.id.tv_name);
+        MagicTextView tvStatus = mDialog.findViewById(R.id.tv_status);
+        MagicTextView tvBirthday = mDialog.findViewById(R.id.tv_birthday);
+        MagicButton viewClose = mDialog.findViewById(R.id.viewClose);
+        RecyclerView rvWork = mDialog.findViewById(R.id.rv_work);
+        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
+        mBlurView.setupWith(root)
+                //.windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(mContext))
+                .blurRadius(10f)
+                .setHasFixedTransformationMatrix(true);
+        tvName.setText(osinItem.getOsinFullName());
+        tvStatus.setText(osinItem.getRoleName());
+        tvBirthday.setText(osinItem.getBirthday());
+        Glide.with(mContext).load(osinItem.getAvatar()).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(ivAvatar);
+        mAdapter = new MasterAdapter(new OnClickMaster() {
+            @Override
+            public void onClickItem(int pos) {
+                //mClick.onClickItem(pos);
+            }
+        });
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
+        rvWork.setLayoutManager(mLayoutManager);
+        rvWork.setItemAnimator(new DefaultItemAnimator());
+        rvWork.setAdapter(mAdapter);
+        viewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+                mclick.onClicClose();
+            }
+        });
+    }
+
     public class MasterAdapter extends RecyclerView.Adapter<MasterAdapter.MyViewHolder> {
 
         OnClickMaster onClick;
@@ -103,6 +154,7 @@ public class DialogHelper<T> {
             return new MyViewHolder(itemView);
         }
 
+        @SuppressLint("StringFormatMatches")
         @Override
         public void onBindViewHolder(MyViewHolder holder, final int position) {
             if (mDatas != null && mDatas.size() > 0) {
@@ -132,51 +184,6 @@ public class DialogHelper<T> {
         public int getItemCount() {
             return mDatas.size();
         }
-    }
-
-    public void onShowUserInfo(ViewGroup root, final OnClickDialog mclick) {
-        int width = ScreenUtils.getScreenWidth();
-        int height = ScreenUtils.getScreenHeight();
-        mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_user, null);
-        ViewGroup.LayoutParams params = mDialog.getWindow().getAttributes();
-        params.width = width;
-        params.height = height;// - BarUtils.getStatusBarHeight();
-        view.setLayoutParams(params);
-        mDialog.setContentView(view);
-        mDialog.setCanceledOnTouchOutside(false);
-        mDialog.setCancelable(false);
-
-        ImageView ivAvatar = mDialog.findViewById(R.id.iv_avatar);
-        MagicTextView tvName = mDialog.findViewById(R.id.tv_name);
-        MagicTextView tvStatus = mDialog.findViewById(R.id.tv_status);
-        MagicTextView tvBirthday = mDialog.findViewById(R.id.tv_birthday);
-        MagicButton viewClose = mDialog.findViewById(R.id.viewClose);
-        RecyclerView rvWork = mDialog.findViewById(R.id.rv_work);
-        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
-        mBlurView.setupWith(root)
-                //.windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mContext))
-                .blurRadius(10f)
-                .setHasFixedTransformationMatrix(true);
-
-        mAdapter = new MasterAdapter(new OnClickMaster() {
-            @Override
-            public void onClickItem(int pos) {
-                //mClick.onClickItem(pos);
-            }
-        });
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(mContext);
-        rvWork.setLayoutManager(mLayoutManager);
-        rvWork.setItemAnimator(new DefaultItemAnimator());
-        rvWork.setAdapter(mAdapter);
-        viewClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-                mclick.onClicClose();
-            }
-        });
     }
 
     public void onShowRegisterJob(ViewGroup root, final OnClickRegisterJob mClick) {

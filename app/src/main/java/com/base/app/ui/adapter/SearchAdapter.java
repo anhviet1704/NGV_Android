@@ -11,8 +11,8 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import com.base.app.R;
-import com.base.app.model.RoleItem;
-import com.base.app.ui.callback.OnClickItem;
+import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.utils.NGVUtils;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
@@ -24,9 +24,9 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
     private List<T> movieList;
     private List<T> movieListFiltered;
     private Context mContext;
-    private OnClickItem mOnClick;
+    private OnClickSearch mOnClick;
 
-    public SearchAdapter(Context context, OnClickItem mOnClick) {
+    public SearchAdapter(Context context, OnClickSearch mOnClick) {
         mContext = context;
         movieList = new ArrayList<>();
         movieListFiltered = new ArrayList<>();
@@ -52,10 +52,10 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
                 @Override
                 public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (movieList.get(oldItemPosition) instanceof RoleItem) {
-                        RoleItem oldItem = (RoleItem) movieList.get(oldItemPosition);
-                        RoleItem newItem = (RoleItem) movieList.get(newItemPosition);
-                        return oldItem.getId() == newItem.getId();
+                    if (movieList.get(oldItemPosition) instanceof JobNewDetailItem) {
+                        JobNewDetailItem oldItem = (JobNewDetailItem) movieList.get(oldItemPosition);
+                        JobNewDetailItem newItem = (JobNewDetailItem) movieList.get(newItemPosition);
+                        return oldItem.getJobId() == newItem.getJobId();
                     } else {
                     }
                     return false;
@@ -63,10 +63,10 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
                 @Override
                 public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-                    if (movieList.get(oldItemPosition) instanceof RoleItem) {
-                        RoleItem oldMovie = (RoleItem) movieList.get(oldItemPosition);
-                        RoleItem newMovie = (RoleItem) movieList.get(newItemPosition);
-                        return newMovie.getValue() == oldMovie.getValue();
+                    if (movieList.get(oldItemPosition) instanceof JobNewDetailItem) {
+                        JobNewDetailItem oldMovie = (JobNewDetailItem) movieList.get(oldItemPosition);
+                        JobNewDetailItem newMovie = (JobNewDetailItem) movieList.get(newItemPosition);
+                        return newMovie.getJobName() == oldMovie.getJobName();
                     }
                     return false;
                 }
@@ -86,16 +86,17 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
     @Override
     public void onBindViewHolder(SearchAdapter.MyViewHolder holder, final int position) {
-        if (movieListFiltered.get(position) instanceof RoleItem) {
-            RoleItem item = (RoleItem) movieListFiltered.get(position);
-            holder.mTvName.setText(item.getValue());
+        if (movieListFiltered.get(position) instanceof JobNewDetailItem) {
+            JobNewDetailItem item = (JobNewDetailItem) movieListFiltered.get(position);
+            holder.mTvName.setText(item.getJobName());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnClick.onClickItem(view, item.getJobId());
+                }
+            });
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mOnClick.onClickItem(view, position);
-            }
-        });
+
     }
 
     @Override
@@ -116,10 +117,10 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
                 if (charString.isEmpty()) {
                     movieListFiltered = movieList;
                 } else {
-                    if (movieList.get(0) instanceof RoleItem) {
+                    if (movieList.get(0) instanceof JobNewDetailItem) {
                         List<T> filteredList = new ArrayList<>();
                         for (T movie : movieList) {
-                            if (NGVUtils.covertStringToChar(((RoleItem) movie).getValue().toLowerCase()).contains(NGVUtils.covertStringToChar(charString.toLowerCase()))) {
+                            if (NGVUtils.covertStringToChar(((JobNewDetailItem) movie).getJobName().toLowerCase()).contains(NGVUtils.covertStringToChar(charString.toLowerCase()))) {
                                 filteredList.add(movie);
                             }
                         }

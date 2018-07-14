@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.text.ParseException;
@@ -117,6 +118,29 @@ public class NGVUtils {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
         return "";
+    }
+
+    public static String onCaculatorTime(Context ctx, String startTime, String endTime) {
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            date1 = dateFormat.parse(startTime);
+            date2 = dateFormat.parse(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = date2.getTime() - date1.getTime();
+        int seconds = (int) (milliseconds / 1000) % 60;
+        int minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        int hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        if (hours == 0) {
+            return ctx.getResources().getString(R.string.tv_home_005, minutes);
+        } else if (minutes == 0) {
+            return ctx.getResources().getString(R.string.tv_home_007, hours);
+        } else {
+            return ctx.getResources().getString(R.string.tv_home_010, hours, minutes);
+        }
     }
 
     public static String onCaculatorDate(Context ctx, String date) {

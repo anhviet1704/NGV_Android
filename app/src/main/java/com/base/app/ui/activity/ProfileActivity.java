@@ -8,11 +8,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.base.app.R;
+import com.base.app.model.LoginItem;
+import com.base.app.utils.NGVUtils;
+import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -35,12 +41,21 @@ public class ProfileActivity extends AppCompatActivity {
     MagicTextView tvAddress;
     @BindView(R.id.iv_back)
     ImageView ivBack;
+    @Inject
+    LoginItem mLoginItem;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
+        Glide.with(this).load(mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
+        tvName.setText(mLoginItem.getFullname());
+        tvBirthday.setText(mLoginItem.getBirthday());
+        tvPhone.setText(mLoginItem.getPhone());
+        tvEmail.setText(mLoginItem.getEmail());
+        tvAddress.setText(mLoginItem.getAddress());
     }
 
 

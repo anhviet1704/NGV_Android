@@ -14,21 +14,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.base.app.R;
+import com.base.app.model.LoginItem;
 import com.base.app.ui.activity.AboutActivity;
 import com.base.app.ui.activity.ChangePassActivity;
-import com.base.app.ui.activity.ForgotPassActivity;
 import com.base.app.ui.activity.LanguageActivity;
 import com.base.app.ui.activity.ProfileActivity;
-import com.base.app.ui.activity.VerifyActivity;
 import com.base.app.ui.activity.WalletActivity;
 import com.base.app.utils.NGVUtils;
+import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 import com.loopeer.shadow.ShadowView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import dagger.android.support.AndroidSupportInjection;
 
 public class SettingFragment extends Fragment {
     @BindView(R.id.iv_avatar)
@@ -52,6 +55,8 @@ public class SettingFragment extends Fragment {
     @BindView(R.id.view_signout)
     LinearLayout viewSignout;
     Unbinder unbinder;
+    @Inject
+    LoginItem mLoginItem;
 
     public static SettingFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -70,7 +75,9 @@ public class SettingFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        AndroidSupportInjection.inject(this);
+        tvName.setText(mLoginItem.getFullname());
+        Glide.with(this).load(mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
     }
 
     @Override

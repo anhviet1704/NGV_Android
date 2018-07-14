@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
+import com.base.app.model.JobDetail;
 import com.base.app.model.OsinItem;
 import com.base.app.ui.callback.OnClickDialog;
 import com.base.app.ui.callback.OnClickFinish;
@@ -186,7 +187,7 @@ public class DialogHelper<T> {
         }
     }
 
-    public void onShowRegisterJob(ViewGroup root, final OnClickRegisterJob mClick) {
+    public void onShowRegisterJob(ViewGroup root, JobDetail jobDetail, final OnClickRegisterJob mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -213,6 +214,13 @@ public class DialogHelper<T> {
                 .blurAlgorithm(new RenderScriptBlur(mContext))
                 .blurRadius(10f)
                 .setHasFixedTransformationMatrix(true);
+
+        tvWorkTime.setText(jobDetail.getStartTime());
+        tvTime.setText(jobDetail.getStartDate());
+        tvJobName.setText(jobDetail.getJobName());
+        tvJobPlace.setText(jobDetail.getJobAddress());
+        tvPriceJob.setText(NGVUtils.formatCurrency(mContext, jobDetail.getFee()));
+        tvTimeJob.setText(NGVUtils.onCaculatorTime(mContext, jobDetail.getStartTime(), jobDetail.getEndTime()));
 
         ivClose.setOnClickListener(new View.OnClickListener() {
             @Override

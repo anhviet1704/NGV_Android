@@ -5,6 +5,7 @@ import com.base.app.ui.activity.ForgotPassActivity;
 import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.NewPassActivity;
+import com.base.app.ui.activity.ProfileActivity;
 import com.base.app.ui.activity.RegisterActivity;
 import com.base.app.ui.activity.VerifyActivity;
 import com.base.app.ui.activity.WalletActivity;
@@ -43,5 +44,8 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract WalletActivity WalletActivity();
+
+    @ContributesAndroidInjector
+    abstract ProfileActivity ProfileActivity();
 
 }

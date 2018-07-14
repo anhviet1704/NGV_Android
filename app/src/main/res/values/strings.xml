@@ -59,6 +59,7 @@
     <string name="tv_home_007">%d giờ</string>
     <string name="tv_home_008">Đóng</string>
     <string name="tv_home_009">Tìm kiếm</string>
+    <string name="tv_home_010">%1d giờ %2d phút</string>
 
     <string name="tv_work_001">Đăng ký công việc</string>
     <string name="tv_work_002">Thời gian</string>

@@ -143,20 +143,17 @@ public class JobNewDetailItem {
 
     @Override
     public String toString() {
-        return
-                "JobNewDetailItem{" +
-                        "job_img = '" + jobImg + '\'' +
-                        ",job_name = '" + jobName + '\'' +
-                        ",job_description = '" + jobDescription + '\'' +
-                        ",diffTime = '" + diffTime + '\'' +
-                        ",job_id = '" + jobId + '\'' +
-                        ",owner_id = '" + ownerId + '\'' +
-                        ",district = '" + district + '\'' +
-                        ",fee = '" + fee + '\'' +
-                        ",created_at = '" + createdAt + '\'' +
-                        ",title = '" + title + '\'' +
-                        ",osin_job_staus = '" + osinJobStaus + '\'' +
-                        ",owner_job_id = '" + ownerJobId + '\'' +
-                        "}";
+        return "job_img = '" + jobImg +
+                ",job_name = '" + jobName +
+                ",job_description = '" + jobDescription +
+                ",diffTime = '" + diffTime +
+                ",job_id = '" + jobId +
+                ",owner_id = '" + ownerId +
+                ",district = '" + district +
+                ",fee = '" + fee +
+                ",created_at = '" + createdAt +
+                ",title = '" + title +
+                ",osin_job_staus = '" + osinJobStaus +
+                ",owner_job_id = '" + ownerJobId;
     }
 }

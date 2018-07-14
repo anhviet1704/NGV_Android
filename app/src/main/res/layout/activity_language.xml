@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF"
@@ -98,8 +97,6 @@
         android:elevation="1dp"
         android:gravity="center"
         android:paddingBottom="14dp"
-        android:paddingEnd="118dp"
-        android:paddingStart="118dp"
         android:paddingTop="16dp"
         android:text="@string/tv_setting_015"
         android:textAllCaps="false"

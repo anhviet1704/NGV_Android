@@ -54,6 +54,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     private List<OsinItem> mOsinItems;
     private boolean isAlreadyRegister = false;
     private DialogHelper mDialogUserInfo;
+    private JobDetail mJobDetail;
 
     @Override
     protected int getLayoutResId() {
@@ -78,7 +79,8 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             public void onChanged(@Nullable ResponseObj<JobDetail> response) {
                 if (response != null)
                     if (response.getResponse() == Response.SUCCESS) {
-                        onUpdateUI(response.getObj());
+                        mJobDetail = response.getObj();
+                        onUpdateUI(mJobDetail);
                     }
             }
         });
@@ -110,7 +112,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.show();
                 } else {
                     final DialogHelper mDialogRegisterJob = new DialogHelper(WorkDetailActivity.this);
-                    mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, new OnClickRegisterJob() {
+                    mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, mJobDetail, new OnClickRegisterJob() {
                         @Override
                         public void onClickRegister(String deal) {
                             viewModel.registerJob(owner_job_id, mLoginItem.getId(), deal)

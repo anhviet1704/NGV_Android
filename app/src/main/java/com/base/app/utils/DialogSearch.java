@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.base.app.R;
 import com.base.app.ui.adapter.SearchAdapter;
-import com.base.app.ui.callback.OnClickItem;
+import com.base.app.ui.callback.OnClickSearch;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -58,7 +58,7 @@ public class DialogSearch<T> {
     }
 
     @SuppressLint("CheckResult")
-    public void onShowSearch(final OnClickItem mClick) {
+    public void onShowSearch(final OnClickSearch mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -75,10 +75,10 @@ public class DialogSearch<T> {
         MagicEditText mEtSearch = mDialog.findViewById(R.id.et_seach);
         final ViewGroup mViewRoot = mDialog.findViewById(R.id.view_root);
         RecyclerView mRvSearch = mDialog.findViewById(R.id.rv_search);
-        mSearchAdapter = new SearchAdapter(mContext, new OnClickItem() {
+        mSearchAdapter = new SearchAdapter(mContext, new OnClickSearch() {
             @Override
-            public void onClickItem(View v, int pos) {
-                mClick.onClickItem(v, pos);
+            public void onClickItem(View v, String job_id) {
+                mClick.onClickItem(v, job_id);
                 dismiss();
             }
 

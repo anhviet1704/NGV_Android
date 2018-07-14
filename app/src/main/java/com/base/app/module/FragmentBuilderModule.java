@@ -6,6 +6,7 @@ import com.base.app.ui.fragment.JobFragment;
 import com.base.app.ui.fragment.JobListFragment;
 import com.base.app.ui.fragment.JobRegisterFragment;
 import com.base.app.ui.fragment.NotificationFragment;
+import com.base.app.ui.fragment.SettingFragment;
 import com.base.app.ui.fragment.WorkListFragment;
 import com.base.app.ui.fragment.WorkMapFragment;
 
@@ -40,4 +41,7 @@ public abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract JobFinishFragment JobFinishFragment();
+
+    @ContributesAndroidInjector
+    abstract SettingFragment SettingFragment();
 }

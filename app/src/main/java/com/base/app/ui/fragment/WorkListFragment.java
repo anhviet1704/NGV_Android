@@ -33,13 +33,17 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
     @Inject
     LoginItem mLoginItem;
     private WorkAdapter mWorkAdapter;
-    private List<JobNewDetailItem> mWorkItems;
+    private static List<JobNewDetailItem> mWorkItems;
 
     public static WorkListFragment newInstance() {
         Bundle args = new Bundle();
         WorkListFragment fragment = new WorkListFragment();
         //fragment.setArguments(args);
         return fragment;
+    }
+
+    public static List<JobNewDetailItem> getData() {
+        return mWorkItems;
     }
 
     @Override

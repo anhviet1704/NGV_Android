@@ -17,7 +17,7 @@ public class JobDetail {
     private String ownerId;
 
     @SerializedName("fee")
-    private String fee;
+    private double fee;
 
     @SerializedName("end_time")
     private String endTime;
@@ -77,11 +77,11 @@ public class JobDetail {
         this.ownerId = ownerId;
     }
 
-    public String getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(String fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 

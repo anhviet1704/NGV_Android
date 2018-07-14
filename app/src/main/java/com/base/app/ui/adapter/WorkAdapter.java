@@ -66,14 +66,14 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         JobNewDetailItem mWorkItem = mWorkItems.get(position);
         holder.tvName.setText(mWorkItem.getJobName());
         holder.tvPrice.setText(NGVUtils.formatCurrency(context, mWorkItem.getFee()));
-        holder.tvTime.setText(mWorkItem.getDiffTime() + " |");
+        holder.tvTime.setText(NGVUtils.onCaculatorDate(context, mWorkItem.getCreatedAt()) + " |");
         holder.tvDistrict.setText(mWorkItem.getDistrict());
         String url = "";
         try {
             url = mWorkItem.getJobImg().get(0).getValue();
         } catch (Exception e) {
         }
-        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(holder.ivDes);
+        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.img_picture)).into(holder.ivDes);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

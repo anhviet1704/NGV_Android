@@ -67,7 +67,7 @@ public class JobRegisterAdapter extends RecyclerView.Adapter<JobRegisterAdapter.
             url = mJobCurrentItem.getJobImg().get(0).getValue();
         } catch (Exception e) {
         }
-        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(holder.ivDes);
+        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.img_picture)).into(holder.ivDes);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

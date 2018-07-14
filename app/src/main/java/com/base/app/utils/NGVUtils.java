@@ -112,14 +112,32 @@ public class NGVUtils {
         return gson.fromJson(data, Object.class);
     }
 
-    public static String onConvertDate(Context ctx, String date) {
+    private static String onConvertVer2(String date) {
+        //2018-07-12 23:43:36
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return "";
+    }
+
+    public static String onCaculatorDate(Context ctx, String date) {
+        //2018-07-12 23:43:36
         String mDate = "";
-        String[] temp = getFormatDate(date).split("/");
+        /*String[] temp = getFormatDate(date).split("/");
         int mHour = Integer.parseInt(temp[0]);
         int mMinutes = Integer.parseInt(temp[1]);
         int mDay = Integer.parseInt(temp[2]);
         int mMonth = Integer.parseInt(temp[3]);
-        int mYear = Integer.parseInt(temp[4]);
+        int mYear = Integer.parseInt(temp[4]);*/
+
+        String[] temp = date.split(" ");
+        String[] dates = temp[0].split("-");
+        String[] times = temp[1].split(":");
+
+        int mHour = Integer.parseInt(times[0]);
+        int mMinutes = Integer.parseInt(times[1]);
+        int mDay = Integer.parseInt(dates[2]);
+        int mMonth = Integer.parseInt(dates[1]);
+        int mYear = Integer.parseInt(dates[0]);
 
         SimpleDateFormat dateFormatter = new SimpleDateFormat("HH/mm/dd/MM/yyyy");
         Date now = new Date();
@@ -144,13 +162,16 @@ public class NGVUtils {
                         mDate = ctx.getResources().getString(R.string.tv_home_007, mHourNow - mHour);
                     }
                 } else if (mDayNow > mDay) {
-                    mDate = mHour + ":" + mMinutes + " " + mDay + "/" + mMonth + "/" + mYear;
+                    //mDate = mHour + ":" + mMinutes + " " + onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
+                    mDate = onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
                 }
             } else if (mMonthNow > mMonth) {
-                mDate = mHour + ":" + mMinutes + " " + mDay + "/" + mMonth + "/" + mYear;
+                mDate = onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
+                //mDate = mHour + ":" + mMinutes + " " + onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
             }
         } else if (mYearNow > mYear) {
-            mDate = mHour + ":" + mMinutes + " " + mDay + "/" + mMonth + "/" + mYear;
+            //mDate = mHour + ":" + mMinutes + " " + onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
+            mDate = onFormatDayMonthZero(mDay) + "/" + onFormatDayMonthZero(mMonth) + "/" + mYear;
         }
 
         return mDate;

@@ -26,6 +26,7 @@ import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.base.app.utils.DialogHelper;
+import com.base.app.utils.NGVUtils;
 import com.base.app.utils.Response;
 import com.base.app.utils.SpacesItemDecoration;
 import com.base.app.viewmodel.WorkDetailActivityVM;
@@ -143,7 +144,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         onUpdateUIStatusJob(obj.getOsinJobStatus());
         String time = obj.getStartDate() + obj.getStartTime() + "-" + obj.getEndTime();
         bind.tvWorkName.setText(obj.getJobName());
-        bind.tvWorkPrice.setText(obj.getFee());
+        bind.tvWorkPrice.setText(NGVUtils.formatCurrency(this, obj.getFee()));
         bind.tvWorkTime.setText(obj.getStartDate());
         bind.tvUserName.setText(obj.getOwnerFullName());
         bind.tvUserAddress.setText(obj.getOwnerAddress());

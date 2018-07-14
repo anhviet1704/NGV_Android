@@ -14,9 +14,10 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
-import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickDialog;
+import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickMaster;
+import com.base.app.ui.callback.OnClickRegisterJob;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
@@ -178,7 +179,7 @@ public class DialogHelper<T> {
         });
     }
 
-    public void onShowRegisterJob(ViewGroup root, final OnClickFinish mClick) {
+    public void onShowRegisterJob(ViewGroup root, final OnClickRegisterJob mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -215,7 +216,7 @@ public class DialogHelper<T> {
         btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClick.onClickItem();
+                mClick.onClickRegister(etSumPrice.getText().toString());
             }
         });
 

@@ -38,13 +38,6 @@ public class HomeFragment extends BaseFragment<WorkListFragmentVM, FragmentHomeB
 
     @Override
     protected void onInit(Bundle instance) {
-        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                updateUI(binding, user);
-            }
-        });*/
-
         FragmentPagerItems pages = FragmentPagerItems.with(getContext())
                 .add(R.string.tv_home_001, WorkListFragment.class)
                 .add(R.string.tv_home_002, WorkMapFragment.class)

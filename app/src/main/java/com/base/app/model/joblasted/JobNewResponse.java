@@ -1,13 +1,13 @@
 package com.base.app.model.joblasted;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import javax.annotation.Generated;
 
-import com.google.gson.annotations.SerializedName;
-
 @Generated("com.robohorse.robopojogenerator")
-public class JobLasted {
+public class JobNewResponse {
 
     @SerializedName("path")
     private String path;
@@ -19,7 +19,7 @@ public class JobLasted {
     private int total;
 
     @SerializedName("data")
-    private List<JobLastDetailItem> data;
+    private List<JobNewDetailItem> data;
 
     @SerializedName("last_page")
     private int lastPage;
@@ -63,12 +63,12 @@ public class JobLasted {
         return total;
     }
 
-    public void setData(List<JobLastDetailItem> data) {
-        this.data = data;
+    public List<JobNewDetailItem> getData() {
+        return data;
     }
 
-    public List<JobLastDetailItem> getData() {
-        return data;
+    public void setData(List<JobNewDetailItem> data) {
+        this.data = data;
     }
 
     public void setLastPage(int lastPage) {

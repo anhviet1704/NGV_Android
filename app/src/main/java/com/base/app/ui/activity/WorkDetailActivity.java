@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,12 +18,13 @@ import com.base.app.model.JobDetail;
 import com.base.app.model.LoginItem;
 import com.base.app.model.OsinItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobLastDetailItem;
+import com.base.app.model.joblasted.JobNewDetailItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
 import com.base.app.ui.callback.OnClickDialog;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.ui.callback.OnClickRegisterJob;
 import com.base.app.utils.DialogHelper;
 import com.base.app.utils.Response;
 import com.base.app.utils.SpacesItemDecoration;
@@ -43,7 +43,7 @@ import javax.inject.Inject;
 public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, ActivityWorkDetailBinding> {
     @Inject
     LoginItem mLoginItem;
-    private JobLastDetailItem mJobLastDetailItem;
+    private JobNewDetailItem mJobLastDetailItem;
 
     private List<String> listItem = new ArrayList<>();
     private ViewpagerWorkAdapter fragmentAdapter;
@@ -64,7 +64,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     @Override
     protected void onInit(Bundle instance) {
-        viewModel.getJobDetail(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
+        viewModel.getJobDetail(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId()).observe(this, new Observer<ResponseObj<JobDetail>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<JobDetail> response) {
                 if (response != null)
@@ -83,7 +83,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickFinish() {
                         @Override
                         public void onClickItem() {
-                            viewModel.cancelJob(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId())
+                            viewModel.cancelJob(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId())
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
@@ -103,10 +103,10 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.show();
                 } else {
                     final DialogHelper mDialogRegisterJob = new DialogHelper(WorkDetailActivity.this);
-                    mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, new OnClickFinish() {
+                    mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, new OnClickRegisterJob() {
                         @Override
-                        public void onClickItem() {
-                            viewModel.registerJob(mJobLastDetailItem.getJobId(), mJobLastDetailItem.getSubJobId(), mLoginItem.getId())
+                        public void onClickRegister(String deal) {
+                            viewModel.registerJob(mJobLastDetailItem.getOwnerJobId(), mLoginItem.getId(), deal)
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
@@ -138,7 +138,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         bind.tvWorkTime.setText(obj.getStartDate());
         bind.tvUserName.setText(obj.getOwnerFullName());
         bind.tvUserAddress.setText(obj.getOwnerAddress());
-        bind.tvContent.setText(obj.getDescription());
+        bind.tvContent.setText(obj.getJobDescription());
         bind.tvJobTime.setText(time);
         bind.tvJobAddress.setText(String.format(getString(R.string.tv_work_004), obj.getJobAddress()));
         mOsinItems = obj.getOsin();
@@ -205,7 +205,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onEvent(JobLastDetailItem event) {
+    public void onEvent(JobNewDetailItem event) {
         mJobLastDetailItem = event;
     }
 

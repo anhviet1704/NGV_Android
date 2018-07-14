@@ -6,25 +6,21 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.base.app.R;
-import com.base.app.model.joblasted.JobLastDetailItem;
+import com.base.app.model.joblasted.JobNewDetailItem;
 import com.ivankocijan.magicviews.views.MagicTextView;
 import com.jaychang.srv.SimpleCell;
 import com.jaychang.srv.SimpleViewHolder;
 import com.jaychang.srv.Updatable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class JobNewCell extends SimpleCell<JobLastDetailItem, JobNewCell.ViewHolder> implements Updatable<JobLastDetailItem> {
+public class JobNewCell extends SimpleCell<JobNewDetailItem, JobNewCell.ViewHolder> implements Updatable<JobNewDetailItem> {
 
 
-    public JobNewCell(JobLastDetailItem item) {
+    public JobNewCell(JobNewDetailItem item) {
         super(item);
     }
 
@@ -87,7 +83,7 @@ public class JobNewCell extends SimpleCell<JobLastDetailItem, JobNewCell.ViewHol
 
 
     @Override
-    public boolean areContentsTheSame(@NonNull JobLastDetailItem newItem) {
+    public boolean areContentsTheSame(@NonNull JobNewDetailItem newItem) {
         return true;
         //return getItem().getTitle().equals(newItem.getTitle());
     }
@@ -98,7 +94,7 @@ public class JobNewCell extends SimpleCell<JobLastDetailItem, JobNewCell.ViewHol
      * onBindViewHolder() will be called with this payload object.
      */
     @Override
-    public Object getChangePayload(JobLastDetailItem newItem) {
+    public Object getChangePayload(JobNewDetailItem newItem) {
         Bundle bundle = new Bundle();
         //bundle.putString(KEY_TITLE, newItem.getTitle());
         return bundle;

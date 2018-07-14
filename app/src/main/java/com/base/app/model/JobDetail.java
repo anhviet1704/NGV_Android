@@ -1,10 +1,11 @@
 package com.base.app.model;
 
+import com.base.app.model.joblasted.JobImg;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 import javax.annotation.Generated;
-
-import com.google.gson.annotations.SerializedName;
 
 @Generated("com.robohorse.robopojogenerator")
 public class JobDetail {
@@ -12,20 +13,26 @@ public class JobDetail {
     @SerializedName("end_date")
     private String endDate;
 
+    @SerializedName("owner_id")
+    private String ownerId;
+
     @SerializedName("fee")
     private String fee;
 
     @SerializedName("end_time")
     private String endTime;
 
-    @SerializedName("description")
-    private String description;
+    @SerializedName("created_at")
+    private String createdAt;
 
     @SerializedName("owner_address")
     private String ownerAddress;
 
-    @SerializedName("sub_job_id")
-    private String subJobId;
+    @SerializedName("title")
+    private String title;
+
+    @SerializedName("owner_job_id")
+    private String ownerJobId;
 
     @SerializedName("owner_full_name")
     private String ownerFullName;
@@ -34,16 +41,19 @@ public class JobDetail {
     private String jobAddress;
 
     @SerializedName("job_img")
-    private String jobImg;
+    private List<JobImg> jobImg;
 
     @SerializedName("start_time")
     private String startTime;
 
+    @SerializedName("osin_job_status")
+    private String osinJobStatus;
+
     @SerializedName("job_name")
     private String jobName;
 
-    @SerializedName("job_id")
-    private String jobId;
+    @SerializedName("job_description")
+    private String jobDescription;
 
     @SerializedName("osin")
     private List<OsinItem> osin;
@@ -51,116 +61,140 @@ public class JobDetail {
     @SerializedName("start_date")
     private String startDate;
 
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
     public String getEndDate() {
         return endDate;
     }
 
-    public void setFee(String fee) {
-        this.fee = fee;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 
     public String getFee() {
         return fee;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setFee(String fee) {
+        this.fee = fee;
     }
 
     public String getEndTime() {
         return endTime;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setOwnerAddress(String ownerAddress) {
-        this.ownerAddress = ownerAddress;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getOwnerAddress() {
         return ownerAddress;
     }
 
-    public void setSubJobId(String subJobId) {
-        this.subJobId = subJobId;
+    public void setOwnerAddress(String ownerAddress) {
+        this.ownerAddress = ownerAddress;
     }
 
-    public String getSubJobId() {
-        return subJobId;
+    public String getTitle() {
+        return title;
     }
 
-    public void setOwnerFullName(String ownerFullName) {
-        this.ownerFullName = ownerFullName;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getOwnerJobId() {
+        return ownerJobId;
+    }
+
+    public void setOwnerJobId(String ownerJobId) {
+        this.ownerJobId = ownerJobId;
     }
 
     public String getOwnerFullName() {
         return ownerFullName;
     }
 
-    public void setJobAddress(String jobAddress) {
-        this.jobAddress = jobAddress;
+    public void setOwnerFullName(String ownerFullName) {
+        this.ownerFullName = ownerFullName;
     }
 
     public String getJobAddress() {
         return jobAddress;
     }
 
-    public void setJobImg(String jobImg) {
-        this.jobImg = jobImg;
+    public void setJobAddress(String jobAddress) {
+        this.jobAddress = jobAddress;
     }
 
-    public Object getJobImg() {
+    public List<JobImg> getJobImg() {
         return jobImg;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setJobImg(List<JobImg> jobImg) {
+        this.jobImg = jobImg;
     }
 
     public String getStartTime() {
         return startTime;
     }
 
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getOsinJobStatus() {
+        return osinJobStatus;
+    }
+
+    public void setOsinJobStatus(String osinJobStatus) {
+        this.osinJobStatus = osinJobStatus;
     }
 
     public String getJobName() {
         return jobName;
     }
 
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
     }
 
-    public String getJobId() {
-        return jobId;
+    public String getJobDescription() {
+        return jobDescription;
     }
 
-    public void setOsin(List<OsinItem> osin) {
-        this.osin = osin;
+    public void setJobDescription(String jobDescription) {
+        this.jobDescription = jobDescription;
     }
 
     public List<OsinItem> getOsin() {
         return osin;
     }
 
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
+    public void setOsin(List<OsinItem> osin) {
+        this.osin = osin;
     }
 
     public String getStartDate() {
         return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -168,17 +202,20 @@ public class JobDetail {
         return
                 "JobDetail{" +
                         "end_date = '" + endDate + '\'' +
+                        ",owner_id = '" + ownerId + '\'' +
                         ",fee = '" + fee + '\'' +
                         ",end_time = '" + endTime + '\'' +
-                        ",description = '" + description + '\'' +
+                        ",created_at = '" + createdAt + '\'' +
                         ",owner_address = '" + ownerAddress + '\'' +
-                        ",sub_job_id = '" + subJobId + '\'' +
+                        ",title = '" + title + '\'' +
+                        ",owner_job_id = '" + ownerJobId + '\'' +
                         ",owner_full_name = '" + ownerFullName + '\'' +
                         ",job_address = '" + jobAddress + '\'' +
                         ",job_img = '" + jobImg + '\'' +
                         ",start_time = '" + startTime + '\'' +
+                        ",osin_job_status = '" + osinJobStatus + '\'' +
                         ",job_name = '" + jobName + '\'' +
-                        ",job_id = '" + jobId + '\'' +
+                        ",job_description = '" + jobDescription + '\'' +
                         ",osin = '" + osin + '\'' +
                         ",start_date = '" + startDate + '\'' +
                         "}";

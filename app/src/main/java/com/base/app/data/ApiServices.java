@@ -2,7 +2,6 @@ package com.base.app.data;
 
 import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
-import com.base.app.model.CountryResponse;
 import com.base.app.model.BaseValueItem;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
@@ -10,7 +9,7 @@ import com.base.app.model.JobItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.RoleItem;
-import com.base.app.model.joblasted.JobLasted;
+import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.model.postobj.RegisterObj;
 
 import io.reactivex.Completable;
@@ -54,11 +53,11 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/cancel")
-    Completable getMaidJobCancel(@Field("job_id") int job_id, @Field("sub_job_id") int sub_job_id, @Field("osin_id") int osin_id);
+    Completable getMaidJobCancel(@Field("owner_job_id") int owner_job_id, @Field("osin_id") int osin_id);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/detail")
-    Observable<BaseObj<JobDetail>> getMaidJobDetail(@Field("job_id") int job_id, @Field("sub_job_id") int sub_job_id, @Field("osin_id") int osin_id);
+    Observable<BaseObj<JobDetail>> getMaidJobDetail(@Field("owner_job_id") int owner_job_id, @Field("osin_id") int osin_id);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/current")
@@ -66,7 +65,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/listLastedJob")
-    Observable<BaseObj<JobLasted>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode);
+    Observable<BaseObj<JobNewResponse>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/history")
@@ -74,9 +73,9 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/register")
-    Completable getMaidJobRegister(@Field("job_id") int job_id,
-                                   @Field("sub_job_id") int sub_job_id,
-                                   @Field("osin_id") int osin_id);
+    Completable getMaidJobRegister(@Field("owner_job_id") int owner_job_id,
+                                   @Field("osin_id") int osin_id,
+                                   @Field("deal") String deal);
 
     //JOB
     @FormUrlEncoded

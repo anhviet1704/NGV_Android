@@ -9,7 +9,7 @@ import com.base.app.data.ApiServices;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobLasted;
+import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.module.AppDatabase;
 import com.base.app.utils.Response;
 import com.base.app.utils.SingleLiveEvent;
@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers;
 @Singleton
 public class JobRepo {
 
-    private MutableLiveData<ResponseObj<JobLasted>> mJobs;
+    private MutableLiveData<ResponseObj<JobNewResponse>> mJobs;
     private SingleLiveEvent<ResponseObj<JobDetail>> mJobDetail;
     private SingleLiveEvent<ResponseObj> mJobRegister;
     private SingleLiveEvent<ResponseObj> mJobCancel;
@@ -50,7 +50,7 @@ public class JobRepo {
         this.mAppDatabase = mDatabase;
     }
 
-    public MutableLiveData<ResponseObj<JobLasted>> getjobs(int osin_id, int limit, int mode) {
+    public MutableLiveData<ResponseObj<JobNewResponse>> getjobs(int osin_id, int limit, int mode) {
         if (mJobs.getValue() != null) {
             if (mJobs.getValue().getResponse() == Response.FAILED)
                 getjobsFromServer(osin_id, limit, mode);
@@ -60,32 +60,32 @@ public class JobRepo {
         return mJobs;
     }
 
-    public SingleLiveEvent<ResponseObj<JobDetail>> getjobDetail(int job_id, int sub_job_id, int osin_id) {
+    public SingleLiveEvent<ResponseObj<JobDetail>> getjobDetail(int owner_job_id, int osin_id) {
         if (mJobDetail.getValue() != null) {
             if (mJobDetail.getValue().getResponse() == Response.FAILED)
-                getjobDetailFromServer(job_id, sub_job_id, osin_id);
+                getjobDetailFromServer(owner_job_id, osin_id);
         } else {
-            getjobDetailFromServer(job_id, sub_job_id, osin_id);
+            getjobDetailFromServer(owner_job_id, osin_id);
         }
         return mJobDetail;
     }
 
-    public SingleLiveEvent<ResponseObj> registerJob(int job_id, int sub_job_id, int osin_id) {
+    public SingleLiveEvent<ResponseObj> registerJob(int owner_job_id, int osin_id, String deal) {
         if (mJobRegister.getValue() != null) {
             if (mJobRegister.getValue().getResponse() == Response.FAILED)
-                onRegisterJobFromServer(job_id, sub_job_id, osin_id);
+                onRegisterJobFromServer(owner_job_id, osin_id, deal);
         } else {
-            onRegisterJobFromServer(job_id, sub_job_id, osin_id);
+            onRegisterJobFromServer(owner_job_id, osin_id, deal);
         }
         return mJobRegister;
     }
 
-    public SingleLiveEvent<ResponseObj> cancelJob(int job_id, int sub_job_id, int osin_id) {
+    public SingleLiveEvent<ResponseObj> cancelJob(int owner_job_id, int osin_id) {
         if (mJobCancel.getValue() != null) {
             if (mJobCancel.getValue().getResponse() == Response.FAILED)
-                onCancelJobFromServer(job_id, sub_job_id, osin_id);
+                onCancelJobFromServer(owner_job_id, osin_id);
         } else {
-            onCancelJobFromServer(job_id, sub_job_id, osin_id);
+            onCancelJobFromServer(owner_job_id, osin_id);
         }
         return mJobCancel;
     }
@@ -94,14 +94,14 @@ public class JobRepo {
         mApiServices.getMaidJobLasted(osin_id, limit, mode)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseObj<JobLasted>>() {
+                .subscribe(new Observer<BaseObj<JobNewResponse>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable = d;
                     }
 
                     @Override
-                    public void onNext(BaseObj<JobLasted> repsonse) {
+                    public void onNext(BaseObj<JobNewResponse> repsonse) {
                         if (repsonse.getSuccess())
                             mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         else
@@ -121,8 +121,8 @@ public class JobRepo {
 
     }
 
-    private void getjobDetailFromServer(int job_id, int sub_job_id, int osin_id) {
-        mApiServices.getMaidJobDetail(job_id, sub_job_id, osin_id)
+    private void getjobDetailFromServer(int owner_job_id, int osin_id) {
+        mApiServices.getMaidJobDetail(owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<JobDetail>>() {
@@ -152,8 +152,8 @@ public class JobRepo {
 
     }
 
-    private void onRegisterJobFromServer(int job_id, int sub_job_id, int osin_id) {
-        mApiServices.getMaidJobRegister(job_id, sub_job_id, osin_id)
+    private void onRegisterJobFromServer(int owner_job_id, int osin_id, String deal) {
+        mApiServices.getMaidJobRegister(owner_job_id, osin_id, deal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -175,8 +175,8 @@ public class JobRepo {
 
     }
 
-    private void onCancelJobFromServer(int job_id, int sub_job_id, int osin_id) {
-        mApiServices.getMaidJobCancel(job_id, sub_job_id, osin_id)
+    private void onCancelJobFromServer(int owner_job_id, int osin_id) {
+        mApiServices.getMaidJobCancel(owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

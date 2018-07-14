@@ -8,8 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.WorkItem;
-import com.base.app.model.joblasted.JobLastDetailItem;
+import com.base.app.model.joblasted.JobNewDetailItem;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> {
 
-    private List<JobLastDetailItem> mWorkItems;
+    private List<JobNewDetailItem> mWorkItems;
     private Context context;
     private OnClickItem clickItem;
 
@@ -45,7 +44,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         }
     }
 
-    public WorkAdapter(Context context, List<JobLastDetailItem> mWorkItems, OnClickItem clickItem) {
+    public WorkAdapter(Context context, List<JobNewDetailItem> mWorkItems, OnClickItem clickItem) {
         this.clickItem = clickItem;
         this.context = context;
         if (mWorkItems == null) {
@@ -64,13 +63,17 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        JobLastDetailItem mWorkItem = mWorkItems.get(position);
-        holder.tvName.setText(mWorkItem.getName());
+        JobNewDetailItem mWorkItem = mWorkItems.get(position);
+        holder.tvName.setText(mWorkItem.getJobName());
         holder.tvPrice.setText(mWorkItem.getFee());
-        holder.tvTime.setText(mWorkItem.getDiffTime() + "|");
+        holder.tvTime.setText(mWorkItem.getDiffTime() + " |");
         holder.tvDistrict.setText(mWorkItem.getDistrict());
-        String url = "https://camo.mybb.com/e01de90be6012adc1b1701dba899491a9348ae79/687474703a2f2f7777772e6a71756572797363726970742e6e65742f696d616765732f53696d706c6573742d526573706f6e736976652d6a51756572792d496d6167652d4c69676874626f782d506c7567696e2d73696d706c652d6c69676874626f782e6a7067";
-        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6)).into(holder.ivDes);
+        String url = "";
+        try {
+            url = mWorkItem.getJobImg().get(0).getValue();
+        } catch (Exception e) {
+        }
+        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(holder.ivDes);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +87,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         return mWorkItems.size();
     }
 
-    public void onUpdateData(List<JobLastDetailItem> mWorkItems) {
+    public void onUpdateData(List<JobNewDetailItem> mWorkItems) {
         this.mWorkItems = mWorkItems;
         notifyDataSetChanged();
     }

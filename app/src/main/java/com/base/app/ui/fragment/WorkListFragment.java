@@ -15,8 +15,8 @@ import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentWorkListBinding;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobLastDetailItem;
-import com.base.app.model.joblasted.JobLasted;
+import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.WorkAdapter;
 import com.base.app.ui.callback.OnClickItem;
@@ -33,7 +33,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
     @Inject
     LoginItem mLoginItem;
     private WorkAdapter mWorkAdapter;
-    private List<JobLastDetailItem> mWorkItems;
+    private List<JobNewDetailItem> mWorkItems;
 
     public static WorkListFragment newInstance() {
         Bundle args = new Bundle();
@@ -67,9 +67,9 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
         bind.rvWork.setItemAnimator(new DefaultItemAnimator());
         bind.rvWork.setAdapter(mWorkAdapter);
         viewModel.getJobList(mLoginItem.getId(), 10, 0)
-                .observe(this, new Observer<ResponseObj<JobLasted>>() {
+                .observe(this, new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
-                    public void onChanged(@Nullable ResponseObj<JobLasted> response) {
+                    public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {
                         if (response.getResponse() == Response.SUCCESS) {
                             mWorkItems = response.getObj().getData();
                             mWorkAdapter.onUpdateData(mWorkItems);

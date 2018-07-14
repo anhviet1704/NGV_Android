@@ -1,15 +1,11 @@
 package com.base.app.viewmodel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobLasted;
 import com.base.app.repo.JobRepo;
-import com.base.app.repo.UserRepository;
 import com.base.app.utils.SingleLiveEvent;
 
 import java.util.List;
@@ -34,18 +30,18 @@ public class WorkDetailActivityVM extends ViewModel {
         mJobHistory = new SingleLiveEvent<>();
     }
 
-    public SingleLiveEvent<ResponseObj<JobDetail>> getJobDetail(int job_id, int sub_job_id, int osin_id) {
-        mJobDetail = mRepository.getjobDetail(job_id, sub_job_id, osin_id);
+    public SingleLiveEvent<ResponseObj<JobDetail>> getJobDetail(int owner_job_id, int osin_id) {
+        mJobDetail = mRepository.getjobDetail(owner_job_id, osin_id);
         return mJobDetail;
     }
 
-    public SingleLiveEvent<ResponseObj> registerJob(int job_id, int sub_job_id, int osin_id) {
-        mJobRegister = mRepository.registerJob(job_id, sub_job_id, osin_id);
+    public SingleLiveEvent<ResponseObj> registerJob(int owner_job_id, int osin_id, String deal) {
+        mJobRegister = mRepository.registerJob(owner_job_id, osin_id, deal);
         return mJobRegister;
     }
 
-    public SingleLiveEvent<ResponseObj> cancelJob(int job_id, int sub_job_id, int osin_id) {
-        mJobCancel = mRepository.cancelJob(job_id, sub_job_id, osin_id);
+    public SingleLiveEvent<ResponseObj> cancelJob(int owner_job_id, int osin_id) {
+        mJobCancel = mRepository.cancelJob(owner_job_id, osin_id);
         return mJobCancel;
     }
 

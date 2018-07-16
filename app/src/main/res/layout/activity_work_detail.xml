@@ -275,7 +275,6 @@
                     android:layout_marginStart="16dp"
                     android:paddingBottom="16dp"
                     android:paddingTop="20dp"
-                    android:text="Công ty Cổ Phần 1989 Địa chỉ: xx , Tp.Hồ chí Minh Cân tuyển nhân viên vào bao sản phẩm cho công ty Số lượng: 02 người - Mô tả công việc: + Chủ yếu vào bao sản phẩm cho Công "
                     android:textColor="#223254"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -361,6 +360,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
                         android:src="@drawable/ic_pin"
                         app:layout_constraintBottom_toBottomOf="@+id/tv_job_address"
                         app:layout_constraintEnd_toStartOf="@+id/magicTextView7"

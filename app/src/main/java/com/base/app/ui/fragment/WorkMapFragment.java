@@ -2,10 +2,6 @@ package com.base.app.ui.fragment;
 
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.base.app.R;
@@ -29,6 +25,11 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     private GoogleMap mMap;
 
     @Override
+    public int getLayoutRes() {
+        return R.layout.fragment_work_map;
+    }
+
+    @Override
     public Class<WorkMapFragmentVM> getViewModel() {
         return WorkMapFragmentVM.class;
     }
@@ -36,7 +37,6 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     @Override
     protected void onInit(Bundle instance) {
         final RxGps rxGps = new RxGps(getActivity());
-        //SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         SupportMapFragment mMapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
         if (mMapFragment == null) {
             rxGps.lastLocation()
@@ -83,9 +83,5 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
         }
     }
 
-    @Override
-    public int getLayoutRes() {
-        return R.layout.fragment_work_map;
-    }
 
 }

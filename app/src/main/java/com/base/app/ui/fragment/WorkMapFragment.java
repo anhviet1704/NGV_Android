@@ -2,27 +2,32 @@ package com.base.app.ui.fragment;
 
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentWorkMapBinding;
+import com.base.app.ui.callback.OnLocationResult;
+import com.base.app.utils.MapHelper;
 import com.base.app.viewmodel.WorkMapFragmentVM;
-import com.github.florent37.rxgps.RxGps;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWorkMapBinding> {
     private GoogleMap mMap;
+    private LatLng mLocation;
+    private Disposable mDisposable;
+    private Circle circle;
 
     @Override
     public int getLayoutRes() {
@@ -36,52 +41,48 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
 
     @Override
     protected void onInit(Bundle instance) {
-        final RxGps rxGps = new RxGps(getActivity());
-        SupportMapFragment mMapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
-        if (mMapFragment == null) {
-            rxGps.lastLocation()
+        //SupportMapFragment mMapFragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.google_map);
+        SupportMapFragment mMapFragment = SupportMapFragment.newInstance();
+        getChildFragmentManager().beginTransaction().replace(R.id.google_map, mMapFragment).commit();
+        mMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                mMap = googleMap;
+                MapHelper.onGetLocation(getActivity(), false, new OnLocationResult() {
+                    @Override
+                    public void onReturnLocation(LatLng latLng) {
+                        mLocation = latLng;
+                        onUpdateUI(mLocation);
+                    }
+                });
+                mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+                    @Override
+                    public void onCameraMove() {
+                        float zoom = mMap.getCameraPosition().zoom;
+                        if (zoom < 18) circle.setVisible(false);
+                        else circle.setVisible(true);
+                    }
+                });
+            }
+        });
 
-                    .doOnSubscribe(new Consumer<Disposable>() {
-                        @Override
-                        public void accept(Disposable disposable) throws Exception {
-
-                        }
-                    })
-                    .subscribeOn(Schedulers.newThread())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(location -> {
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15));
-                        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-                        mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
-                    }, throwable -> {
-                        if (throwable instanceof RxGps.PermissionException) {
-                            //displayError(throwable.getMessage());
-                        } else if (throwable instanceof RxGps.PlayServicesNotAvailableException) {
-                            // displayError(throwable.getMessage());
-                        }
-                    });
-            mMapFragment = SupportMapFragment.newInstance();
-            getChildFragmentManager().beginTransaction().replace(R.id.google_map, mMapFragment).commit();
-            mMapFragment.getMapAsync(new OnMapReadyCallback() {
-                @SuppressLint("MissingPermission")
-                @Override
-                public void onMapReady(GoogleMap googleMap) {
-                    mMap = googleMap;
-                    LatLng demoMatker = new LatLng(10.813831, 106.6691083);
-                    mMap.addMarker(new MarkerOptions().position(demoMatker).title("Công ty"));
-                    //mMap.moveCamera(CameraUpdateFactory.newLatLng(demoMatker));
-                    mMap.setMinZoomPreference(5);
-                    mMap.setMaxZoomPreference(20);
-                    mMap.setMyLocationEnabled(true);
-                    //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 15));
-                    // Zoom in, animating the camera.
-                    mMap.animateCamera(CameraUpdateFactory.zoomIn());
-                    // Zoom out to zoom level 10, animating with a duration of 2 seconds.
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
-                }
-            });
-        }
+        bind.ivLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.animateCamera(MapHelper.onZoomToLocation(mLocation, 20));
+            }
+        });
     }
 
+    private void onUpdateUI(LatLng location) {
+        mMap.addMarker(new MarkerOptions().position(location).title("Công ty")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
+        mMap.animateCamera(MapHelper.onZoomToLocation(location, 20));
+        circle = mMap.addCircle(new CircleOptions()
+                .center(location)
+                .radius(50)
+                .strokeColor(Color.TRANSPARENT)
+                .fillColor(Color.parseColor("#1A1C89FF")));
+    }
 
 }

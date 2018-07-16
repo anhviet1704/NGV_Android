@@ -8,4 +8,6 @@ import com.google.android.gms.maps.model.LatLng;
 
 public interface OnLocationResult {
     void onReturnLocation(LatLng latLng);
+
+    void onPermissionEnable(boolean isGrand);
 }

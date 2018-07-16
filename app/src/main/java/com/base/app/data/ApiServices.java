@@ -92,4 +92,13 @@ public interface ApiServices {
                                                    @Field("lat") double latidute,
                                                    @Field("long") double longtidute);
 
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/listLatLongJob")
+    Observable<BaseObj<JobNewResponse>> getMaidJobLastedMap(@Field("osin_id") int osin_id,
+                                                            @Field("latitude") double latitude,
+                                                            @Field("longitude") double longitude,
+                                                            @Field("radius") float radius,
+                                                            @Field("mode") int mode,
+                                                            @Field("limit") int limit);
+
 }

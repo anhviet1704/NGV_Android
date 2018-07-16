@@ -279,4 +279,36 @@ public class JobRepo {
                     }
                 });
     }
+
+    public MutableLiveData<ResponseObj<JobNewResponse>> getJobsMap(int osin_id, double latitude, double longitude, float radius, int mode, int limit) {
+        MutableLiveData<ResponseObj<JobNewResponse>> mJobs = new MutableLiveData<>();
+        mApiServices.getMaidJobLastedMap(osin_id, latitude, longitude, radius, mode, limit)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseObj<JobNewResponse>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(BaseObj<JobNewResponse> repsonse) {
+                        if (repsonse.getSuccess())
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                        else
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mJobs.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        disposable.dispose();
+                    }
+                });
+        return mJobs;
+    }
 }

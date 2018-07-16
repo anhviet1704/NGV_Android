@@ -28,7 +28,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <com.github.florent37.shapeofview.shapes.RoundRectView
-            android:id="@+id/view"
+            android:id="@+id/view_radius"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -46,7 +46,6 @@
             app:shape_roundRect_topRightRadius="6dp">
 
             <com.ivankocijan.magicviews.views.MagicTextView
-                android:id="@+id/tv_work_price_sum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"

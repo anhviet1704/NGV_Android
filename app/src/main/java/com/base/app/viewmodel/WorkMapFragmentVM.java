@@ -1,29 +1,34 @@
 package com.base.app.viewmodel;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.repo.RegisterRepo;
+import com.base.app.model.joblasted.JobNewResponse;
+import com.base.app.repo.JobRepo;
+import com.base.app.utils.Response;
 
 import javax.inject.Inject;
 
 public class WorkMapFragmentVM extends ViewModel {
 
-    private RegisterRepo mRepository;
-    private MutableLiveData<ResponseObj<LoginItem>> mLogin;
+    private JobRepo mRepository;
+    private MutableLiveData<ResponseObj<JobNewResponse>> mJobs;
 
     @Inject
-    public WorkMapFragmentVM(RegisterRepo repository) {
+    public WorkMapFragmentVM(JobRepo repository) {
         this.mRepository = repository;
-        mLogin = new MutableLiveData<>();
+        mJobs = new MutableLiveData<>();
     }
 
 
-    public LiveData<ResponseObj<LoginItem>> postLogin(String phone, String pass) {
-        mLogin = mRepository.postLogin(phone, pass);
-        return mLogin;
+    public MutableLiveData<ResponseObj<JobNewResponse>> getJobsMap(int osin_id, double latitude, double longitude, float radius, int mode, int limit) {
+        if (mJobs.getValue() != null) {
+            if (mJobs.getValue().getResponse() == Response.FAILED)
+                mJobs = mRepository.getJobsMap(osin_id, latitude, longitude, radius, mode, limit);
+        } else {
+            mJobs = mRepository.getJobsMap(osin_id, latitude, longitude, radius, mode, limit);
+        }
+        return mJobs;
     }
 }

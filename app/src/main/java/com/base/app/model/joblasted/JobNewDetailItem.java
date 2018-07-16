@@ -9,151 +9,190 @@ import javax.annotation.Generated;
 @Generated("com.robohorse.robopojogenerator")
 public class JobNewDetailItem {
 
-    @SerializedName("job_img")
-    private List<JobImg> jobImg;
+	@SerializedName("distance")
+	private double distance;
 
-    @SerializedName("job_name")
-    private String jobName;
+	@SerializedName("diffTime")
+	private String diffTime;
 
-    @SerializedName("job_description")
-    private String jobDescription;
+	@SerializedName("owner_id")
+	private int ownerId;
 
-    @SerializedName("diffTime")
-    private String diffTime;
+	@SerializedName("fee")
+	private int fee;
 
-    @SerializedName("job_id")
-    private String jobId;
+	@SerializedName("latitude")
+	private double latitude;
 
-    @SerializedName("owner_id")
-    private String ownerId;
+	@SerializedName("created_at")
+	private String createdAt;
 
-    @SerializedName("district")
-    private String district;
+	@SerializedName("title")
+	private String title;
 
-    @SerializedName("fee")
-    private double fee;
+	@SerializedName("osin_job_staus")
+	private int osinJobStaus;
 
-    @SerializedName("created_at")
-    private String createdAt;
+	@SerializedName("owner_job_id")
+	private int ownerJobId;
 
-    @SerializedName("title")
-    private String title;
+	@SerializedName("job_img")
+	private List<JobImg> jobImg;
 
-    @SerializedName("osin_job_staus")
-    private String osinJobStaus;
+	@SerializedName("job_description")
+	private String jobDescription;
 
-    @SerializedName("owner_job_id")
-    private int ownerJobId;
+	@SerializedName("job_name")
+	private String jobName;
 
-    public List<JobImg> getJobImg() {
-        return jobImg;
-    }
+	@SerializedName("job_id")
+	private String jobId;
 
-    public void setJobImg(List<JobImg> jobImg) {
-        this.jobImg = jobImg;
-    }
+	@SerializedName("district")
+	private String district;
 
-    public String getJobName() {
-        return jobName;
-    }
+	@SerializedName("longitude")
+	private double longitude;
 
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
+	public double getDistance() {
+		return distance;
+	}
 
-    public String getJobDescription() {
-        return jobDescription;
-    }
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 
-    public void setJobDescription(String jobDescription) {
-        this.jobDescription = jobDescription;
-    }
+	public String getDiffTime() {
+		return diffTime;
+	}
 
-    public void setDiffTime(String diffTime) {
-        this.diffTime = diffTime;
-    }
+	public void setDiffTime(String diffTime) {
+		this.diffTime = diffTime;
+	}
 
-    public String getDiffTime() {
-        return diffTime;
-    }
+	public int getOwnerId() {
+		return ownerId;
+	}
 
-    public String getJobId() {
-        return jobId;
-    }
+	public void setOwnerId(int ownerId) {
+		this.ownerId = ownerId;
+	}
 
-    public void setJobId(String jobId) {
-        this.jobId = jobId;
-    }
+	public int getFee() {
+		return fee;
+	}
 
-    public String getOwnerId() {
-        return ownerId;
-    }
+	public void setFee(int fee) {
+		this.fee = fee;
+	}
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
-    }
+	public double getLatitude() {
+		return latitude;
+	}
 
-    public void setDistrict(String district) {
-        this.district = district;
-    }
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-    public String getDistrict() {
-        return district;
-    }
+	public String getCreatedAt() {
+		return createdAt;
+	}
 
-    public double getFee() {
-        return fee;
-    }
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setFee(double fee) {
-        this.fee = fee;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+	public int getOsinJobStaus() {
+		return osinJobStaus;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setOsinJobStaus(int osinJobStaus) {
+		this.osinJobStaus = osinJobStaus;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public int getOwnerJobId() {
+		return ownerJobId;
+	}
 
-    public String getOsinJobStaus() {
-        return osinJobStaus;
-    }
+	public void setOwnerJobId(int ownerJobId) {
+		this.ownerJobId = ownerJobId;
+	}
 
-    public void setOsinJobStaus(String osinJobStaus) {
-        this.osinJobStaus = osinJobStaus;
-    }
+	public List<JobImg> getJobImg() {
+		return jobImg;
+	}
 
-    public int getOwnerJobId() {
-        return ownerJobId;
-    }
+	public void setJobImg(List<JobImg> jobImg) {
+		this.jobImg = jobImg;
+	}
 
-    public void setOwnerJobId(int ownerJobId) {
-        this.ownerJobId = ownerJobId;
-    }
+	public String getJobDescription() {
+		return jobDescription;
+	}
 
-    @Override
-    public String toString() {
-        return "job_img = '" + jobImg +
-                ",job_name = '" + jobName +
-                ",job_description = '" + jobDescription +
-                ",diffTime = '" + diffTime +
-                ",job_id = '" + jobId +
-                ",owner_id = '" + ownerId +
-                ",district = '" + district +
-                ",fee = '" + fee +
-                ",created_at = '" + createdAt +
-                ",title = '" + title +
-                ",osin_job_staus = '" + osinJobStaus +
-                ",owner_job_id = '" + ownerJobId;
-    }
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+
+	public String getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	@Override
+	public String toString() {
+		return
+				"JobNewDetailItem{" +
+						"distance = '" + distance + '\'' +
+						",diffTime = '" + diffTime + '\'' +
+						",owner_id = '" + ownerId + '\'' +
+						",fee = '" + fee + '\'' +
+						",latitude = '" + latitude + '\'' +
+						",created_at = '" + createdAt + '\'' +
+						",title = '" + title + '\'' +
+						",osin_job_staus = '" + osinJobStaus + '\'' +
+						",owner_job_id = '" + ownerJobId + '\'' +
+						",job_img = '" + jobImg + '\'' +
+						",job_description = '" + jobDescription + '\'' +
+						",job_name = '" + jobName + '\'' +
+						",job_id = '" + jobId + '\'' +
+						",district = '" + district + '\'' +
+						",longitude = '" + longitude + '\'' +
+						"}";
+	}
 }

@@ -1,7 +1,7 @@
 package com.base.app.utils;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.location.Location;
 
 import com.base.app.ui.callback.OnLocationResult;
 import com.github.florent37.rxgps.RxGps;
@@ -10,9 +10,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MapHelper {
@@ -25,33 +25,30 @@ public class MapHelper {
         return CameraUpdateFactory.newCameraPosition(cameraPosition);
     }
 
-    public static void onGetLocation(Activity activity, boolean isRealTime, final OnLocationResult mLocation) {
+    @SuppressLint("CheckResult")
+    public static void onGetLocation(Activity activity, boolean isRealTime, final OnLocationResult locationClick) {
         new RxGps(activity).locationLowPower()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Location>() {
+                .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposable = d;
+                    public void accept(Disposable disposable) throws Exception {
+                        mDisposable = disposable;
                     }
-
-                    @Override
-                    public void onNext(Location location) {
-                        if (isRealTime) {
-                            mLocation.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
-                        } else {
-                            mLocation.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
-                            mDisposable.dispose();
-                        }
+                })
+                .subscribe(location -> {
+                    if (isRealTime) {
+                        locationClick.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                    } else {
+                        locationClick.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        mDisposable.dispose();
                     }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
+                }, throwable -> {
+                    if (throwable instanceof RxGps.PermissionException) {
+                        locationClick.onPermissionEnable(false);
+                        //the user does not allow the permission
+                    } else if (throwable instanceof RxGps.PlayServicesNotAvailableException) {
+                        //the user do not have play services
                     }
                 });
     }

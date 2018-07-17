@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
@@ -20,9 +20,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> {
+public class JobListAdapter extends RecyclerView.Adapter<JobListAdapter.MyViewHolder> {
 
-    private List<JobNewDetailItem> mWorkItems;
+    private List<JobNewItem> mWorkItems;
     private Context context;
     private OnClickItem clickItem;
 
@@ -44,7 +44,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         }
     }
 
-    public WorkAdapter(Context context, List<JobNewDetailItem> mWorkItems, OnClickItem clickItem) {
+    public JobListAdapter(Context context, List<JobNewItem> mWorkItems, OnClickItem clickItem) {
         this.clickItem = clickItem;
         this.context = context;
         if (mWorkItems == null) {
@@ -63,7 +63,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        JobNewDetailItem mWorkItem = mWorkItems.get(position);
+        JobNewItem mWorkItem = mWorkItems.get(position);
         holder.tvName.setText(mWorkItem.getJobName());
         holder.tvPrice.setText(NGVUtils.formatCurrency(context, mWorkItem.getFee()));
         holder.tvTime.setText(NGVUtils.onCaculatorDate(context, mWorkItem.getCreatedAt()) + " |");
@@ -87,7 +87,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.MyViewHolder> 
         return mWorkItems.size();
     }
 
-    public void onUpdateData(List<JobNewDetailItem> mWorkItems) {
+    public void onUpdateData(List<JobNewItem> mWorkItems) {
         this.mWorkItems = mWorkItems;
         notifyDataSetChanged();
     }

@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class JobNewDetailItem {
+public class JobNewItem {
 
 	@SerializedName("distance")
 	private double distance;

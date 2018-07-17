@@ -18,7 +18,7 @@ import com.base.app.model.JobDetail;
 import com.base.app.model.LoginItem;
 import com.base.app.model.OsinItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
 import com.base.app.ui.callback.OnClickDialog;
@@ -45,7 +45,7 @@ import javax.inject.Inject;
 public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, ActivityWorkDetailBinding> {
     @Inject
     LoginItem mLoginItem;
-    private JobNewDetailItem mJobLastDetailItem;
+    private JobNewItem mJobLastDetailItem;
     private JobCurrentItem mJobCurrentItem;
 
     private List<String> listItem = new ArrayList<>();
@@ -217,7 +217,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
-    public void onEvent(JobNewDetailItem event) {
+    public void onEvent(JobNewItem event) {
         mJobLastDetailItem = event;
     }
 

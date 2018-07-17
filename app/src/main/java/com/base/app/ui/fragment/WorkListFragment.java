@@ -15,10 +15,10 @@ import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentWorkListBinding;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.ui.activity.WorkDetailActivity;
-import com.base.app.ui.adapter.WorkAdapter;
+import com.base.app.ui.adapter.JobListAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkListFragmentVM;
@@ -32,8 +32,8 @@ import javax.inject.Inject;
 public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentWorkListBinding> {
     @Inject
     LoginItem mLoginItem;
-    private WorkAdapter mWorkAdapter;
-    private static List<JobNewDetailItem> mWorkItems;
+    private static List<JobNewItem> mWorkItems;
+    private JobListAdapter mWorkAdapter;
 
     public static WorkListFragment newInstance() {
         Bundle args = new Bundle();
@@ -42,7 +42,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
         return fragment;
     }
 
-    public static List<JobNewDetailItem> getData() {
+    public static List<JobNewItem> getData() {
         return mWorkItems;
     }
 
@@ -58,7 +58,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
 
     @Override
     protected void onInit(Bundle instance) {
-        mWorkAdapter = new WorkAdapter(getContext(), mWorkItems, new OnClickItem() {
+        mWorkAdapter = new JobListAdapter(getContext(), mWorkItems, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
                 EventBus.getDefault().postSticky(mWorkItems.get(pos));

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.joblasted.JobNewDetailItem;
+import com.base.app.model.joblasted.JobNewItem;
 import com.ivankocijan.magicviews.views.MagicTextView;
 import com.jaychang.srv.SimpleCell;
 import com.jaychang.srv.SimpleViewHolder;
@@ -17,10 +17,10 @@ import com.jaychang.srv.Updatable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class JobNewCell extends SimpleCell<JobNewDetailItem, JobNewCell.ViewHolder> implements Updatable<JobNewDetailItem> {
+public class JobNewCell extends SimpleCell<JobNewItem, JobNewCell.ViewHolder> implements Updatable<JobNewItem> {
 
 
-    public JobNewCell(JobNewDetailItem item) {
+    public JobNewCell(JobNewItem item) {
         super(item);
     }
 
@@ -83,7 +83,7 @@ public class JobNewCell extends SimpleCell<JobNewDetailItem, JobNewCell.ViewHold
 
 
     @Override
-    public boolean areContentsTheSame(@NonNull JobNewDetailItem newItem) {
+    public boolean areContentsTheSame(@NonNull JobNewItem newItem) {
         return true;
         //return getItem().getTitle().equals(newItem.getTitle());
     }
@@ -94,7 +94,7 @@ public class JobNewCell extends SimpleCell<JobNewDetailItem, JobNewCell.ViewHold
      * onBindViewHolder() will be called with this payload object.
      */
     @Override
-    public Object getChangePayload(JobNewDetailItem newItem) {
+    public Object getChangePayload(JobNewItem newItem) {
         Bundle bundle = new Bundle();
         //bundle.putString(KEY_TITLE, newItem.getTitle());
         return bundle;

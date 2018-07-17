@@ -5,6 +5,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <FrameLayout
@@ -21,11 +22,12 @@
             android:id="@+id/rv_job"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view_radius" />
 
         <com.github.florent37.shapeofview.shapes.RoundRectView
             android:id="@+id/view_radius"
@@ -46,6 +48,7 @@
             app:shape_roundRect_topRightRadius="6dp">
 
             <com.ivankocijan.magicviews.views.MagicTextView
+                android:id="@+id/tv_radius"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"

@@ -19,7 +19,7 @@ public class JobNewResponse {
     private int total;
 
     @SerializedName("data")
-    private List<JobNewDetailItem> data;
+    private List<JobNewItem> data;
 
     @SerializedName("last_page")
     private int lastPage;
@@ -63,11 +63,11 @@ public class JobNewResponse {
         return total;
     }
 
-    public List<JobNewDetailItem> getData() {
+    public List<JobNewItem> getData() {
         return data;
     }
 
-    public void setData(List<JobNewDetailItem> data) {
+    public void setData(List<JobNewItem> data) {
         this.data = data;
     }
 

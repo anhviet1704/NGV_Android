@@ -90,9 +90,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.1.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding-design:2.1.1'
-    //EVENTBUS
+
     implementation 'org.greenrobot:eventbus:3.1.1'
-    //FONT
     implementation 'com.ivankocijan:MagicViews:3.1.1@aar'
     implementation 'me.relex:circleindicator:1.2.2@aar'
     implementation 'com.github.florent37:shapeofview:1.2.0'

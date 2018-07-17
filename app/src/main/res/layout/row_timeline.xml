@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#223254"
+    android:background="#FFFFFF"
     android:orientation="horizontal">
 
     <com.github.vipulasri.timelineview.TimelineView
@@ -13,10 +12,10 @@
         android:layout_height="match_parent"
         android:paddingEnd="16dp"
         android:paddingStart="22dp"
-        app:marker="@drawable/ic_marker"
-        app:line="#DFE5ED"
         android:paddingTop="18dp"
+        app:line="#DFE5ED"
         app:lineSize="2dp"
+        app:marker="@drawable/ic_marker"
         app:markerInCenter="false"
         app:markerSize="20dp" />
 
@@ -34,7 +33,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="6dp"
             android:text="Hôm nay"
-            android:textColor="#FFFFFF"
+            android:textColor="#84B8FF"
             android:textSize="14sp"
             app:typeFace="HelveticaNeue_Regular.otf" />
 
@@ -44,9 +43,10 @@
             android:layout_height="wrap_content"
             android:paddingBottom="6dp"
             android:text="Hôm nay"
-            android:textColor="#84B8FF"
+            android:textColor="#223254"
             android:textSize="14sp"
             app:typeFace="HelveticaNeue_Light.otf" />
+
 
         <com.ivankocijan.magicviews.views.MagicTextView
             android:id="@+id/tv_address"

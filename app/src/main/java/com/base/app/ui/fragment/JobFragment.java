@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -13,7 +14,6 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobBinding;
 import com.base.app.viewmodel.WorkListFragmentVM;
-import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
 import butterknife.BindView;
@@ -45,12 +45,19 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
     @BindView(R.id.view_content)
     FrameLayout viewContent;
     Unbinder unbinder;
+    public static ViewGroup viewRoot;
+    @BindView(R.id.tv_working)
+    MagicTextView tvWorking;
 
     public static JobFragment newInstance() {
         Bundle bundle = new Bundle();
         JobFragment fragment = new JobFragment();
         //fragment.setArguments(bundle);
         return fragment;
+    }
+
+    public static ViewGroup getRoot() {
+        return viewRoot;
     }
 
     @Override
@@ -65,6 +72,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
 
     @Override
     protected void onInit(Bundle instance) {
+        viewRoot = bind.viewRoot;
         /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
             @Override
             public void onChanged(@Nullable User user) {
@@ -95,7 +103,6 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
     @OnClick({R.id.tv_job_list, R.id.tv_job_register, R.id.tv_job_finish})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-
             case R.id.tv_job_list:
                 onClearSelectBottomBar();
                 tvJobList.setBackgroundColor(Color.parseColor("#84B8FF"));

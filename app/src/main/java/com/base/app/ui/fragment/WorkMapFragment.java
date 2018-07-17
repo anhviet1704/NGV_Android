@@ -136,7 +136,9 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
         bind.ivLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMap.animateCamera(MapHelper.onZoomToLocation(mLocation, 20));
+                mMap.clear();
+                mMap.animateCamera(MapHelper.onZoomToLocation(mLocation, 19));
+                onUpdateUI(mLocation);
             }
         });
         bind.viewRadius.setOnClickListener(new View.OnClickListener() {
@@ -152,9 +154,11 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                 if (isShowMap) {
                     bind.rvJob.setVisibility(View.GONE);
                     bind.googleMap.setVisibility(View.VISIBLE);
+                    bind.ivLocation.setVisibility(View.VISIBLE);
                 } else {
                     bind.rvJob.setVisibility(View.VISIBLE);
                     bind.googleMap.setVisibility(View.GONE);
+                    bind.ivLocation.setVisibility(View.GONE);
                 }
 
             }
@@ -163,10 +167,10 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
 
     private void onUpdateUI(LatLng location) {
         mMap.addMarker(new MarkerOptions().position(location).title("Công ty")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
-        mMap.animateCamera(MapHelper.onZoomToLocation(location, 20));
+        mMap.animateCamera(MapHelper.onZoomToLocation(location, 19));
         circle = mMap.addCircle(new CircleOptions()
                 .center(location)
-                .radius(50)
+                .radius(60)
                 .strokeColor(Color.TRANSPARENT)
                 .fillColor(Color.parseColor("#1A1C89FF")));
     }

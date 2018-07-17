@@ -53,7 +53,6 @@ public class JobRegisterAdapter extends RecyclerView.Adapter<JobRegisterAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_job_register, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
@@ -61,7 +60,8 @@ public class JobRegisterAdapter extends RecyclerView.Adapter<JobRegisterAdapter.
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         JobCurrentItem mJobCurrentItem = mItems.get(position);
         holder.tvName.setText(mJobCurrentItem.getName());
-        holder.tvTime.setText(mJobCurrentItem.getStartTime());
+        String date[] = mJobCurrentItem.getCreatedAt().split(" ");
+        holder.tvTime.setText(String.format(context.getResources().getString(R.string.tv_work_026), date[0]));
         String url = "";
         try {
             url = mJobCurrentItem.getJobImg().get(0).getValue();

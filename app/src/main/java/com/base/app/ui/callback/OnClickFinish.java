@@ -5,5 +5,10 @@ package com.base.app.ui.callback;
  */
 
 public interface OnClickFinish {
-    void onClickItem();
+
+    void onClickFinish();
+
+    void onClickRate();
+
+    void onClickCancel();
 }

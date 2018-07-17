@@ -3,7 +3,6 @@ package com.base.app.utils;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.constraint.Group;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,12 +17,11 @@ import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.OsinItem;
 import com.base.app.ui.callback.OnClickDialog;
-import com.base.app.ui.callback.OnClickFinish;
+import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
-import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -238,7 +236,7 @@ public class DialogHelper<T> {
 
     }
 
-    public void onShowDialogConfirm(ViewGroup root, final OnClickFinish mClick) {
+    public void onShowDialogConfirm(ViewGroup root, final OnClickItem mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -263,7 +261,7 @@ public class DialogHelper<T> {
         mBtYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mClick.onClickItem();
+                mClick.onClickItem(v, 0);
             }
         });
         mBtNo.setOnClickListener(new View.OnClickListener() {
@@ -274,44 +272,6 @@ public class DialogHelper<T> {
         });
     }
 
-    public void onShowDialogFinish(ViewGroup root, final OnClickFinish mClick) {
-        int width = ScreenUtils.getScreenWidth();
-        int height = ScreenUtils.getScreenHeight();
-        mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_job_start, null);
-        ViewGroup.LayoutParams params = mDialog.getWindow().getAttributes();
-        params.width = width;
-        params.height = height;// - BarUtils.getStatusBarHeight();
-        view.setLayoutParams(params);
-        mDialog.setContentView(view);
-        mDialog.setCanceledOnTouchOutside(false);
-        mDialog.setCancelable(true);
-
-        ImageView mIvClose = mDialog.findViewById(R.id.iv_close);
-        RoundRectView mViewCall = mDialog.findViewById(R.id.view_call);
-        RoundRectView mViewFindStreet = mDialog.findViewById(R.id.view_find_street);
-        RoundRectView mViewTime = mDialog.findViewById(R.id.view_time);
-        MagicTextView mTvTime = mDialog.findViewById(R.id.tv_time_job);
-        ImageView mIvFinish = mDialog.findViewById(R.id.iv_finish);
-        MagicTextView mTvStatus = mDialog.findViewById(R.id.tv_pass);
-        MagicTextView mTvCancel = mDialog.findViewById(R.id.tv_cancel);
-        Group mGrFinish = mDialog.findViewById(R.id.gr_finish);
-        MagicButton btFinish = mDialog.findViewById(R.id.bt_finish);
-        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
-        mBlurView.setupWith(root)
-                //.windowBackground(windowBackground)
-                .blurAlgorithm(new RenderScriptBlur(mContext))
-                .blurRadius(10f)
-                .setHasFixedTransformationMatrix(true);
-
-
-        mIvClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-            }
-        });
-    }
 
 
 }

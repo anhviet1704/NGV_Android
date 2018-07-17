@@ -22,6 +22,8 @@ import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobFinishFragmentVM;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
         final JobFinishAdapter mWorkAdapter = new JobFinishAdapter(getContext(), mDataList, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
+                EventBus.getDefault().postSticky(mDataList.get(pos));
                 Intent intent = new Intent(getContext(), WorkDetailActivity.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(v, 0, 0, 0, 0);
                 startActivity(intent, options.toBundle());

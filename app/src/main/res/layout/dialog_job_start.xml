@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <eightbitlab.com.blurview.BlurView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomBlurView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -210,7 +209,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="24dp"
-                        android:src="@drawable/ic_finish"
+                        android:src="@drawable/ic_not_finish"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
@@ -243,6 +242,7 @@
                         app:layout_constraintTop_toTopOf="@+id/iv_smile" />
 
                     <com.ivankocijan.magicviews.views.MagicTextView
+                        android:id="@+id/tv_finish"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tv_work_019"
@@ -274,6 +274,7 @@
 
                     <android.support.constraint.Group
                         android:id="@+id/gr_finish"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:constraint_referenced_ids="iv_smile,iv_sad" />
@@ -324,6 +325,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/roundRectView7"
                 app:typeFace="HelveticaNeue_Medium.otf" />
+
         </android.support.constraint.ConstraintLayout>
 
 

@@ -21,7 +21,6 @@ import com.base.app.di.AppModule;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.utils.AppCons;
-import com.base.app.utils.DialogLoading;
 import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.utils.keyboard.KeyboardHeightObserver;
@@ -83,6 +82,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
         }
     }
 
+    @SuppressLint("CheckResult")
     private void onCheckPermission() {
         RxPermissions rxPermissions = new RxPermissions(this);
         rxPermissions

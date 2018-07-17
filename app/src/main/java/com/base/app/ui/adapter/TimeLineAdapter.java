@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
+import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.VectorDrawableUtils;
 import com.github.vipulasri.timelineview.TimelineView;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,9 +25,14 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
     private List<JobCurrentItem> mDatas;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
+    private OnClickItem mClick;
 
-    public TimeLineAdapter(List<JobCurrentItem> datas) {
-        mDatas = datas;
+    public TimeLineAdapter(List<JobCurrentItem> datas, OnClickItem Click) {
+        if (datas == null) {
+            mDatas = new ArrayList<>();
+        } else
+            mDatas = datas;
+        mClick = Click;
     }
 
     @Override
@@ -47,7 +54,13 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
         holder.timeMarker.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker));
         holder.tvTime.setText(item.getStartTime());//not format
         holder.tvName.setText(item.getName());
-        holder.tvAddress.setText(item.getAddress());
+        holder.tvAddress.setText(String.format(mContext.getResources().getString(R.string.tv_work_025), item.getAddress()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mClick.onClickItem(view, position);
+            }
+        });
     }
 
     @Override
@@ -68,7 +81,6 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
 
         public TimeLineViewHolder(View itemView, int viewType) {
             super(itemView);
-
             ButterKnife.bind(this, itemView);
             timeMarker.initLine(viewType);
         }

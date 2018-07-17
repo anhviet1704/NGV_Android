@@ -30,7 +30,6 @@ public class JobRepo {
     private MutableLiveData<ResponseObj<JobNewResponse>> mJobs;
     private SingleLiveEvent<ResponseObj<JobDetail>> mJobDetail;
     private SingleLiveEvent<ResponseObj> mJobRegister;
-    private SingleLiveEvent<ResponseObj> mJobCancel;
     private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobCurent;
     private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobStatusRegister;
 
@@ -43,7 +42,6 @@ public class JobRepo {
         this.mJobs = new MutableLiveData<>();
         this.mJobDetail = new SingleLiveEvent<>();
         this.mJobRegister = new SingleLiveEvent<>();
-        this.mJobCancel = new SingleLiveEvent<>();
         this.mJobCurent = new SingleLiveEvent<>();
         this.mJobStatusRegister = new SingleLiveEvent<>();
         this.mApiServices = mApiServices;
@@ -78,16 +76,6 @@ public class JobRepo {
             onRegisterJobFromServer(owner_job_id, osin_id, deal);
         }
         return mJobRegister;
-    }
-
-    public SingleLiveEvent<ResponseObj> cancelJob(int owner_job_id, int osin_id) {
-        if (mJobCancel.getValue() != null) {
-            if (mJobCancel.getValue().getResponse() == Response.FAILED)
-                onCancelJobFromServer(owner_job_id, osin_id);
-        } else {
-            onCancelJobFromServer(owner_job_id, osin_id);
-        }
-        return mJobCancel;
     }
 
     private void getjobsFromServer(int osin_id, int limit, int mode) {
@@ -175,7 +163,8 @@ public class JobRepo {
 
     }
 
-    private void onCancelJobFromServer(int owner_job_id, int osin_id) {
+    public SingleLiveEvent<ResponseObj> onCancelJob(int owner_job_id, int osin_id) {
+        SingleLiveEvent<ResponseObj> mJobCancel = new SingleLiveEvent<>();
         mApiServices.getMaidJobCancel(owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -195,7 +184,31 @@ public class JobRepo {
                         mJobCancel.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
+        return mJobCancel;
+    }
 
+    public SingleLiveEvent<ResponseObj> onFinishJob(int owner_job_id, int osin_id) {
+        SingleLiveEvent<ResponseObj> mJob = new SingleLiveEvent<>();
+        mApiServices.getMaidJobFinish(owner_job_id, osin_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mJob.setValue(new ResponseObj(null, Response.SUCCESS));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mJob.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                    }
+                });
+        return mJob;
     }
 
 

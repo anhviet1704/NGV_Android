@@ -14,6 +14,7 @@ import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -61,7 +62,8 @@ public class JobFinishAdapter extends RecyclerView.Adapter<JobFinishAdapter.MyVi
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         JobCurrentItem mWorkItem = mItems.get(position);
         holder.tvName.setText(mWorkItem.getName());
-        holder.tvTime.setText(mWorkItem.getStartTime());
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        holder.tvTime.setText(String.format(context.getResources().getString(R.string.tv_work_027), formatter.format(mWorkItem.getFee()) + " đ"));
         String url = "";
         try {
             url = mWorkItem.getJobImg().get(0).getValue();

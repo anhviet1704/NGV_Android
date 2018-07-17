@@ -41,7 +41,7 @@ public class WorkDetailActivityVM extends ViewModel {
     }
 
     public SingleLiveEvent<ResponseObj> cancelJob(int owner_job_id, int osin_id) {
-        mJobCancel = mRepository.cancelJob(owner_job_id, osin_id);
+        mJobCancel = mRepository.onCancelJob(owner_job_id, osin_id);
         return mJobCancel;
     }
 

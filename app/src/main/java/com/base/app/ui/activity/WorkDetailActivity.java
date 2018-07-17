@@ -22,7 +22,6 @@ import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
 import com.base.app.ui.callback.OnClickDialog;
-import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.base.app.utils.DialogHelper;
@@ -91,9 +90,9 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             public void onClick(View view) {
                 if (isAlreadyRegister) {
                     final DialogHelper mDialogConfirm = new DialogHelper(WorkDetailActivity.this);
-                    mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickFinish() {
+                    mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickItem() {
                         @Override
-                        public void onClickItem() {
+                        public void onClickItem(View v, int pos) {
                             viewModel.cancelJob(owner_job_id, mLoginItem.getId())
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
@@ -238,11 +237,22 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
             bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
             bind.viewWaitingJob.setVisibility(View.VISIBLE);
+            bind.shadowView.setVisibility(View.VISIBLE);
+            bind.viewEndJob.setVisibility(View.GONE);
+            bind.tvSubmit.setText(getString(R.string.tv_work_021));
+        } else if (status == 3) {
+            bind.tvSubmit.setTextColor(Color.parseColor("#223254"));
+            bind.tvSubmit.setBackgroundColor(Color.parseColor("#DFE5ED"));
+            bind.viewWaitingJob.setVisibility(View.GONE);
+            bind.shadowView.setVisibility(View.GONE);
+            bind.viewEndJob.setVisibility(View.VISIBLE);
             bind.tvSubmit.setText(getString(R.string.tv_work_021));
         } else {
             bind.tvSubmit.setTextColor(Color.parseColor("#FFFFFF"));
             bind.tvSubmit.setBackgroundColor(Color.parseColor("#84B8FF"));
             bind.viewWaitingJob.setVisibility(View.GONE);
+            bind.viewEndJob.setVisibility(View.GONE);
+            bind.shadowView.setVisibility(View.VISIBLE);
             bind.tvSubmit.setText(getString(R.string.tv_work_001));
         }
     }

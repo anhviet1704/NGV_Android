@@ -56,6 +56,10 @@ public interface ApiServices {
     Completable getMaidJobCancel(@Field("owner_job_id") int owner_job_id, @Field("osin_id") int osin_id);
 
     @FormUrlEncoded
+    @POST("api/vi/osin/job/complete")
+    Completable getMaidJobFinish(@Field("owner_job_id") int owner_job_id, @Field("osin_id") int osin_id);
+
+    @FormUrlEncoded
     @POST("api/vi/osin/job/detail")
     Observable<BaseObj<JobDetail>> getMaidJobDetail(@Field("owner_job_id") int owner_job_id, @Field("osin_id") int osin_id);
 

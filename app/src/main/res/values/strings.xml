@@ -86,6 +86,9 @@
     <string name="tv_work_022">đ/ giờ</string>
     <string name="tv_work_023">Phạm vi</string>
     <string name="tv_work_024">Phạm vi %s</string>
+    <string name="tv_work_025">Địa chỉ: %s</string>
+    <string name="tv_work_026">Ngày đăng ký: %s</string>
+    <string name="tv_work_027">Đã thanh toán: %s</string>
 
     <string name="tv_setting_001">Ví thanh toán</string>
     <string name="tv_setting_002">Đổi mật khẩu</string>

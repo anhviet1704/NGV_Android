@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
@@ -13,6 +14,9 @@ import com.base.app.model.JobCurrentItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.ui.adapter.TimeLineAdapter;
+import com.base.app.ui.callback.OnClickFinish;
+import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.DialogJobMgr;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobListFragmentVM;
 
@@ -48,7 +52,41 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
     protected void onInit(Bundle instance) {
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         bind.rvJob.setHasFixedSize(true);
-        final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList);
+        final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList, new OnClickItem() {
+            @Override
+            public void onClickItem(View v, int pos) {
+                DialogJobMgr mDialogJob = new DialogJobMgr(getContext());
+                mDialogJob.onShowDialogFinish(JobFragment.getRoot(), new OnClickFinish() {
+                    @Override
+                    public void onClickFinish() {
+                        /*viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
+                            @Override
+                            public void onChanged(@Nullable ResponseObj responseObj) {
+                                mDialogJob.onUpdateUI(3);
+                            }
+                        });*/
+                        mDialogJob.onUpdateUI(3);
+                    }
+
+                    @Override
+                    public void onClickRate() {
+
+                    }
+
+                    @Override
+                    public void onClickCancel() {
+                        viewModel.cancelJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
+                            @Override
+                            public void onChanged(@Nullable ResponseObj responseObj) {
+                                mDialogJob.dismiss();
+                            }
+                        });
+                    }
+                });
+                mDialogJob.onUpdateUI(1);
+                mDialogJob.show();
+            }
+        });
         bind.rvJob.setAdapter(mTimeLineAdapter);
         viewModel.getJobCurent(mLoginItem.getId()).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override

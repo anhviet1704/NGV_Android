@@ -58,7 +58,7 @@ public class DialogJobMgr<T> {
         }
     }
 
-    public void onShowDialogFinish(ViewGroup root, final OnClickFinish mClick) {
+    public void onShowDialogFinish(ViewGroup root, String startTime, final OnClickFinish mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -117,6 +117,7 @@ public class DialogJobMgr<T> {
                 mDialog.dismiss();
             }
         });
+        mTvTime.setText(startTime);
     }
 
     public void onUpdateUI(int type) {

@@ -56,7 +56,7 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
             @Override
             public void onClickItem(View v, int pos) {
                 DialogJobMgr mDialogJob = new DialogJobMgr(getContext());
-                mDialogJob.onShowDialogFinish(JobFragment.getRoot(), new OnClickFinish() {
+                mDialogJob.onShowDialogFinish(JobFragment.getRoot(), mDataList.get(pos).getStartTime(), new OnClickFinish() {
                     @Override
                     public void onClickFinish() {
                         /*viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {

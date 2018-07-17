@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.greenrobot.eventbus.EventBus;
@@ -59,6 +60,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     private JobMapAdapter mWorkAdapter;
     private List<BaseValueItem> mRadiusList = new ArrayList<>();
     private int mRadius = 15;
+    private Marker myLocation;
+    private Marker oldMarker;
 
     @Override
     public int getLayoutRes() {
@@ -166,7 +169,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     }
 
     private void onUpdateUI(LatLng location) {
-        mMap.addMarker(new MarkerOptions().position(location).title("Công ty")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
+        myLocation = mMap.addMarker(new MarkerOptions().position(location).title("Công ty"));
+        myLocation.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
         mMap.animateCamera(MapHelper.onZoomToLocation(location, 19));
         circle = mMap.addCircle(new CircleOptions()
                 .center(location)
@@ -180,8 +184,24 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
             options.position(new LatLng(point.getLatitude(), point.getLongitude()));
             //options.title("someTitle");
             //options.snippet("someDesc");
-            mMap.addMarker(options).setIcon(BitmapDescriptorFactory.defaultMarker());
+            mMap.addMarker(options).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker));
         }
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                if (marker.equals(myLocation)) {
+
+                } else {
+                    if (oldMarker != null) {
+                        oldMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker));
+                    }
+                    oldMarker = marker;
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_select));
+                }
+
+                return false;
+            }
+        });
     }
 
     private void onGetJobFromRadius(int radius) {

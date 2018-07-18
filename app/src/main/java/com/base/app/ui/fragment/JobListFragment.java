@@ -59,6 +59,7 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                 mDialogJob.onShowDialogFinish(JobFragment.getRoot(), mDataList.get(pos).getStartTime(), new OnClickFinish() {
                     @Override
                     public void onClickFinish() {
+                        //Comment for test
                         /*viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
@@ -95,6 +96,7 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mTimeLineAdapter.onUpdateData(mDataList);
+                        JobFragment.onUpdateFirstJob(mDataList.get(0));
                     }
             }
         });

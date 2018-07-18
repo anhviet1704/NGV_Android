@@ -15,7 +15,7 @@
         android:paddingTop="18dp"
         app:line="#DFE5ED"
         app:lineSize="2dp"
-        app:marker="@drawable/ic_marker"
+        app:marker="@drawable/ic_marker_timeline"
         app:markerInCenter="false"
         app:markerSize="20dp" />
 

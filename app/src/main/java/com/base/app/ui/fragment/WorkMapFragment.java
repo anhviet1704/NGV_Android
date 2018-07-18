@@ -190,7 +190,6 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
             @Override
             public boolean onMarkerClick(Marker marker) {
                 if (marker.equals(myLocation)) {
-
                 } else {
                     if (oldMarker != null) {
                         oldMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker));
@@ -198,7 +197,6 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                     oldMarker = marker;
                     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_marker_select));
                 }
-
                 return false;
             }
         });

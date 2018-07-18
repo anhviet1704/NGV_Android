@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobBinding;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
@@ -22,18 +23,14 @@ import butterknife.Unbinder;
 
 public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBinding> {
 
-    @BindView(R.id.tv_work_time)
-    MagicTextView tvWorkTime;
-    @BindView(R.id.tv_time)
-    MagicTextView tvTime;
+    static MagicTextView tvWorkTime;
+    static MagicTextView tvTime;
     @BindView(R.id.imageView3)
     ImageView imageView3;
-    @BindView(R.id.tv_job_name)
-    MagicTextView tvJobName;
+    static MagicTextView tvJobName;
     @BindView(R.id.imageView6)
     ImageView imageView6;
-    @BindView(R.id.tv_job_place)
-    MagicTextView tvJobPlace;
+    static MagicTextView tvJobPlace;
     @BindView(R.id.tv_job_list)
     MagicTextView tvJobList;
     @BindView(R.id.tv_job_register)
@@ -48,6 +45,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
     public static ViewGroup viewRoot;
     @BindView(R.id.tv_working)
     MagicTextView tvWorking;
+
 
     public static JobFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -70,17 +68,11 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
         return WorkListFragmentVM.class;
     }
 
-    @Override
-    protected void onInit(Bundle instance) {
-        viewRoot = bind.viewRoot;
-        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                updateUI(binding, user);
-            }
-        });*/
-        onSetupView();
-
+    public static void onUpdateFirstJob(JobCurrentItem job) {
+        tvWorkTime.setText(job.getStartTime());
+        tvTime.setText(job.getStartDate());
+        tvJobName.setText(job.getName());
+        tvJobPlace.setText(job.getAddress());
     }
 
     private void onSetupView() {
@@ -131,5 +123,22 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
                         .commit();
                 break;
         }
+    }
+
+    @Override
+    protected void onInit(Bundle instance) {
+        viewRoot = bind.viewRoot;
+        tvWorkTime = bind.tvWorkTime;
+        tvTime = bind.tvTime;
+        tvJobName = bind.tvJobName;
+        tvJobPlace = bind.tvJobPlace;
+        /*viewModel.getUser("JakeWharton").observe(this, new Observer<User>() {
+            @Override
+            public void onChanged(@Nullable User user) {
+                updateUI(binding, user);
+            }
+        });*/
+        onSetupView();
+
     }
 }

@@ -230,6 +230,4 @@ public class NGVUtils {
         }
         return sValue;
     }
-
-
 }

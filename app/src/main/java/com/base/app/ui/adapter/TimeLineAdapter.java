@@ -51,7 +51,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.TimeLi
     @Override
     public void onBindViewHolder(TimeLineViewHolder holder, int position) {
         JobCurrentItem item = mDatas.get(position);
-        holder.timeMarker.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker));
+        holder.timeMarker.setMarker(VectorDrawableUtils.getDrawable(mContext, R.drawable.ic_marker_timeline));
         holder.tvTime.setText(item.getStartTime());//not format
         holder.tvName.setText(item.getName());
         holder.tvAddress.setText(String.format(mContext.getResources().getString(R.string.tv_work_025), item.getAddress()));

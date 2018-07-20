@@ -47,21 +47,6 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     @BindView(R.id.container)
     ConstraintLayout container;
 
-   /* @Override
-    protected int getLayoutResId() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    protected Class<MovieListViewModel> getViewModel() {
-        return MovieListViewModel.class;
-    }
-
-    @Override
-    protected void onCreate(Bundle instance, MovieListViewModel viewModel, ActivityMainBinding binding) {
-
-    }*/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

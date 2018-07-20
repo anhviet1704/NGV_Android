@@ -44,13 +44,13 @@
 
     <ImageView
         android:id="@+id/iv_vn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
         android:layout_marginStart="21dp"
         android:layout_marginTop="21dp"
+        android:background="@drawable/ic_vn_select"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/roundRectView5"
-        app:srcCompat="@drawable/ic_vn_select" />
+        app:layout_constraintTop_toBottomOf="@+id/roundRectView5" />
 
     <com.ivankocijan.magicviews.views.MagicTextView
         android:id="@+id/tv_content"
@@ -67,12 +67,12 @@
 
     <ImageView
         android:id="@+id/iv_en"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
         android:layout_marginStart="54dp"
+        android:background="@drawable/ic_us"
         app:layout_constraintStart_toEndOf="@+id/iv_vn"
-        app:layout_constraintTop_toTopOf="@+id/iv_vn"
-        app:srcCompat="@drawable/ic_us" />
+        app:layout_constraintTop_toTopOf="@+id/iv_vn" />
 
     <com.ivankocijan.magicviews.views.MagicTextView
         android:layout_width="wrap_content"

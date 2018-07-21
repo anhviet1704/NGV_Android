@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">NGV</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="FACEBOOK_APP_ID">319409295264859</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">fdd999d2726df1108d8ac99951055e25</string>
+
+    <string name="tv_error_01">Vui lòng nhập đủ thông tin</string>
+    <string name="tv_error_02">Vui lòng cấp quyền cho ứng dụng</string>
+
+    <string name="tv_login_001"><u>Đăng ký tài khoản</u></string>
+    <string name="tv_login_002">Số điện thoại</string>
+    <string name="tv_login_003">Mật khẩu</string>
+    <string name="tv_login_004">Quên mật khẩu</string>
+    <string name="tv_login_005">Đang tải dữ liệu</string>
+
+    <string name="tv_register_001">Đăng ký tài khoản</string>
+    <string name="tv_register_002">Xin chào, để bắt đầu tham gia bạn vui lòng cung cấp một vài thông tin!</string>
+    <string name="tv_register_003">Chi tiết cá nhân</string>
+    <string name="tv_register_004">Tên đầy đủ của bạn</string>
+    <string name="tv_register_005">Ngày sinh</string>
+    <string name="tv_register_006">Số điện thoại</string>
+    <string name="tv_register_007">Quốc gia</string>
+    <string name="tv_register_008">Email</string>
+    <string name="tv_register_009">Xác nhận</string>
+    <string name="tv_register_010">Văn phòng đăng ký</string>
+    <string name="tv_register_011">Ảnh CMND mặt trước</string>
+    <string name="tv_register_012">Ảnh CMND mặt sau</string>
+    <string name="tv_register_013">Hoàn tât</string>
+    <string name="tv_register_014">Quá trình đăng ký hoàn tất, chúng tôi sẽ sớm liên lạc với bạn để kích hoạt.</string>
+    <string name="tv_register_015">Đăng nhập</string>
+    <string name="tv_register_016">Quên mật khẩu</string>
+    <string name="tv_register_017">Nhập mật khẩu mới</string>
+    <string name="tv_register_018">Mật khẩu</string>
+    <string name="tv_register_019">Nhập lại mật khẩu</string>
+    <string name="tv_register_020">Xác thực</string>
+    <string name="tv_register_021">Chúng tôi sẽ gửi một mã vào số điện thoại đã đăng ký thẻ ngân hàng của bạn, vui lòng xác nhận để tiếp tục thao tác!</string>
+    <string name="tv_register_022">Nhập mã xác nhận</string>
+    <string name="tv_register_023"><u>Gửi lại mã</u></string>
+    <string name="tv_register_024"><u>Đã có mã</u></string>
+    <string name="tv_register_025">lấy mã xác nhận</string>
+    <string name="tv_register_027">Nhập số điện thoại bạn dùng đăng ký trước đó với hệ thống!</string>
+    <string name="tv_register_028">Chọn công việc thực hiện</string>
+    <string name="tv_register_029">Gửi chào giá</string>
+    <string name="tv_register_030">Mật khẩu cũ</string>
+    <string name="tv_register_031">Giới tính</string>
+    <string name="tv_register_032">Nam</string>
+    <string name="tv_register_033">Nữ</string>
+    <string name="tv_register_034">Tài khoản</string>
+    <string name="tv_register_035">Địa chỉ</string>
+
+    <string name="tv_home_001">Danh sách</string>
+    <string name="tv_home_002">Bản đồ</string>
+    <string name="tv_home_003">Thông báo</string>
+    <string name="tv_home_004">Phạm vi</string>
+    <string name="tv_home_005">%d phút</string>
+    <string name="tv_home_006">Vừa xong</string>
+    <string name="tv_home_007">%d giờ</string>
+    <string name="tv_home_008">Đóng</string>
+    <string name="tv_home_009">Tìm kiếm</string>
+    <string name="tv_home_010">%1d giờ %2d phút</string>
+
+    <string name="tv_work_001">Đăng ký công việc</string>
+    <string name="tv_work_002">Thời gian</string>
+    <string name="tv_work_003">Người đã đăng ký</string>
+    <string name="tv_work_004">Đ/c làm việc: %s</string>
+    <string name="tv_work_005">Hoàn thành</string>
+    <string name="tv_work_006">Lịch làm việc</string>
+    <string name="tv_work_007">Đã đăng ký</string>
+    <string name="tv_work_008">Hoàn thành</string>
+    <string name="tv_work_009">Đã đăng ký công việc, chờ xác nhận</string>
+    <string name="tv_work_010">Huỷ đăng ký công việc!</string>
+    <string name="tv_work_011">Bạn đang chờ chủ công việc xác nhận, thao tác này sẽ huỷ bỏ đăng ký trước đó. Bạn có muốn thực hiện không?</string>
+    <string name="tv_work_012">Có</string>
+    <string name="tv_work_013">Không</string>
+    <string name="tv_work_014">Đang làm việc</string>
+    <string name="tv_work_015">Bản tin đã hết hạn</string>
+    <string name="tv_work_016">Liên hệ chủ nhà</string>
+    <string name="tv_work_017">Tìm đường</string>
+    <string name="tv_work_018">Tôi đã hoàn thành công việc này</string>
+    <string name="tv_work_019">Xong</string>
+    <string name="tv_work_020"><u>Hủy công việc này</u></string>
+    <string name="tv_work_021">Hủy đăng ký</string>
+    <string name="tv_work_022">đ/ giờ</string>
+    <string name="tv_work_023">Phạm vi</string>
+    <string name="tv_work_024">Phạm vi %s</string>
+    <string name="tv_work_025">Địa chỉ: %s</string>
+    <string name="tv_work_026">Ngày đăng ký: %s</string>
+    <string name="tv_work_027">Đã thanh toán: %s</string>
+
+    <string name="tv_setting_001">Payment</string>
+    <string name="tv_setting_002">Change password</string>
+    <string name="tv_setting_003">Change language</string>
+    <string name="tv_setting_004">About</string>
+    <string name="tv_setting_005">Log out</string>
+    <string name="tv_setting_006">Ngày sinh</string>
+    <string name="tv_setting_007">Số điện thoại</string>
+    <string name="tv_setting_008">Email</string>
+    <string name="tv_setting_009">Nơi làm việc</string>
+    <string name="tv_setting_010">Thông tin</string>
+    <string name="tv_setting_011">Thông tin ứng dụng</string>
+    <string name="tv_setting_012">Tiếng Việt</string>
+    <string name="tv_setting_013">Tiếng Anh</string>
+    <string name="tv_setting_014">Ngôn ngữ</string>
+    <string name="tv_setting_015">Chọn ngôn ngữ này</string>
+
+    <string name="tv_user_001">Thành viên chính thức</string>
+    <string name="tv_user_002">Lịch sử công việc</string>
+    <string name="tv_user_003">Đóng</string>
+    <string name="tv_user_004">Đơn giá công việc</string>
+    <string name="tv_user_005">Thời gian công việc</string>
+    <string name="tv_user_006">Thành tiền (Có thể chỉnh sửa giá theo mong muốn)</string>
+    <string name="tv_user_007">Nhập số tiền</string>
+    <string name="tv_user_008">
+    <![CDATA[<p><font color="#98A2B0"  size="13">Đã hoàn thành công việc</font> %1s.</p>    ]]>
+</string>
+
+    <string name="tv_wallet_001">Ngân hàng\nliên kết</string>
+    <string name="tv_wallet_002">Nạp tiền\nvào ví</string>
+    <string name="tv_wallet_003">Rút tiền\nkhỏi ví</string>
+    <string name="tv_wallet_004">Số dư tài hiện tại của ví</string>
+    <string name="tv_wallet_005">Lịch sử giao dịch</string>
+    <string name="tv_wallet_006">Nạp vào ví %s đ</string>
+    <string name="tv_wallet_007">Nạp vào</string>
+    <string name="tv_wallet_008">Rút ra</string>
+    <string name="tv_wallet_009">Thanh toán</string>
+</resources>

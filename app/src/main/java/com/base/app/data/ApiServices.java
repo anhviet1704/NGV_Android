@@ -81,6 +81,10 @@ public interface ApiServices {
                                    @Field("osin_id") int osin_id,
                                    @Field("deal") String deal);
 
+    @FormUrlEncoded
+    @POST("api/vi/osin/job/rate")
+    Single<BaseObj> maidRateJob(@Field("osin_id") int osin_id, @Field("owner_job_id") int owner_job_id, @Field("rate_job") int rate_job);
+
     //JOB
     @FormUrlEncoded
     @POST("api/vi/job/getLastedJob")

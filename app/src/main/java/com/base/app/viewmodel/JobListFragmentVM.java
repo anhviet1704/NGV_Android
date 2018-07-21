@@ -18,6 +18,8 @@ public class JobListFragmentVM extends ViewModel {
     private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobCurrent;
     private SingleLiveEvent<ResponseObj> mJobCancel;
     private SingleLiveEvent<ResponseObj> mJobFinish;
+    private SingleLiveEvent<ResponseObj> mJobRate;
+
     @Inject
     public JobListFragmentVM(JobRepo repository) {
         this.mRepository = repository;
@@ -38,6 +40,11 @@ public class JobListFragmentVM extends ViewModel {
     public SingleLiveEvent<ResponseObj> finishJob(int owner_job_id, int osin_id) {
         mJobFinish = mRepository.onFinishJob(owner_job_id, osin_id);
         return mJobFinish;
+    }
+
+    public SingleLiveEvent<ResponseObj> rateJob(int osin_id, int owner_job_id, int rate_job) {
+        mJobRate = mRepository.onRateJob(osin_id, owner_job_id, rate_job);
+        return mJobRate;
     }
 
     public void onClearData() {

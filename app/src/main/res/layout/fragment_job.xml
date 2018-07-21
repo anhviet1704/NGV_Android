@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/view_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFF"
-        android:id="@+id/view_root"
         android:orientation="vertical">
 
         <com.ivankocijan.magicviews.views.MagicTextView
@@ -16,7 +16,6 @@
             android:layout_below="@id/view_toolbar"
             android:layout_marginStart="20dp"
             android:layout_marginTop="28dp"
-            android:text="6:30 - 15:00"
             android:textColor="#84B8FF"
             android:textSize="28sp"
             app:layout_constraintEnd_toStartOf="@+id/roundRectView"
@@ -33,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
-            android:text="Hôm nay"
             android:textColor="#98A2B0"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/tv_work_time"
@@ -46,12 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:drawablePadding="10dp"
-            android:visibility="gone"
             android:drawableStart="@drawable/ic_working"
             android:gravity="center"
             android:text="@string/tv_work_014"
             android:textColor="#5FD150"
             android:textSize="16sp"
+            android:visibility="gone"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_time"
             app:layout_constraintStart_toEndOf="@+id/tv_time"
             app:typeFace="HelveticaNeue_Light.otf" />

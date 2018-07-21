@@ -1,7 +1,7 @@
 package com.base.app.utils;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.support.constraint.Group;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
+import com.base.app.model.JobCurrentItem;
 import com.base.app.ui.callback.OnClickFinish;
+import com.base.app.ui.fragment.DialogMap;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
@@ -23,14 +25,17 @@ public class DialogJobMgr<T> {
 
     ImageView mIvClose;
     ImageView mIvFinish;
+    ImageView mIvSmile;
+    ImageView mIvSad;
     Group mGrFinish;
     MagicButton btFinish;
     MagicTextView mTvCancel;
     MagicTextView mTvFinish;
-    private Context mContext;
+    private Activity mContext;
     private Dialog mDialog;
+    private int typeOfRate = 1;
 
-    public DialogJobMgr(Context context) {
+    public DialogJobMgr(Activity context) {
         mContext = context;
     }
 
@@ -58,7 +63,7 @@ public class DialogJobMgr<T> {
         }
     }
 
-    public void onShowDialogFinish(ViewGroup root, String startTime, final OnClickFinish mClick) {
+    public void onShowDialogFinish(ViewGroup root, JobCurrentItem item, final OnClickFinish mClick) {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
@@ -81,6 +86,8 @@ public class DialogJobMgr<T> {
         mTvFinish = mDialog.findViewById(R.id.tv_finish);
         mTvCancel = mDialog.findViewById(R.id.tv_cancel);
         mGrFinish = mDialog.findViewById(R.id.gr_finish);
+        mIvSmile = mDialog.findViewById(R.id.iv_smile);
+        mIvSad = mDialog.findViewById(R.id.iv_sad);
         btFinish = mDialog.findViewById(R.id.bt_finish);
         BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
         mBlurView.setupWith(root)
@@ -102,7 +109,7 @@ public class DialogJobMgr<T> {
         btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClick.onClickRate();
+                mClick.onClickRate(typeOfRate);
             }
         });
         mTvCancel.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +124,31 @@ public class DialogJobMgr<T> {
                 mDialog.dismiss();
             }
         });
-        mTvTime.setText(startTime);
+        mIvSmile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                typeOfRate = 1;
+                mIvSmile.setImageResource(R.drawable.ic_smile);
+                mIvSad.setImageResource(R.drawable.ic_sad);
+            }
+        });
+        mIvSad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                typeOfRate = 2;
+                mIvSmile.setImageResource(R.drawable.ic_smile);
+                mIvSad.setImageResource(R.drawable.ic_sad);
+            }
+        });
+        mViewFindStreet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogMap mDialogMap = DialogMap.newInstance();
+                mDialogMap.setData(item);
+                mDialogMap.show(mContext.getFragmentManager(), "");
+            }
+        });
+        mTvTime.setText(item.getStartTime());
     }
 
     public void onUpdateUI(int type) {

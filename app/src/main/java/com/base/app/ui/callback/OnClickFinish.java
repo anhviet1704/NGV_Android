@@ -8,7 +8,7 @@ public interface OnClickFinish {
 
     void onClickFinish();
 
-    void onClickRate();
+    void onClickRate(int type);
 
     void onClickCancel();
 }

@@ -68,7 +68,7 @@ public class LanguageActivity extends AppCompatActivity {
             case R.id.iv_en:
                 ivEn.setBackgroundResource(R.drawable.ic_us_select);
                 ivVn.setBackgroundResource(R.drawable.ic_vn);
-                lang = "us";
+                lang = "en";
                 break;
             case R.id.bt_finish:
                 setLocale("vi", getResources());

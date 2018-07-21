@@ -20,6 +20,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.CompletableObserver;
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -200,6 +201,30 @@ public class JobRepo {
 
                     @Override
                     public void onComplete() {
+                        mJob.setValue(new ResponseObj(null, Response.SUCCESS));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mJob.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                    }
+                });
+        return mJob;
+    }
+
+    public SingleLiveEvent<ResponseObj> onRateJob(int osin_id, int owner_job_id, int rate_job) {
+        SingleLiveEvent<ResponseObj> mJob = new SingleLiveEvent<>();
+        mApiServices.maidRateJob(osin_id, owner_job_id, rate_job)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<BaseObj>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseObj baseObj) {
                         mJob.setValue(new ResponseObj(null, Response.SUCCESS));
                     }
 

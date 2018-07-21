@@ -55,8 +55,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
         final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
-                DialogJobMgr mDialogJob = new DialogJobMgr(getContext());
-                mDialogJob.onShowDialogFinish(JobFragment.getRoot(), mDataList.get(pos).getStartTime(), new OnClickFinish() {
+                DialogJobMgr mDialogJob = new DialogJobMgr(getActivity());
+                mDialogJob.onShowDialogFinish(JobFragment.getRoot(), mDataList.get(pos), new OnClickFinish() {
                     @Override
                     public void onClickFinish() {
                         //Comment for test
@@ -70,8 +70,14 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                     }
 
                     @Override
-                    public void onClickRate() {
-
+                    public void onClickRate(int type) {
+                        //1: hài lòng, 2:không hài lòng
+                        viewModel.rateJob(mLoginItem.getId(), mDataList.get(pos).getOwnerJobId(), type).observe(getActivity(), new Observer<ResponseObj>() {
+                            @Override
+                            public void onChanged(@Nullable ResponseObj responseObj) {
+                                mDialogJob.dismiss();
+                            }
+                        });
                     }
 
                     @Override
@@ -96,7 +102,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mTimeLineAdapter.onUpdateData(mDataList);
-                        JobFragment.onUpdateFirstJob(mDataList.get(0));
+                        if (mDataList.size() > 0)
+                            JobFragment.onUpdateFirstJob(mDataList.get(0));
                     }
             }
         });

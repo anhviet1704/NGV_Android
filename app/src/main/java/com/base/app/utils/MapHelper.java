@@ -38,9 +38,9 @@ public class MapHelper {
                 })
                 .subscribe(location -> {
                     if (isRealTime) {
-                        locationClick.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        locationClick.onReturnLocation(new com.google.android.gms.maps.model.LatLng(location.getLatitude(), location.getLongitude()));
                     } else {
-                        locationClick.onReturnLocation(new LatLng(location.getLatitude(), location.getLongitude()));
+                        locationClick.onReturnLocation(new com.google.android.gms.maps.model.LatLng(location.getLatitude(), location.getLongitude()));
                         mDisposable.dispose();
                     }
                 }, throwable -> {

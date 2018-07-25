@@ -80,7 +80,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     // GLIDE
     implementation 'com.github.bumptech.glide:glide:4.7.1'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'jp.wasabeef:glide-transformations:3.3.0'
     //RX JAVA
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -106,6 +106,8 @@ dependencies {
     implementation 'com.romandanylyk:pageindicatorview:1.0.1'
     implementation 'com.loopeer.lib:shadow:0.0.4-beta3'
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.maps:google-maps-services:0.2.9'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation 'com.github.vipulasri:timelineview:1.0.6'
     implementation 'com.jaychang:simplerecyclerview:2.0.4'
     implementation 'com.eightbitlab:blurview:1.4.0'

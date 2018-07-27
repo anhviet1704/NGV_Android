@@ -21,6 +21,7 @@ import com.base.app.ui.adapter.JobFinishAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobFinishFragmentVM;
+import com.ethanhua.skeleton.SkeletonScreen;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, FragmentJobListBinding> {
 
@@ -66,7 +69,7 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
         });
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvJob.setItemAnimator(new DefaultItemAnimator());
-        bind.rvJob.setAdapter(mWorkAdapter);
+        SkeletonScreen skeletonLoading = showSkeletonLoading(bind.rvJob, mWorkAdapter);
         //STATUS CODE :  === 1:waiting ,:2: approved, 3:complete, 4:cancel
         viewModel.getListJobFinish(mLoginItem.getId(), 3).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
@@ -75,6 +78,7 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mWorkAdapter.onUpdateData(mDataList);
+                        skeletonLoading.hide();
                     }
             }
         });

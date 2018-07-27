@@ -11,6 +11,7 @@ import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
+import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.module.AppDatabase;
 import com.base.app.utils.Response;
@@ -280,12 +281,12 @@ public class RegisterRepo {
 
     }
 
-    public SingleLiveEvent<ResponseObj<Object>> uploadFile(MultipartBody.Part image) {
-        SingleLiveEvent<ResponseObj<Object>> upload = new SingleLiveEvent<>();
+    public SingleLiveEvent<ResponseObj<UploadItem>> uploadFile(MultipartBody.Part image) {
+        SingleLiveEvent<ResponseObj<UploadItem>> upload = new SingleLiveEvent<>();
         mApiServices.uploadFile(image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<BaseObj<Object>>() {
+                .subscribe(new SingleObserver<BaseObj<UploadItem>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 

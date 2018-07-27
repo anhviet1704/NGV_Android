@@ -46,7 +46,6 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
 
     @Inject
     PrefHelper mPrefHelper;
-    //private DialogLoading mDialogLoading;
     private String userName;
     private String passWord;
     private boolean isSplashShow = true;
@@ -129,6 +128,8 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
                         || TextUtils.isEmpty(bind.etPassword.getText().toString())) {
                     Toast.makeText(LoginActivity.this, getString(R.string.tv_error_01), Toast.LENGTH_SHORT).show();
                 } else {
+                    if (!mDialogLoading.isShowing())
+                        mDialogLoading.show();
                     viewModel.postLogin(bind.etUsername.getText().toString(), bind.etPassword.getText().toString())
                             .observe(LoginActivity.this, new Observer<ResponseObj<LoginItem>>() {
                                 @Override

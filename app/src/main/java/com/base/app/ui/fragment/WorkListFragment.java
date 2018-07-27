@@ -22,12 +22,15 @@ import com.base.app.ui.adapter.JobListAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkListFragmentVM;
+import com.ethanhua.skeleton.SkeletonScreen;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentWorkListBinding> {
     @Inject
@@ -69,7 +72,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
         });
         bind.rvWork.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvWork.setItemAnimator(new DefaultItemAnimator());
-        bind.rvWork.setAdapter(mWorkAdapter);
+        SkeletonScreen skeletonScreen = showSkeletonLoading(bind.rvWork, mWorkAdapter);
         viewModel.getJobList(mLoginItem.getId(), 10, 0)
                 .observe(this, new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
@@ -77,8 +80,10 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                         if (response.getResponse() == Response.SUCCESS) {
                             mWorkItems = response.getObj().getData();
                             mWorkAdapter.onUpdateData(mWorkItems);
+                            skeletonScreen.hide();
                         }
                     }
                 });
+
     }
 }

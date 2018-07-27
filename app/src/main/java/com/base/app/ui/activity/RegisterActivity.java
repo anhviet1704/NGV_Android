@@ -24,6 +24,7 @@ import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
+import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.ui.adapter.WorkTypeAdapter;
 import com.base.app.ui.callback.OnClickItem;
@@ -300,9 +301,9 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                                     public void accept(File file) throws Exception {
                                         RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
                                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(fileName, fileName, body);
-                                        viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<Object>>() {
+                                        viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<UploadItem>>() {
                                             @Override
-                                            public void onChanged(@Nullable ResponseObj<Object> objectResponseObj) {
+                                            public void onChanged(@Nullable ResponseObj<UploadItem> objectResponseObj) {
                                                 if (objectResponseObj != null)
                                                     if (objectResponseObj.getResponse() == Response.SUCCESS)
                                                         Toast.makeText(RegisterActivity.this, "upload file success + hide loading", Toast.LENGTH_SHORT).show();

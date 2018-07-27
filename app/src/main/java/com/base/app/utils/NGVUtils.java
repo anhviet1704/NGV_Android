@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.Group;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.base.app.R;
@@ -14,6 +15,8 @@ import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
+import com.ethanhua.skeleton.Skeleton;
+import com.ethanhua.skeleton.SkeletonScreen;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,6 +35,20 @@ import java.util.regex.Pattern;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class NGVUtils {
+
+
+    public static SkeletonScreen showSkeletonLoading(RecyclerView rv, RecyclerView.Adapter adapter) {
+        return Skeleton.bind(rv)
+                .adapter(adapter)
+                .shimmer(true)
+                .angle(20)
+                .frozen(true)
+                .color(R.color.color_shimmer)
+                .duration(1200)
+                .count(10)
+                .load(R.layout.row_loading)
+                .show();
+    }
 
     public static String onGenFileName(String ext) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmmssSSS");

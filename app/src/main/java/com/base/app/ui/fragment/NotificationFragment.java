@@ -12,9 +12,12 @@ import com.base.app.model.WorkItem;
 import com.base.app.ui.adapter.NotificationAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.viewmodel.WorkListFragmentVM;
+import com.ethanhua.skeleton.SkeletonScreen;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class NotificationFragment extends BaseFragment<WorkListFragmentVM, FragmentNotificationBinding> {
 
@@ -63,6 +66,6 @@ public class NotificationFragment extends BaseFragment<WorkListFragmentVM, Fragm
 
             }
         });
-        bind.rvNotification.setAdapter(mAdapter);
+        SkeletonScreen skeletonLoading = showSkeletonLoading(bind.rvNotification, mAdapter);
     }
 }

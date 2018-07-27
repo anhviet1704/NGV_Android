@@ -8,6 +8,7 @@ import com.base.app.model.BaseValueItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
+import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.repo.RegisterRepo;
 import com.base.app.utils.SingleLiveEvent;
@@ -26,7 +27,7 @@ public class RegisterActivityVM extends ViewModel {
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles = new MutableLiveData<>();
-    private SingleLiveEvent<ResponseObj<Object>> mUpload = new SingleLiveEvent<>();
+    private SingleLiveEvent<ResponseObj<UploadItem>> mUpload = new SingleLiveEvent<>();
 
     @Inject
     public RegisterActivityVM(RegisterRepo repository) {
@@ -55,7 +56,7 @@ public class RegisterActivityVM extends ViewModel {
         return mRegister;
     }
 
-    public SingleLiveEvent<ResponseObj<Object>> uploadFile(MultipartBody.Part image) {
+    public SingleLiveEvent<ResponseObj<UploadItem>> uploadFile(MultipartBody.Part image) {
         mUpload = mRepository.uploadFile(image);
         return mUpload;
     }

@@ -9,6 +9,7 @@ import com.base.app.model.JobItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.RoleItem;
+import com.base.app.model.UploadItem;
 import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.model.postobj.RegisterObj;
 
@@ -110,7 +111,7 @@ public interface ApiServices {
                                                             @Field("limit") int limit);
 
     @Multipart
-    @POST("api/vi/osin/osin/uploadSingleImage")
-    Single<BaseObj<Object>> uploadFile(@Part MultipartBody.Part image);
+    @POST("api/vi/osin/uploadSingleImage")
+    Single<BaseObj<UploadItem>> uploadFile(@Part MultipartBody.Part image);
 
 }

@@ -9,4 +9,5 @@
     <color name="transparent">#00000000</color>
     <color name="color_01">#2AA5FF</color>
     <color name="color_blur">#B3DEDEDE</color>
+    <color name="color_shimmer">#6197DD</color>
 </resources>

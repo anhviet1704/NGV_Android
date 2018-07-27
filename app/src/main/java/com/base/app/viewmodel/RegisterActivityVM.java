@@ -10,10 +10,13 @@ import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.repo.RegisterRepo;
+import com.base.app.utils.SingleLiveEvent;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import okhttp3.MultipartBody;
 
 
 public class RegisterActivityVM extends ViewModel {
@@ -23,6 +26,7 @@ public class RegisterActivityVM extends ViewModel {
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles = new MutableLiveData<>();
+    private SingleLiveEvent<ResponseObj<Object>> mUpload = new SingleLiveEvent<>();
 
     @Inject
     public RegisterActivityVM(RegisterRepo repository) {
@@ -49,5 +53,10 @@ public class RegisterActivityVM extends ViewModel {
     public LiveData<ResponseObj<RegisterItem>> postRegister(RegisterObj registerObj) {
         mRegister = mRepository.postRegister(registerObj);
         return mRegister;
+    }
+
+    public SingleLiveEvent<ResponseObj<Object>> uploadFile(MultipartBody.Part image) {
+        mUpload = mRepository.uploadFile(image);
+        return mUpload;
     }
 }

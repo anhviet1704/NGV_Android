@@ -1,9 +1,10 @@
 package com.base.app.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -19,6 +20,7 @@ import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityRegisterBinding;
 import com.base.app.model.BaseValueItem;
 import com.base.app.model.CountryResponse;
+import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.RoleItem;
@@ -30,16 +32,27 @@ import com.base.app.utils.DialogMaster;
 import com.base.app.utils.NGVUtils;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.RegisterActivityVM;
+import com.blankj.utilcode.util.FileUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
-import com.esafirm.imagepicker.features.ImagePicker;
-import com.esafirm.imagepicker.features.ReturnMode;
-import com.esafirm.imagepicker.model.Image;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.inject.Inject;
+
+import gun0912.tedbottompicker.TedBottomPicker;
+import id.zelory.compressor.Compressor;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityRegisterBinding> {
@@ -57,6 +70,9 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     private DialogMaster mDialogCountries;
     private DialogMaster mDialogGender;
     private WorkTypeAdapter mWorkAdapter;
+    @Inject
+    LoginItem mLoginItem;
+    private Uri selectedUri;
 
     @Override
     protected int getLayoutResId() {
@@ -263,30 +279,53 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     }
 
     private void onOpenGallery() {
-        ImagePicker.create(this)
-                .returnMode(ReturnMode.ALL)
-                .folderMode(false)
-                .toolbarFolderTitle("Folder")
-                .toolbarImageTitle("Tap to select")
-                .toolbarArrowColor(Color.BLACK)
-                .single()
-                .limit(1)
-                .showCamera(true)
-                .imageDirectory("Camera")
-                .start();
-    }
+        TedBottomPicker bottomSheetDialogFragment = new TedBottomPicker.Builder(RegisterActivity.this)
+                .setOnImageSelectedListener(new TedBottomPicker.OnImageSelectedListener() {
+                    @SuppressLint("CheckResult")
+                    @Override
+                    public void onImageSelected(final Uri uri) {
+                        if (mPosOfImage == 1) {
+                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivFrontCard);
+                        } else if (mPosOfImage == 2) {
+                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivBackCard);
+                        }
+                        final String fileName = NGVUtils.onGenFileName(FileUtils.getFileExtension(FileUtils.getFileName(uri.getPath())));
+                        selectedUri = uri;
+                        new Compressor(getApplicationContext())
+                                .compressToFileAsFlowable(new File(uri.getPath()))
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<File>() {
+                                    @Override
+                                    public void accept(File file) throws Exception {
+                                        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+                                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(fileName, fileName, body);
+                                        viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<Object>>() {
+                                            @Override
+                                            public void onChanged(@Nullable ResponseObj<Object> objectResponseObj) {
+                                                if (objectResponseObj != null)
+                                                    if (objectResponseObj.getResponse() == Response.SUCCESS)
+                                                        Toast.makeText(RegisterActivity.this, "upload file success + hide loading", Toast.LENGTH_SHORT).show();
+                                                    else
+                                                        Toast.makeText(RegisterActivity.this, "upload file failse + " + objectResponseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(getApplicationContext(), "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
-    @Override
-    protected void onActivityResult(int requestCode, final int resultCode, Intent data) {
-        if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            Image image = ImagePicker.getFirstImageOrNull(data);
-            if (mPosOfImage == 1) {
-                Glide.with(this).load(image.getPath()).apply(NGVUtils.onGetRound(6)).into(bind.ivFrontCard);
-            } else if (mPosOfImage == 2) {
-                Glide.with(this).load(image.getPath()).apply(NGVUtils.onGetRound(6)).into(bind.ivBackCard);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
+                    }
+                })
+                .setPeekHeight(ScreenUtils.getScreenHeight())
+                .setSelectedUri(selectedUri)
+                .setTitle("Chọn hình ảnh")
+                .create();
+        bottomSheetDialogFragment.show(getSupportFragmentManager());
+
     }
 
     private void onSetupWorkType() {

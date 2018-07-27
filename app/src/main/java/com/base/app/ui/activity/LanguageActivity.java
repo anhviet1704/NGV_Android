@@ -37,21 +37,20 @@ public class LanguageActivity extends AppCompatActivity {
     ImageView ivEn;
     @BindView(R.id.bt_finish)
     MagicButton btFinish;
-    String lang = "vi";
+    String lang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
         ButterKnife.bind(this);
-    }
-
-    public static void setLocale(String lang, Resources resources) {
-        Locale myLocale = new Locale(lang);
-        DisplayMetrics dm = resources.getDisplayMetrics();
-        Configuration conf = resources.getConfiguration();
-        conf.locale = myLocale;
-        resources.updateConfiguration(conf, dm);
+        if (getResources().getConfiguration().locale.toString().contains("vi")) {
+            lang = "vi";
+            ivVn.performClick();
+        } else {
+            lang = "en";
+            ivEn.performClick();
+        }
     }
 
     @OnClick({R.id.iv_back, R.id.iv_vn, R.id.iv_en, R.id.bt_finish})
@@ -71,10 +70,22 @@ public class LanguageActivity extends AppCompatActivity {
                 lang = "en";
                 break;
             case R.id.bt_finish:
-                setLocale("vi", getResources());
+                setLocale(lang);
                 finish();
                 break;
         }
+    }
+
+    public void setLocale(String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+        //refresh activity
+        Intent refresh = new Intent(this, MainActivity.class);
+        startActivity(refresh);
     }
 
     private void refeshLayout() {

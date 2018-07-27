@@ -22,7 +22,7 @@ public class RoomModule {
     @Singleton
     @Provides
     AppDatabase providesReauthDb(Application application) {
-        return Room.databaseBuilder(application, AppDatabase.class, "reauth.db").fallbackToDestructiveMigration().build();
+        return Room.databaseBuilder(application, AppDatabase.class, "reauth.db").build();
     }
 
     @Singleton

@@ -7,7 +7,7 @@ import com.base.app.dao.UserDao;
 import com.base.app.entity.UserEntity;
 
 
-@Database(entities = {UserEntity.class}, version = 1)
+@Database(entities = {UserEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();

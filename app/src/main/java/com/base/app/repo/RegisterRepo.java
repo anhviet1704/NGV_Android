@@ -25,6 +25,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MultipartBody;
 
 @Singleton
 public class RegisterRepo {
@@ -279,4 +280,30 @@ public class RegisterRepo {
 
     }
 
+    public SingleLiveEvent<ResponseObj<Object>> uploadFile(MultipartBody.Part image) {
+        SingleLiveEvent<ResponseObj<Object>> upload = new SingleLiveEvent<>();
+        mApiServices.uploadFile(image)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<BaseObj<Object>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseObj repsonse) {
+                        if (repsonse.getSuccess())
+                            mRegister.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                        else
+                            mRegister.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                    }
+                });
+        return upload;
+    }
 }

@@ -33,6 +33,13 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class NGVUtils {
 
+    public static String onGenFileName(String ext) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+        Date now = new Date();
+        return dateFormatter.format(now) + "." + ext;
+    }
+
+
     public static String covertStringToChar(String str) {
         try {
             String temp = Normalizer.normalize(str, Normalizer.Form.NFD);

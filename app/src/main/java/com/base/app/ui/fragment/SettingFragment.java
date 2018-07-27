@@ -18,9 +18,12 @@ import com.base.app.model.LoginItem;
 import com.base.app.ui.activity.AboutActivity;
 import com.base.app.ui.activity.ChangePassActivity;
 import com.base.app.ui.activity.LanguageActivity;
+import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.ProfileActivity;
 import com.base.app.ui.activity.WalletActivity;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 import com.loopeer.shadow.ShadowView;
@@ -57,6 +60,9 @@ public class SettingFragment extends Fragment {
     Unbinder unbinder;
     @Inject
     LoginItem mLoginItem;
+
+    @Inject
+    PrefHelper mPrefHelper;
 
     public static SettingFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -98,19 +104,20 @@ public class SettingFragment extends Fragment {
             case R.id.view_change_pass:
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(viewChangePass, 0, 0, 0, 0);
                 startActivity(new Intent(getActivity(), ChangePassActivity.class));
-
-                //NGVUtils.startActivity(getActivity(), ChangePassActivity.class, viewChangePass);
                 break;
             case R.id.view_change_language:
                 ActivityOptionsCompat options1 = ActivityOptionsCompat.makeClipRevealAnimation(viewChangeLanguage, 0, 0, 0, 0);
                 startActivity(new Intent(getActivity(), LanguageActivity.class));
-                //NGVUtils.startActivity(getActivity(), LanguageActivity.class, viewChangeLanguage);
                 break;
             case R.id.view_info:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
                 //NGVUtils.startActivity(getActivity(), AboutActivity.class, viewInfo);
                 break;
             case R.id.view_signout:
+                mPrefHelper.putString(AppCons.LOGIN_USERNAME, "");
+                mPrefHelper.putString(AppCons.LOGIN_PASSWORD, "");
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent, ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, 0, 0).toBundle());
                 break;
         }
     }

@@ -15,11 +15,14 @@ import com.base.app.model.postobj.RegisterObj;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 //{lang} default is vi
 public interface ApiServices {
@@ -45,9 +48,6 @@ public interface ApiServices {
 
     @GET("api/vi/osin/roles")
     Observable<BaseList<RoleItem>> getRoles();
-
-    @GET("api/vi/uploadSingleImage")
-    Observable<BaseObj<Object>> uploadFile();
 
     //Info job
 
@@ -108,5 +108,9 @@ public interface ApiServices {
                                                             @Field("radius") float radius,
                                                             @Field("mode") int mode,
                                                             @Field("limit") int limit);
+
+    @Multipart
+    @POST("api/vi/osin/osin/uploadSingleImage")
+    Single<BaseObj<Object>> uploadFile(@Part MultipartBody.Part image);
 
 }

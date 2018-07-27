@@ -267,6 +267,10 @@ public class DialogMap extends DialogFragment {
 
     private void addPolyline(DirectionsResult results, GoogleMap mMap) {
         List<LatLng> decodedPath = PolyUtil.decode(results.routes[overview].overviewPolyline.getEncodedPath());
-        mMap.addPolyline(new PolylineOptions().addAll(decodedPath));
+        PolylineOptions polyline = new PolylineOptions()
+                .addAll(decodedPath)
+                .width(25f)
+                .color(Color.parseColor("#FF869B"));
+        mMap.addPolyline(polyline);
     }
 }

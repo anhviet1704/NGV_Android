@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
 
@@ -26,11 +24,11 @@ import com.base.app.ui.adapter.JobMapAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnLocationResult;
-import com.base.app.utils.AppCons;
 import com.base.app.utils.DialogMaster;
 import com.base.app.utils.MapHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkMapFragmentVM;
+import com.ethanhua.skeleton.SkeletonScreen;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -48,6 +46,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
+
+import static com.base.app.utils.NGVUtils.showSkeletonLoading;
+
 public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWorkMapBinding> {
     private GoogleMap mMap;
     private LatLng mLocation;
@@ -63,6 +65,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     private int mRadius = 15;
     private Marker myLocation;
     private Marker oldMarker;
+    private SkeletonScreen skeletonScreen;
 
     @Override
     public int getLayoutRes() {
@@ -100,9 +103,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                 startActivity(intent, options.toBundle());
             }
         });
-        bind.rvJob.setLayoutManager(new LinearLayoutManager(getContext()));
-        bind.rvJob.setItemAnimator(new DefaultItemAnimator());
-        bind.rvJob.setAdapter(mWorkAdapter);
+        bind.rvJob.setItemAnimator(new SlideInUpAnimator());
+        skeletonScreen = showSkeletonLoading(bind.rvJob, mWorkAdapter);
 
         SupportMapFragment mMapFragment = SupportMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.google_map, mMapFragment).commit();
@@ -204,7 +206,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     }
 
     private void onGetJobFromRadius(int radius) {
-        viewModel.getJobsMap(mLoginItem.getId(), mLocation.latitude, mLocation.longitude, radius, 0, AppCons.PAGE_SIZE)
+        viewModel.getJobsMap(mLoginItem.getId(), mLocation.latitude, mLocation.longitude, radius, 0, 100)
                 .observe(getActivity(), new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
                     public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {
@@ -214,6 +216,10 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                                 mJobsMap = response.getObj().getData();
                                 onAddMarker(mJobsMap);
                                 mWorkAdapter.onUpdateData(mJobsMap);
+                                if (skeletonScreen != null) {
+                                    skeletonScreen.hide();
+                                    skeletonScreen = null;
+                                }
                             }
                     }
                 });

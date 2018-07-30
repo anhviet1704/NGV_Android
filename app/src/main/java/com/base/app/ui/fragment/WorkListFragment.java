@@ -5,7 +5,6 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.util.Log;
 
 import com.base.app.R;
@@ -30,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
 import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
@@ -83,9 +84,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                 onLoadJob();
             }
         });
-        bind.rvWork.setItemAnimator(new DefaultItemAnimator());
-
-
+        bind.rvWork.setItemAnimator(new SlideInUpAnimator());
     }
 
     private void onLoadJob() {

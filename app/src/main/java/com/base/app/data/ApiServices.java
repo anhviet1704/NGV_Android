@@ -24,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 //{lang} default is vi
 public interface ApiServices {
@@ -70,7 +71,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/listLastedJob")
-    Observable<BaseObj<JobNewResponse>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode);
+    Observable<BaseObj<JobNewResponse>> getMaidJobLasted(@Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode, @Query("page") int page);
 
     @FormUrlEncoded
     @POST("api/vi/osin/job/history")

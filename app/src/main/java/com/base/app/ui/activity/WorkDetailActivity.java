@@ -67,6 +67,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
 
     @Override
     protected void onInit(Bundle instance) {
+        mDialogLoading.show();
         int owner_job_id;
         if (mJobLastDetailItem != null) {
             owner_job_id = mJobLastDetailItem.getOwnerJobId();
@@ -80,6 +81,7 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     if (response.getResponse() == Response.SUCCESS) {
                         mJobDetail = response.getObj();
                         onUpdateUI(mJobDetail);
+                        mDialogLoading.dismiss();
                     }
             }
         });

@@ -5,10 +5,8 @@ import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.view.View;
+import android.util.Log;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
@@ -18,14 +16,17 @@ import com.base.app.model.ResponseObj;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.ui.activity.WorkDetailActivity;
+import com.base.app.ui.adapter.JobCell;
 import com.base.app.ui.adapter.JobListAdapter;
-import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.ethanhua.skeleton.SkeletonScreen;
+import com.jaychang.srv.OnLoadMoreListener;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,8 +36,11 @@ import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentWorkListBinding> {
     @Inject
     LoginItem mLoginItem;
-    private static List<JobNewItem> mWorkItems;
+    private static List<JobNewItem> mWorkItems = new ArrayList<>();
     private JobListAdapter mWorkAdapter;
+    private SkeletonScreen skeletonScreen;
+    private int page = 1;
+    private int lastPage = 1;
 
     public static WorkListFragment newInstance() {
         Bundle args = new Bundle();
@@ -61,29 +65,59 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
 
     @Override
     protected void onInit(Bundle instance) {
-        mWorkAdapter = new JobListAdapter(getContext(), mWorkItems, new OnClickItem() {
+        skeletonScreen = showSkeletonLoading(bind.rvWork, bind.rvWork.getAdapter());
+        onLoadJob();
+        bind.rvWork.setAutoLoadMoreThreshold(2);
+        bind.rvWork.setLoadMoreToTop(false);
+        bind.rvWork.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
-            public void onClickItem(View v, int pos) {
-                EventBus.getDefault().postSticky(mWorkItems.get(pos));
-                Intent intent = new Intent(getContext(), WorkDetailActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(v, 0, 0, 0, 0);
-                startActivity(intent, options.toBundle());
+            public boolean shouldLoadMore() {
+                if (page < lastPage)
+                    return true;
+                else
+                    return false;
+            }
+
+            @Override
+            public void onLoadMore() {
+                onLoadJob();
             }
         });
-        bind.rvWork.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvWork.setItemAnimator(new DefaultItemAnimator());
-        SkeletonScreen skeletonScreen = showSkeletonLoading(bind.rvWork, mWorkAdapter);
-        viewModel.getJobList(mLoginItem.getId(), 10, 0)
+
+
+    }
+
+    private void onLoadJob() {
+        if (page > 1)
+            bind.rvWork.showLoadMoreView();
+        viewModel.getJobList(mLoginItem.getId(), AppCons.PAGE_SIZE, 0, page)
                 .observe(this, new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
                     public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {
+                        bind.rvWork.hideLoadMoreView();
                         if (response.getResponse() == Response.SUCCESS) {
-                            mWorkItems = response.getObj().getData();
-                            mWorkAdapter.onUpdateData(mWorkItems);
+                            lastPage = response.getObj().getLastPage();
+                            if (response.getObj().getData().size() > 0) {
+                                Log.d("vinh123", "page = " + page + " size = " + response.getObj().getData().size() + " size total = " + mWorkItems.size());
+                                mWorkItems.addAll(response.getObj().getData());
+                                for (JobNewItem item : response.getObj().getData()) {
+                                    JobCell cell = new JobCell(item);
+                                    cell.setOnCellClickListener(item1 -> {
+                                        EventBus.getDefault().postSticky(item1);
+                                        Intent intent = new Intent(getContext(), WorkDetailActivity.class);
+                                        startActivity(intent);
+                                    });
+                                    bind.rvWork.addCell(cell);
+                                }
+                            }
+                        }
+                        page++;
+                        if (skeletonScreen != null) {
                             skeletonScreen.hide();
+                            skeletonScreen = null;
                         }
                     }
                 });
-
     }
 }

@@ -28,7 +28,6 @@ import io.reactivex.schedulers.Schedulers;
 @Singleton
 public class JobRepo {
 
-    private MutableLiveData<ResponseObj<JobNewResponse>> mJobs;
     private SingleLiveEvent<ResponseObj<JobDetail>> mJobDetail;
     private SingleLiveEvent<ResponseObj> mJobRegister;
     private SingleLiveEvent<ResponseObj<List<JobCurrentItem>>> mJobCurent;
@@ -40,23 +39,12 @@ public class JobRepo {
 
 
     public JobRepo(ApiServices mApiServices, AppDatabase mDatabase) {
-        this.mJobs = new MutableLiveData<>();
         this.mJobDetail = new SingleLiveEvent<>();
         this.mJobRegister = new SingleLiveEvent<>();
         this.mJobCurent = new SingleLiveEvent<>();
         this.mJobStatusRegister = new SingleLiveEvent<>();
         this.mApiServices = mApiServices;
         this.mAppDatabase = mDatabase;
-    }
-
-    public MutableLiveData<ResponseObj<JobNewResponse>> getjobs(int osin_id, int limit, int mode) {
-        if (mJobs.getValue() != null) {
-            if (mJobs.getValue().getResponse() == Response.FAILED)
-                getjobsFromServer(osin_id, limit, mode);
-        } else {
-            getjobsFromServer(osin_id, limit, mode);
-        }
-        return mJobs;
     }
 
     public SingleLiveEvent<ResponseObj<JobDetail>> getjobDetail(int owner_job_id, int osin_id) {
@@ -79,8 +67,9 @@ public class JobRepo {
         return mJobRegister;
     }
 
-    private void getjobsFromServer(int osin_id, int limit, int mode) {
-        mApiServices.getMaidJobLasted(osin_id, limit, mode)
+    public SingleLiveEvent<ResponseObj<JobNewResponse>> getjobsNew(int osin_id, int limit, int mode, int page) {
+        SingleLiveEvent<ResponseObj<JobNewResponse>> mJobs = new SingleLiveEvent<>();
+        mApiServices.getMaidJobLasted(osin_id, limit, mode, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<JobNewResponse>>() {
@@ -92,9 +81,12 @@ public class JobRepo {
                     @Override
                     public void onNext(BaseObj<JobNewResponse> repsonse) {
                         if (repsonse.getSuccess())
-                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                            if (repsonse.getData().getData().size() == 0)
+                                mJobs.setValue(new ResponseObj(repsonse.getData(), Response.NODATA));
+                            else
+                                mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         else
-                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                            mJobs.setValue(new ResponseObj(null, Response.FAILED, repsonse.getMessage()));
                     }
 
                     @Override
@@ -107,7 +99,7 @@ public class JobRepo {
                         disposable.dispose();
                     }
                 });
-
+        return mJobs;
     }
 
     private void getjobDetailFromServer(int owner_job_id, int osin_id) {

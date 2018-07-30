@@ -26,6 +26,7 @@ import com.base.app.ui.adapter.JobMapAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnLocationResult;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.DialogMaster;
 import com.base.app.utils.MapHelper;
 import com.base.app.utils.Response;
@@ -203,7 +204,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     }
 
     private void onGetJobFromRadius(int radius) {
-        viewModel.getJobsMap(mLoginItem.getId(), mLocation.latitude, mLocation.longitude, radius, 0, 100)
+        viewModel.getJobsMap(mLoginItem.getId(), mLocation.latitude, mLocation.longitude, radius, 0, AppCons.PAGE_SIZE)
                 .observe(getActivity(), new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
                     public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {

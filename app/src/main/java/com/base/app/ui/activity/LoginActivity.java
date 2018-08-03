@@ -87,6 +87,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
         rxPermissions
                 .requestEach(Manifest.permission.CAMERA,
                         Manifest.permission.CALL_PHONE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION
                 )

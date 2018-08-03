@@ -28,7 +28,7 @@ import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.ui.adapter.WorkTypeAdapter;
 import com.base.app.ui.callback.OnClickItem;
-import com.base.app.ui.callback.OnClickMaster;
+import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.utils.DialogMaster;
 import com.base.app.utils.NGVUtils;
 import com.base.app.utils.Response;
@@ -59,9 +59,9 @@ import okhttp3.RequestBody;
 public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityRegisterBinding> {
 
     private int mPosOfImage = -1;
-    private int mPosOfOffice = -1;
-    private int mPosOfCountry = -1;
-    private int mGenderValue = -1;
+    private String mOfficeId;
+    private String mOfCountryId;
+    private int mGenderId = -1;
     private CountryResponse mCountryItem;
     private List<RoleItem> mRoles = new ArrayList<>();
     private List<BaseValueItem> mOffices = new ArrayList<>();
@@ -173,18 +173,18 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     RegisterObj registerObj = new RegisterObj();
                     registerObj.setFullname(bind.etName.getText().toString());
                     registerObj.setBirthday(bind.etBirthday.getText().toString());
-                    registerObj.setCountry(String.valueOf(mCountries.get(mPosOfCountry).getId()));
+                    registerObj.setCountry(mOfCountryId);
                     registerObj.setPhone(bind.etPhone.getText().toString());
                     registerObj.setEmail(bind.etEmail.getText().toString());
                     registerObj.setRole(upRoles.substring(1));
-                    registerObj.setOffice(String.valueOf(mOffices.get(mPosOfOffice).getId()));
+                    registerObj.setOffice(mOfficeId);
                     registerObj.setStatus(1);//set active
                     //null param
                     registerObj.setAddress(bind.etAddress.getText().toString());
                     registerObj.setAvatar("");
                     registerObj.setDescription("");
                     registerObj.setFamily_register_img("");
-                    registerObj.setGender(mGenderValue);
+                    registerObj.setGender(mGenderId);
                     registerObj.setIdentity_id("");
                     registerObj.setIdentity_img("");
                     registerObj.setProfile_img("");
@@ -227,30 +227,30 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
 
     private void onSetupDialog() {
         mDialogOffices = new DialogMaster(this);
-        mDialogOffices.onShowMasterData(new OnClickMaster() {
+        mDialogOffices.onShowMasterData(new OnClickSearch() {
             @Override
-            public void onClickItem(int pos) {
-                mPosOfOffice = pos;
-                bind.tvDepartment.setText(mOffices.get(pos).getValue());
+            public void onClickItem(View v, Object object) {
+                mOfficeId = ((BaseValueItem) object).getId();
+                bind.tvDepartment.setText(((BaseValueItem) object).getValue());
             }
         });
         mDialogOffices.setTitle(getString(R.string.tv_home_004));
         mDialogCountries = new DialogMaster(this);
-        mDialogCountries.onShowMasterData(new OnClickMaster() {
+        mDialogCountries.onShowMasterData(new OnClickSearch() {
             @Override
-            public void onClickItem(int pos) {
-                mPosOfCountry = pos;
-                bind.tvCountry.setText(mCountries.get(pos).getValue());
+            public void onClickItem(View v, Object object) {
+                mOfCountryId = ((BaseValueItem) object).getId();
+                bind.tvCountry.setText(((BaseValueItem) object).getValue());
             }
         });
         mDialogCountries.setTitle(getString(R.string.tv_register_007));
 
         mDialogGender = new DialogMaster(this);
-        mDialogGender.onShowMasterData(new OnClickMaster() {
+        mDialogGender.onShowMasterData(new OnClickSearch() {
             @Override
-            public void onClickItem(int pos) {
-                mGenderValue = Integer.parseInt(mGender.get(pos).getId());
-                bind.tvGender.setText(mGender.get(pos).getValue());
+            public void onClickItem(View v, Object object) {
+                mGenderId = Integer.parseInt(((BaseValueItem) object).getId());
+                bind.tvGender.setText(((BaseValueItem) object).getValue());
             }
         });
         mGender.add(new BaseValueItem("1", getString(R.string.tv_register_032)));

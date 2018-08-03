@@ -8,5 +8,7 @@ public class AppCons {
     public static final int PAGE_SIZE = 15;
     public static final String LOGIN_USERNAME = "UserLogin";
     public static final String LOGIN_PASSWORD = "PasswordLogin";
+    public static String LANGUAGE = "vi";
+    public static String LANGUAGE_KEY = "Language_App";
 
 }

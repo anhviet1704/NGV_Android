@@ -2,6 +2,7 @@ package com.base.app.module;
 
 import com.base.app.ui.activity.ChangePassActivity;
 import com.base.app.ui.activity.ForgotPassActivity;
+import com.base.app.ui.activity.LanguageActivity;
 import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.NewPassActivity;
@@ -47,5 +48,8 @@ public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector
     abstract ProfileActivity ProfileActivity();
+
+    @ContributesAndroidInjector
+    abstract LanguageActivity LanguageActivity();
 
 }

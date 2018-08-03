@@ -32,14 +32,11 @@ import javax.inject.Inject;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentWorkListBinding> {
     @Inject
     LoginItem mLoginItem;
     private static List<JobNewItem> mWorkItems = new ArrayList<>();
-    private JobListAdapter mWorkAdapter;
-    private SkeletonScreen skeletonScreen;
     private int page = 1;
     private int lastPage = 1;
 
@@ -66,7 +63,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
 
     @Override
     protected void onInit(Bundle instance) {
-        skeletonScreen = showSkeletonLoading(bind.rvWork, bind.rvWork.getAdapter());
+        mDialogLoading.show();
         onLoadJob();
         bind.rvWork.setAutoLoadMoreThreshold(2);
         bind.rvWork.setLoadMoreToTop(false);
@@ -112,10 +109,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                             }
                         }
                         page++;
-                        if (skeletonScreen != null) {
-                            skeletonScreen.hide();
-                            skeletonScreen = null;
-                        }
+                        mDialogLoading.dismiss();
                     }
                 });
     }

@@ -77,8 +77,8 @@ public class DialogSearch<T> {
         RecyclerView mRvSearch = mDialog.findViewById(R.id.rv_search);
         mSearchAdapter = new SearchAdapter(mContext, new OnClickSearch() {
             @Override
-            public void onClickItem(View v, String job_id) {
-                mClick.onClickItem(v, job_id);
+            public void onClickItem(View v, Object object) {
+                mClick.onClickItem(v, object);
                 dismiss();
             }
 

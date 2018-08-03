@@ -19,14 +19,12 @@ import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.DialogJobMgr;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobListFragmentVM;
-import com.ethanhua.skeleton.SkeletonScreen;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJobListBinding> {
 
@@ -53,6 +51,7 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
 
     @Override
     protected void onInit(Bundle instance) {
+        mDialogLoading.show();
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         bind.rvJob.setHasFixedSize(true);
         final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList, new OnClickItem() {
@@ -97,7 +96,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                 mDialogJob.show();
             }
         });
-        SkeletonScreen skeletonLoading = showSkeletonLoading(bind.rvJob, mTimeLineAdapter);
+        bind.rvJob.setAdapter(mTimeLineAdapter);
+
         viewModel.getJobCurent(mLoginItem.getId()).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
@@ -107,7 +107,7 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                         mTimeLineAdapter.onUpdateData(mDataList);
                         if (mDataList.size() > 0)
                             JobFragment.onUpdateFirstJob(mDataList.get(0));
-                        skeletonLoading.hide();
+                        mDialogLoading.dismiss();
                     }
             }
         });

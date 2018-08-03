@@ -1,14 +1,19 @@
 package com.base.app.utils;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.support.constraint.Group;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.View;
 
 import com.base.app.R;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.callback.OnClickGroup;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.bumptech.glide.load.MultiTransformation;
@@ -29,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
@@ -36,6 +42,14 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class NGVUtils {
 
+    public void setLocale(Application app, String lang) {
+        Locale myLocale = new Locale(lang);
+        Resources res = app.getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.locale = myLocale;
+        res.updateConfiguration(conf, dm);
+    }
 
     public static SkeletonScreen showSkeletonLoading(RecyclerView rv, RecyclerView.Adapter adapter) {
         return Skeleton.bind(rv)

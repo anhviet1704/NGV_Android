@@ -30,7 +30,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, FragmentJobListBinding> {
 
@@ -67,19 +66,22 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
                 startActivity(intent, options.toBundle());
             }
         });
+        mDialogLoading.show();
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getContext()));
         bind.rvJob.setItemAnimator(new DefaultItemAnimator());
-        SkeletonScreen skeletonLoading = showSkeletonLoading(bind.rvJob, mWorkAdapter);
+        bind.rvJob.setAdapter(mWorkAdapter);
         //STATUS CODE :  === 1:waiting ,:2: approved, 3:complete, 4:cancel
         viewModel.getListJobFinish(mLoginItem.getId(), 3).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
-                if (listResponseObj != null)
+                if (listResponseObj != null) {
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mWorkAdapter.onUpdateData(mDataList);
-                        skeletonLoading.hide();
                     }
+                    mDialogLoading.hide();
+                }
+
             }
         });
     }

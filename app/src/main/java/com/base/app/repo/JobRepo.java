@@ -11,6 +11,7 @@ import com.base.app.model.JobDetail;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.module.AppDatabase;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.Response;
 import com.base.app.utils.SingleLiveEvent;
 
@@ -69,7 +70,7 @@ public class JobRepo {
 
     public SingleLiveEvent<ResponseObj<JobNewResponse>> getjobsNew(int osin_id, int limit, int mode, int page) {
         SingleLiveEvent<ResponseObj<JobNewResponse>> mJobs = new SingleLiveEvent<>();
-        mApiServices.getMaidJobLasted(osin_id, limit, mode, page)
+        mApiServices.getMaidJobLasted(AppCons.LANGUAGE, osin_id, limit, mode, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<JobNewResponse>>() {
@@ -103,7 +104,7 @@ public class JobRepo {
     }
 
     private void getjobDetailFromServer(int owner_job_id, int osin_id) {
-        mApiServices.getMaidJobDetail(owner_job_id, osin_id)
+        mApiServices.getMaidJobDetail(AppCons.LANGUAGE, owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<JobDetail>>() {
@@ -134,7 +135,7 @@ public class JobRepo {
     }
 
     private void onRegisterJobFromServer(int owner_job_id, int osin_id, String deal) {
-        mApiServices.getMaidJobRegister(owner_job_id, osin_id, deal)
+        mApiServices.getMaidJobRegister(AppCons.LANGUAGE, owner_job_id, osin_id, deal)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -158,7 +159,7 @@ public class JobRepo {
 
     public SingleLiveEvent<ResponseObj> onCancelJob(int owner_job_id, int osin_id) {
         SingleLiveEvent<ResponseObj> mJobCancel = new SingleLiveEvent<>();
-        mApiServices.getMaidJobCancel(owner_job_id, osin_id)
+        mApiServices.getMaidJobCancel(AppCons.LANGUAGE, owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -182,7 +183,7 @@ public class JobRepo {
 
     public SingleLiveEvent<ResponseObj> onFinishJob(int owner_job_id, int osin_id) {
         SingleLiveEvent<ResponseObj> mJob = new SingleLiveEvent<>();
-        mApiServices.getMaidJobFinish(owner_job_id, osin_id)
+        mApiServices.getMaidJobFinish(AppCons.LANGUAGE, owner_job_id, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
@@ -206,7 +207,7 @@ public class JobRepo {
 
     public SingleLiveEvent<ResponseObj> onRateJob(int osin_id, int owner_job_id, int rate_job) {
         SingleLiveEvent<ResponseObj> mJob = new SingleLiveEvent<>();
-        mApiServices.maidRateJob(osin_id, owner_job_id, rate_job)
+        mApiServices.maidRateJob(AppCons.LANGUAGE, osin_id, owner_job_id, rate_job)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<BaseObj>() {
@@ -240,7 +241,7 @@ public class JobRepo {
     }
 
     private void onGetCurrentJobFromServer(int osin_id) {
-        mApiServices.getMaidJobCurrent(osin_id)
+        mApiServices.getMaidJobCurrent(AppCons.LANGUAGE, osin_id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseList<JobCurrentItem>>() {
@@ -281,7 +282,7 @@ public class JobRepo {
     }
 
     private void onGetJobStatusJobFromServer(int osin_id, int status) {
-        mApiServices.getMaidJobHistory(osin_id, status)
+        mApiServices.getMaidJobHistory(AppCons.LANGUAGE, osin_id, status)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseList<JobCurrentItem>>() {
@@ -312,7 +313,7 @@ public class JobRepo {
 
     public MutableLiveData<ResponseObj<JobNewResponse>> getJobsMap(int osin_id, double latitude, double longitude, float radius, int mode, int limit) {
         MutableLiveData<ResponseObj<JobNewResponse>> mJobs = new MutableLiveData<>();
-        mApiServices.getMaidJobLastedMap(osin_id, latitude, longitude, radius, mode, limit)
+        mApiServices.getMaidJobLastedMap(AppCons.LANGUAGE, osin_id, latitude, longitude, radius, mode, limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<JobNewResponse>>() {

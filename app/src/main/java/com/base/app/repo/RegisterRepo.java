@@ -14,6 +14,7 @@ import com.base.app.model.RoleItem;
 import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.module.AppDatabase;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.Response;
 import com.base.app.utils.SingleLiveEvent;
 
@@ -95,7 +96,7 @@ public class RegisterRepo {
 
 
     private void postLoginServer(String phone, String pass) {
-        mApiServices.postLogin(phone, pass)
+        mApiServices.postLogin(AppCons.LANGUAGE, phone, pass)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<LoginItem>>() {
@@ -131,7 +132,7 @@ public class RegisterRepo {
     }
 
     private void onChangePassFromServer(int id, String oldPass, String newPass) {
-        mApiServices.postChangePasss(id, oldPass, newPass, newPass)
+        mApiServices.postChangePasss(AppCons.LANGUAGE, id, oldPass, newPass, newPass)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<BaseObj>() {
@@ -157,7 +158,7 @@ public class RegisterRepo {
     }
 
     private void getCountriesFromServer() {
-        mApiServices.getCountries()
+        mApiServices.getCountries(AppCons.LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseList<BaseValueItem>>() {
@@ -188,7 +189,7 @@ public class RegisterRepo {
     }
 
     private void getRolesFromServer() {
-        mApiServices.getRoles()
+        mApiServices.getRoles(AppCons.LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseList<RoleItem>>() {
@@ -219,7 +220,7 @@ public class RegisterRepo {
     }
 
     private void getOfficesFromServer() {
-        mApiServices.getOffices()
+        mApiServices.getOffices(AppCons.LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseList<BaseValueItem>>() {
@@ -251,7 +252,7 @@ public class RegisterRepo {
     }
 
     private void postRegisterServer(final RegisterObj registerObj) {
-        mApiServices.postRegister(registerObj)
+        mApiServices.postRegister(AppCons.LANGUAGE, registerObj)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<RegisterItem>>() {
@@ -283,7 +284,7 @@ public class RegisterRepo {
 
     public SingleLiveEvent<ResponseObj<UploadItem>> uploadFile(MultipartBody.Part image) {
         SingleLiveEvent<ResponseObj<UploadItem>> upload = new SingleLiveEvent<>();
-        mApiServices.uploadFile(image)
+        mApiServices.uploadFile(AppCons.LANGUAGE, image)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<BaseObj<UploadItem>>() {

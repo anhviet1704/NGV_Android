@@ -9,8 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 
 import com.base.app.R;
+import com.base.app.model.BaseValueItem;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.utils.NGVUtils;
@@ -22,22 +24,22 @@ import java.util.List;
 public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> implements Filterable {
 
     private List<T> movieList;
-    private List<T> movieListFiltered;
+    private List<T> mDataFilter;
     private Context mContext;
     private OnClickSearch mOnClick;
 
     public SearchAdapter(Context context, OnClickSearch mOnClick) {
         mContext = context;
         movieList = new ArrayList<>();
-        movieListFiltered = new ArrayList<>();
+        mDataFilter = new ArrayList<>();
         this.mOnClick = mOnClick;
     }
 
     public void onUpdateData(final List<T> movieList) {
         if (this.movieList == null) {
             this.movieList = movieList;
-            this.movieListFiltered = movieList;
-            notifyItemChanged(0, movieListFiltered.size());
+            this.mDataFilter = movieList;
+            notifyItemChanged(0, mDataFilter.size());
         } else {
             final DiffUtil.DiffResult result = DiffUtil.calculateDiff(new DiffUtil.Callback() {
                 @Override
@@ -56,7 +58,10 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
                         JobNewItem oldItem = (JobNewItem) movieList.get(oldItemPosition);
                         JobNewItem newItem = (JobNewItem) movieList.get(newItemPosition);
                         return oldItem.getJobId() == newItem.getJobId();
-                    } else {
+                    } else if (movieList.get(oldItemPosition) instanceof BaseValueItem) {
+                        BaseValueItem oldMovie = (BaseValueItem) movieList.get(oldItemPosition);
+                        BaseValueItem newMovie = (BaseValueItem) movieList.get(newItemPosition);
+                        return newMovie.getId() == oldMovie.getId();
                     }
                     return false;
                 }
@@ -67,12 +72,16 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
                         JobNewItem oldMovie = (JobNewItem) movieList.get(oldItemPosition);
                         JobNewItem newMovie = (JobNewItem) movieList.get(newItemPosition);
                         return newMovie.getJobName() == oldMovie.getJobName();
+                    } else if (movieList.get(oldItemPosition) instanceof BaseValueItem) {
+                        BaseValueItem oldMovie = (BaseValueItem) movieList.get(oldItemPosition);
+                        BaseValueItem newMovie = (BaseValueItem) movieList.get(newItemPosition);
+                        return newMovie.getValue() == oldMovie.getValue();
                     }
                     return false;
                 }
             });
             this.movieList = movieList;
-            this.movieListFiltered = movieList;
+            this.mDataFilter = movieList;
             result.dispatchUpdatesTo(this);
         }
     }
@@ -86,13 +95,24 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
     @Override
     public void onBindViewHolder(SearchAdapter.MyViewHolder holder, final int position) {
-        if (movieListFiltered.get(position) instanceof JobNewItem) {
-            JobNewItem item = (JobNewItem) movieListFiltered.get(position);
+        if (mDataFilter.get(position) instanceof JobNewItem) {
+            JobNewItem item = (JobNewItem) mDataFilter.get(position);
             holder.mTvName.setText(item.getJobName());
+            holder.mIvArrow.setVisibility(View.GONE);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mOnClick.onClickItem(view, item.getJobId());
+                    mOnClick.onClickItem(view, mDataFilter.get(position));
+                }
+            });
+        } else if (mDataFilter.get(0) instanceof BaseValueItem) {
+            BaseValueItem item = (BaseValueItem) mDataFilter.get(position);
+            holder.mTvName.setText(item.getValue());
+            holder.mIvArrow.setVisibility(View.VISIBLE);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnClick.onClickItem(view, mDataFilter.get(position));
                 }
             });
         }
@@ -102,7 +122,7 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
     @Override
     public int getItemCount() {
         if (movieList != null) {
-            return movieListFiltered.size();
+            return mDataFilter.size();
         } else {
             return 0;
         }
@@ -115,7 +135,7 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
             protected FilterResults performFiltering(CharSequence charSequence) {
                 String charString = charSequence.toString();
                 if (charString.isEmpty()) {
-                    movieListFiltered = movieList;
+                    mDataFilter = movieList;
                 } else {
                     if (movieList.get(0) instanceof JobNewItem) {
                         List<T> filteredList = new ArrayList<>();
@@ -124,17 +144,25 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
                                 filteredList.add(movie);
                             }
                         }
-                        movieListFiltered = filteredList;
+                        mDataFilter = filteredList;
+                    } else if (movieList.get(0) instanceof BaseValueItem) {
+                        List<T> filteredList = new ArrayList<>();
+                        for (T movie : movieList) {
+                            if (NGVUtils.covertStringToChar(((BaseValueItem) movie).getValue().toLowerCase()).contains(NGVUtils.covertStringToChar(charString.toLowerCase()))) {
+                                filteredList.add(movie);
+                            }
+                        }
+                        mDataFilter = filteredList;
                     }
                 }
                 FilterResults filterResults = new FilterResults();
-                filterResults.values = movieListFiltered;
+                filterResults.values = mDataFilter;
                 return filterResults;
             }
 
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                movieListFiltered = (ArrayList<T>) filterResults.values;
+                mDataFilter = (ArrayList<T>) filterResults.values;
                 notifyDataSetChanged();
             }
         };
@@ -143,11 +171,13 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public MagicTextView mTvName;
         public ConstraintLayout mViewRoot;
+        private ImageView mIvArrow;
 
         public MyViewHolder(View view) {
             super(view);
             mTvName = view.findViewById(R.id.tv_name);
             mViewRoot = view.findViewById(R.id.view_root);
+            mIvArrow = view.findViewById(R.id.imageView2);
         }
     }
 }

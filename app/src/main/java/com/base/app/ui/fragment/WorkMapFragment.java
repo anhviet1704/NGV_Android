@@ -23,12 +23,12 @@ import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobMapAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
+import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.ui.callback.OnLocationResult;
 import com.base.app.utils.DialogMaster;
 import com.base.app.utils.MapHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkMapFragmentVM;
-import com.ethanhua.skeleton.SkeletonScreen;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -48,7 +48,6 @@ import javax.inject.Inject;
 
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 
-import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWorkMapBinding> {
     private GoogleMap mMap;
@@ -62,10 +61,9 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     private boolean isShowMap = true;
     private JobMapAdapter mWorkAdapter;
     private List<BaseValueItem> mRadiusList = new ArrayList<>();
-    private int mRadius = 15;
+    private int mRadius = 5;
     private Marker myLocation;
     private Marker oldMarker;
-    private SkeletonScreen skeletonScreen;
 
     @Override
     public int getLayoutRes() {
@@ -79,17 +77,20 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
 
     @Override
     protected void onInit(Bundle instance) {
+        mDialogLoading.show();
         bind.tvRadius.setText(String.format(getString(R.string.tv_work_024), "5km"));
         mRadiusList.add(new BaseValueItem("5", "5km"));
         mRadiusList.add(new BaseValueItem("10", "10km"));
         mRadiusList.add(new BaseValueItem("15", "15km"));
         mRadiusList.add(new BaseValueItem("20", "20km"));
         mDialogRadius = new DialogMaster(getContext());
-        mDialogRadius.onShowMasterData(new OnClickMaster() {
+        mDialogRadius.onShowMasterData(new OnClickSearch() {
             @Override
-            public void onClickItem(int pos) {
-                onGetJobFromRadius(Integer.parseInt(mRadiusList.get(pos).getId()));
-                bind.tvRadius.setText(String.format(getString(R.string.tv_work_024), mRadiusList.get(pos).getValue()));
+            public void onClickItem(View v, Object object) {
+
+                onGetJobFromRadius(Integer.parseInt(((BaseValueItem) object).getId()));
+                mRadius = Integer.parseInt(((BaseValueItem) object).getId());
+                bind.tvRadius.setText(String.format(getString(R.string.tv_work_024), ((BaseValueItem) object).getValue()));
             }
         });
         mDialogRadius.setData(mRadiusList);
@@ -104,7 +105,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
             }
         });
         bind.rvJob.setItemAnimator(new SlideInUpAnimator());
-        skeletonScreen = showSkeletonLoading(bind.rvJob, mWorkAdapter);
+        bind.rvJob.setAdapter(mWorkAdapter);
 
         SupportMapFragment mMapFragment = SupportMapFragment.newInstance();
         getChildFragmentManager().beginTransaction().replace(R.id.google_map, mMapFragment).commit();
@@ -118,7 +119,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                     public void onReturnLocation(LatLng latLng) {
                         mLocation = latLng;
                         onGetJobFromRadius(mRadius);
-                        onUpdateUI(mLocation);
+                        onUpdateUI(mLocation, mRadius);
                     }
 
                     @Override
@@ -126,7 +127,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                         Toast.makeText(getContext(), getString(R.string.tv_error_02), Toast.LENGTH_SHORT).show();
                     }
                 });
-                mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+                /*mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
                     @Override
                     public void onCameraMove() {
                         if (mMap.getCameraPosition().zoom < 18)
@@ -134,7 +135,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                         else
                             circle.setVisible(true);
                     }
-                });
+                });*/
             }
 
         });
@@ -142,9 +143,9 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
         bind.ivLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMap.clear();
+                //mMap.clear();
                 mMap.animateCamera(MapHelper.onZoomToLocation(mLocation, 19));
-                onUpdateUI(mLocation);
+                //onUpdateUI(mLocation, mRadius);
             }
         });
         bind.viewRadius.setOnClickListener(new View.OnClickListener() {
@@ -171,13 +172,13 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
         });
     }
 
-    private void onUpdateUI(LatLng location) {
+    private void onUpdateUI(LatLng location, int radius) {
         myLocation = mMap.addMarker(new MarkerOptions().position(location).title("Công ty"));
         myLocation.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location));
         mMap.animateCamera(MapHelper.onZoomToLocation(location, 19));
         circle = mMap.addCircle(new CircleOptions()
                 .center(location)
-                .radius(60)
+                .radius(radius * 1000)
                 .strokeColor(Color.TRANSPARENT)
                 .fillColor(Color.parseColor("#1A1C89FF")));
     }
@@ -216,10 +217,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                                 mJobsMap = response.getObj().getData();
                                 onAddMarker(mJobsMap);
                                 mWorkAdapter.onUpdateData(mJobsMap);
-                                if (skeletonScreen != null) {
-                                    skeletonScreen.hide();
-                                    skeletonScreen = null;
-                                }
+                                onUpdateUI(mLocation, mRadius);
+                                mDialogLoading.dismiss();
                             }
                     }
                 });

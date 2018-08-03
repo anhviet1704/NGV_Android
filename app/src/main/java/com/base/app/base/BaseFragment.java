@@ -13,6 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.base.app.R;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -33,6 +36,8 @@ public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBindin
     public T viewModel;
 
     public B bind;
+
+    public MaterialDialog mDialogLoading;
 
     @LayoutRes
     public abstract int getLayoutRes();
@@ -55,6 +60,11 @@ public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBindin
         AndroidSupportInjection.inject(this);
         //AndroidInjection.inject(this);
         viewModel = ViewModelProviders.of(getActivity(), viewModelFactory).get(getViewModel());
+        mDialogLoading = new MaterialDialog.Builder(getActivity())
+                //.title(R.string.tv_login_005)
+                .content(R.string.tv_login_005)
+                .progress(true, 0)
+                .build();
         onInit(savedInstanceState);
     }
 

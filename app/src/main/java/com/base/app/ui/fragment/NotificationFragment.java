@@ -17,7 +17,6 @@ import com.ethanhua.skeleton.SkeletonScreen;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.base.app.utils.NGVUtils.showSkeletonLoading;
 
 public class NotificationFragment extends BaseFragment<WorkListFragmentVM, FragmentNotificationBinding> {
 
@@ -48,6 +47,7 @@ public class NotificationFragment extends BaseFragment<WorkListFragmentVM, Fragm
                 updateUI(binding, user);
             }
         });*/
+        //mDialogLoading.show();
         mDataList.add(new WorkItem(1, "askjdhakjs"));
         mDataList.add(new WorkItem(2, "askjdhakjs"));
         mDataList.add(new WorkItem(3, "askjdhakjs"));
@@ -66,6 +66,6 @@ public class NotificationFragment extends BaseFragment<WorkListFragmentVM, Fragm
 
             }
         });
-        SkeletonScreen skeletonLoading = showSkeletonLoading(bind.rvNotification, mAdapter);
+        bind.rvNotification.setAdapter(mAdapter);
     }
 }

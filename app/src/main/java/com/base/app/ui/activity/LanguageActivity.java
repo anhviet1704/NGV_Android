@@ -11,15 +11,21 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.base.app.R;
+import com.base.app.utils.AppCons;
+import com.base.app.utils.PrefHelper;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.github.florent37.shapeofview.shapes.RoundRectView;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
 
 
 public class LanguageActivity extends AppCompatActivity {
@@ -37,20 +43,26 @@ public class LanguageActivity extends AppCompatActivity {
     ImageView ivEn;
     @BindView(R.id.bt_finish)
     MagicButton btFinish;
-    String lang;
+    @Inject
+    PrefHelper mPrefHelper;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
         setContentView(R.layout.activity_language);
         ButterKnife.bind(this);
-        if (getResources().getConfiguration().locale.toString().contains("vi")) {
-            lang = "vi";
+        AppCons.LANGUAGE = mPrefHelper.getString(getPackageName() + AppCons.LANGUAGE_KEY);
+        if (AppCons.LANGUAGE.equals("")) {
+            AppCons.LANGUAGE = "vi";
+        }
+        if (AppCons.LANGUAGE.equals("vi")) {
+            AppCons.LANGUAGE = "vi";
             ivVn.performClick();
         } else {
-            lang = "en";
             ivEn.performClick();
         }
+
     }
 
     @OnClick({R.id.iv_back, R.id.iv_vn, R.id.iv_en, R.id.bt_finish})
@@ -62,15 +74,16 @@ public class LanguageActivity extends AppCompatActivity {
             case R.id.iv_vn:
                 ivVn.setBackgroundResource(R.drawable.ic_vn_select);
                 ivEn.setBackgroundResource(R.drawable.ic_us);
-                lang = "vi";
+                AppCons.LANGUAGE = "vi";
                 break;
             case R.id.iv_en:
                 ivEn.setBackgroundResource(R.drawable.ic_us_select);
                 ivVn.setBackgroundResource(R.drawable.ic_vn);
-                lang = "en";
+                AppCons.LANGUAGE = "en";
                 break;
             case R.id.bt_finish:
-                setLocale(lang);
+                setLocale(AppCons.LANGUAGE);
+                mPrefHelper.putString(getPackageName() + AppCons.LANGUAGE_KEY, AppCons.LANGUAGE);
                 finish();
                 break;
         }
@@ -84,8 +97,11 @@ public class LanguageActivity extends AppCompatActivity {
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
         //refresh activity
+        finish();
+        ActivityUtils.finishActivity(MainActivity.class);
         Intent refresh = new Intent(this, MainActivity.class);
         startActivity(refresh);
+
     }
 
     private void refeshLayout() {

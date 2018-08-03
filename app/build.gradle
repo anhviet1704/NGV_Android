@@ -28,8 +28,8 @@ android {
         enabled = true
     }
     productFlavors {
-        ngv {
-            applicationIdSuffix ".ngv"
+        ngvmaid {
+            applicationIdSuffix ".ngvmaid"
             buildConfigField "String", "BASE_URL", BASE_URL_RELEASE
         }
     }

@@ -68,9 +68,9 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
+    protected void onDestroy() {
         EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
     @Subscribe

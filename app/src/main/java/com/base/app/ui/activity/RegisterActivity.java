@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.base.app.R;
+import com.base.app.automap.PlaceItem;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityRegisterBinding;
 import com.base.app.model.BaseValueItem;
@@ -38,6 +39,9 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,6 +78,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     @Inject
     LoginItem mLoginItem;
     private Uri selectedUri;
+    PlaceItem mPlaceItem;
 
     @Override
     protected int getLayoutResId() {
@@ -146,6 +151,17 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                         } else {
                             Toast.makeText(RegisterActivity.this, listResponseObj.getErr(), Toast.LENGTH_SHORT).show();
                         }
+                    }
+                });
+            }
+        });
+        bind.etAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewModel.getOffices().observe(RegisterActivity.this, new Observer<ResponseObj<List<BaseValueItem>>>() {
+                    @Override
+                    public void onChanged(@Nullable ResponseObj<List<BaseValueItem>> listResponseObj) {
+                        startActivity(new Intent(RegisterActivity.this, AddressActivity.class));
                     }
                 });
             }
@@ -343,5 +359,11 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
         bind.rvWork.setNestedScrollingEnabled(false);
         bind.rvWork.setItemAnimator(new DefaultItemAnimator());
         bind.rvWork.setAdapter(mWorkAdapter);
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(PlaceItem item) {
+        mPlaceItem = item;
+        bind.etAddress.setText(mPlaceItem.getDes());
     }
 }

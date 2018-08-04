@@ -218,8 +218,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                                 onAddMarker(mJobsMap);
                                 mWorkAdapter.onUpdateData(mJobsMap);
                                 onUpdateUI(mLocation, mRadius);
-                                mDialogLoading.dismiss();
                             }
+                        mDialogLoading.dismiss();
                     }
                 });
     }

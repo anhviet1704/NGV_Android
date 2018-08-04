@@ -86,7 +86,9 @@ public class JobRepo {
                                 mJobs.setValue(new ResponseObj(repsonse.getData(), Response.NODATA));
                             else
                                 mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else
                             mJobs.setValue(new ResponseObj(null, Response.FAILED, repsonse.getMessage()));
                     }
 
@@ -117,7 +119,9 @@ public class JobRepo {
                     public void onNext(BaseObj<JobDetail> repsonse) {
                         if (repsonse.getSuccess())
                             mJobDetail.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mJobDetail.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else
                             mJobDetail.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                     }
 
@@ -254,8 +258,11 @@ public class JobRepo {
                     public void onNext(BaseList<JobCurrentItem> repsonse) {
                         if (repsonse.getSuccess())
                             mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else
                             mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+
                     }
 
                     @Override
@@ -295,8 +302,11 @@ public class JobRepo {
                     public void onNext(BaseList<JobCurrentItem> repsonse) {
                         if (repsonse.getSuccess())
                             mJobStatusRegister.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mJobStatusRegister.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else
                             mJobStatusRegister.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+
                     }
 
                     @Override
@@ -326,7 +336,9 @@ public class JobRepo {
                     public void onNext(BaseObj<JobNewResponse> repsonse) {
                         if (repsonse.getSuccess())
                             mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else
                             mJobs.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                     }
 

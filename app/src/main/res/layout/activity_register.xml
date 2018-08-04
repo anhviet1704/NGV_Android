@@ -165,11 +165,11 @@
                     android:hint="@string/tv_register_031"
                     app:typeFace="HelveticaNeue_Light.otf" />
 
-                <com.ivankocijan.magicviews.views.MagicEditText
+                <com.ivankocijan.magicviews.views.MagicTextView
                     android:id="@+id/et_address"
                     style="@style/EdittextStyle"
                     android:layout_marginBottom="16dp"
-                    android:drawableEnd="@drawable/ic_edit"
+                    android:drawableEnd="@drawable/ic_more"
                     android:hint="@string/tv_register_035"
                     app:typeFace="HelveticaNeue_Light.otf" />
 

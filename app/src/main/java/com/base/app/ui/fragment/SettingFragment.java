@@ -2,6 +2,7 @@ package com.base.app.ui.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -63,6 +64,8 @@ public class SettingFragment extends Fragment {
 
     @Inject
     PrefHelper mPrefHelper;
+    @BindView(R.id.view_call_phone)
+    LinearLayout viewCallPhone;
 
     public static SettingFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -120,5 +123,13 @@ public class SettingFragment extends Fragment {
                 startActivity(intent, ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, 0, 0).toBundle());
                 break;
         }
+    }
+
+    @OnClick(R.id.view_call_phone)
+    public void onViewClicked() {
+        Intent i = new Intent(Intent.ACTION_DIAL);
+        String p = "tel:" + "0933533776";
+        i.setData(Uri.parse(p));
+        startActivity(i);
     }
 }

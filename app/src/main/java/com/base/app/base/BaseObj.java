@@ -13,7 +13,7 @@ public class BaseObj<T> {
     private String message;
     @SerializedName("code")
     @Expose
-    private String code;
+    private int code;
     @SerializedName("data")
     @Expose
     private T data;
@@ -34,11 +34,11 @@ public class BaseObj<T> {
         this.message = message;
     }
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

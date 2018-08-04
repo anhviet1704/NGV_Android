@@ -48,15 +48,18 @@ public class NotificationFragment extends BaseFragment<WorkListFragmentVM, Fragm
             }
         });*/
         //mDialogLoading.show();
-        mDataList.add(new WorkItem(1, "askjdhakjs"));
-        mDataList.add(new WorkItem(2, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
-        mDataList.add(new WorkItem(3, "askjdhakjs"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
+        mDataList.add(new WorkItem(1, "Dữ liệu đâu mà demo"));
 
         bind.rvNotification.setLayoutManager(new LinearLayoutManager(getActivity()));
         bind.rvNotification.setHasFixedSize(true);

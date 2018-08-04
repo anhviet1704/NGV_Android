@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
@@ -14,12 +16,17 @@ import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.model.joblasted.JobNewResponse;
+import com.base.app.ui.activity.LoginActivity;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobCell;
 import com.base.app.ui.adapter.JobListAdapter;
+import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.AppCons;
+import com.base.app.utils.DialogHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkListFragmentVM;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.ethanhua.skeleton.SkeletonScreen;
 import com.jaychang.srv.OnLoadMoreListener;
 
@@ -107,10 +114,20 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                                     bind.rvWork.addCell(cell);
                                 }
                             }
+                        } else if (response.getResponse() == Response.UNAUTHORIZED) {
+                            final DialogHelper mDialogErr = new DialogHelper(getContext());
+                            mDialogErr.onShowDialogConfirm(MainActivity.mViewRoot, new OnClickItem() {
+                                @Override
+                                public void onClickItem(View v, int pos) {
+                                    ActivityUtils.finishAllActivities();
+                                    startActivity(new Intent(getContext(), LoginActivity.class));
+                                }
+                            });
                         }
                         page++;
                         mDialogLoading.dismiss();
                     }
+
                 });
     }
 }

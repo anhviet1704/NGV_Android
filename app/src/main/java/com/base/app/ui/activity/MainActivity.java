@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,8 +45,7 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
     ShadowView shadowView;
     @BindView(R.id.view)
     FrameLayout view;
-    @BindView(R.id.container)
-    ConstraintLayout container;
+    public static ViewGroup mViewRoot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements HasSupportFragmen
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .add(R.id.view, HomeFragment.newInstance(), null)
                 .commit();
+        mViewRoot = findViewById(R.id.container);
+
         //dataBinding.viewPager.setAdapter(new MoviesPagerAdapter(getSupportFragmentManager()));
         //dataBinding.tabs.setupWithViewPager(dataBinding.viewPager);
         //dataBinding.viewPager.setOffscreenPageLimit(3);

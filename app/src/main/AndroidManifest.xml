@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".MyApp"
@@ -53,8 +54,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:launchMode="singleTask"
             android:name=".ui.activity.MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppThemeNoToolBar" />
         <activity
             android:name=".ui.activity.RegisterActivity"
@@ -89,6 +90,12 @@
             android:theme="@style/AppThemeNoToolBar" />
         <activity
             android:name=".ui.activity.WalletActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.AddressActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.MapActivity"
             android:theme="@style/AppThemeNoToolBar" />
     </application>
 

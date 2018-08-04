@@ -9,6 +9,9 @@
 
     <string name="tv_error_01">Vui lòng nhập đủ thông tin</string>
     <string name="tv_error_02">Vui lòng cấp quyền cho ứng dụng</string>
+    <string name="tv_error_03">Lỗi</string>
+    <string name="tv_error_04">Đã xảy ra lỗi xác thực, vui lòng đăng nhập lại</string>
+    <string name="tv_error_05">Đồng ý</string>
 
     <string name="tv_login_001"><u>Đăng ký tài khoản</u></string>
     <string name="tv_login_002">Số điện thoại</string>
@@ -105,6 +108,7 @@
     <string name="tv_setting_013">Tiếng Anh</string>
     <string name="tv_setting_014">Ngôn ngữ</string>
     <string name="tv_setting_015">Chọn ngôn ngữ này</string>
+    <string name="tv_setting_016">Liên hệ tổng đài</string>
 
     <string name="tv_user_001">Thành viên chính thức</string>
     <string name="tv_user_002">Lịch sử công việc</string>

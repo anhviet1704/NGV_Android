@@ -272,6 +272,34 @@ public class DialogHelper<T> {
         });
     }
 
+    public void onShowDialogErr(ViewGroup root, final OnClickItem mClick) {
+        int width = ScreenUtils.getScreenWidth();
+        int height = ScreenUtils.getScreenHeight();
+        mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_err, null);
+        ViewGroup.LayoutParams params = mDialog.getWindow().getAttributes();
+        params.width = width;
+        params.height = height;// - BarUtils.getStatusBarHeight();
+        view.setLayoutParams(params);
+        mDialog.setContentView(view);
+        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.setCancelable(true);
+
+        MagicTextView mBtYes = mDialog.findViewById(R.id.bt_yes);
+        BlurView mBlurView = mDialog.findViewById(R.id.bottomBlurView);
+        mBlurView.setupWith(root)
+                //.windowBackground(windowBackground)
+                .blurAlgorithm(new RenderScriptBlur(mContext))
+                .blurRadius(10f)
+                .setHasFixedTransformationMatrix(true);
+
+        mBtYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mClick.onClickItem(v, 0);
+            }
+        });
+    }
 
 
 }

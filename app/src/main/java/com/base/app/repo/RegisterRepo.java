@@ -109,7 +109,9 @@ public class RegisterRepo {
                     public void onNext(BaseObj<LoginItem> repsonse) {
                         if (repsonse.getSuccess())
                             mLogin.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else {
+                        else if (repsonse.getCode() == 401) {
+                            mLogin.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mLogin.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                         }
                     }
@@ -145,7 +147,9 @@ public class RegisterRepo {
                     public void onSuccess(BaseObj repsonse) {
                         if (repsonse.getSuccess())
                             mChangePass.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else {
+                        else if (repsonse.getCode() == 401) {
+                            mChangePass.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mChangePass.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                         }
                     }
@@ -169,10 +173,14 @@ public class RegisterRepo {
 
                     @Override
                     public void onNext(BaseList<BaseValueItem> repsonse) {
-                        if (repsonse.getSuccess()) {
+                        if (repsonse.getSuccess())
                             mCountries.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        } else
+                        else if (repsonse.getCode() == 401) {
+                            mCountries.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mCountries.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                        }
+
                     }
 
                     @Override
@@ -202,8 +210,11 @@ public class RegisterRepo {
                     public void onNext(BaseList<RoleItem> repsonse) {
                         if (repsonse.getSuccess())
                             mRoles.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mRoles.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mRoles.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                        }
                     }
 
                     @Override
@@ -233,7 +244,9 @@ public class RegisterRepo {
                     public void onNext(BaseList<BaseValueItem> repsonse) {
                         if (repsonse.getSuccess())
                             mOffices.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else {
+                        else if (repsonse.getCode() == 401) {
+                            mOffices.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mOffices.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                         }
                     }
@@ -265,8 +278,11 @@ public class RegisterRepo {
                     public void onNext(BaseObj<RegisterItem> repsonse) {
                         if (repsonse.getSuccess())
                             mRegister.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
+                        else if (repsonse.getCode() == 401) {
+                            mRegister.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
                             mRegister.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                        }
                     }
 
                     @Override
@@ -296,14 +312,16 @@ public class RegisterRepo {
                     @Override
                     public void onSuccess(BaseObj repsonse) {
                         if (repsonse.getSuccess())
-                            mRegister.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else
-                            mRegister.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                            upload.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                        else if (repsonse.getCode() == 401) {
+                            upload.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                        } else {
+                            upload.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                        }
                     }
-
                     @Override
                     public void onError(Throwable e) {
-                        mRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        upload.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
         return upload;

@@ -20,7 +20,7 @@ public class DialogLoading {
         int width = ScreenUtils.getScreenWidth();
         int height = ScreenUtils.getScreenHeight();
         mDialog = new Dialog(mContext, R.style.AppThemeNoToolBar);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_error, null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_loading, null);
         ViewGroup.LayoutParams params = mDialog.getWindow().getAttributes();
         params.width = width;
         params.height = height;// - BarUtils.getStatusBarHeight();

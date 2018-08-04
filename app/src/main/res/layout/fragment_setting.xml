@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="#F8FAFF"
     android:orientation="vertical">
 
@@ -68,7 +67,7 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,6 +148,36 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="18dp"
                                 android:text="@string/tv_setting_002"
+                                android:textColor="#223254"
+                                android:textSize="16sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                                app:typeFace="HelveticaNeue_Regular.otf" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/view_call_phone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingBottom="18dp"
+                            android:paddingStart="24dp"
+                            android:paddingTop="18dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_phone" />
+
+                            <com.ivankocijan.magicviews.views.MagicTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="18dp"
+                                android:text="@string/tv_setting_016"
                                 android:textColor="#223254"
                                 android:textSize="16sp"
                                 app:layout_constraintBottom_toBottomOf="parent"

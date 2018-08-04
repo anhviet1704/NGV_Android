@@ -10,7 +10,8 @@ public class ResponseObj<T> {
     private Response response;
     private String err;
 
-    public ResponseObj() {
+    public ResponseObj(@Nullable T obj) {
+        this.mObj = obj;
     }
 
     public ResponseObj(@Nullable T obj, Response response) {

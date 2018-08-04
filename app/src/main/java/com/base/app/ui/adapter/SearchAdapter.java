@@ -86,6 +86,13 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
         }
     }
 
+    public void onUpdateOnlineData(List<T> list) {
+        this.movieList = list;
+        this.mDataFilter = list;
+        notifyDataSetChanged();
+
+    }
+
     @Override
     public SearchAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -121,7 +128,8 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
     @Override
     public int getItemCount() {
-        if (movieList != null) {
+        //if (movieList != null) {
+        if (mDataFilter != null) {
             return mDataFilter.size();
         } else {
             return 0;
@@ -170,7 +178,7 @@ public class SearchAdapter<T> extends RecyclerView.Adapter<SearchAdapter.MyViewH
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public MagicTextView mTvName;
-        public ConstraintLayout mViewRoot;
+        public View mViewRoot;
         private ImageView mIvArrow;
 
         public MyViewHolder(View view) {

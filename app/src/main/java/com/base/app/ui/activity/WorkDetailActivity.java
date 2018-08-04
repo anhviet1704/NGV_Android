@@ -26,6 +26,7 @@ import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.base.app.utils.DialogHelper;
 import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.utils.SpacesItemDecoration;
 import com.base.app.viewmodel.WorkDetailActivityVM;
@@ -44,6 +45,8 @@ import javax.inject.Inject;
 public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, ActivityWorkDetailBinding> {
     @Inject
     LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
     private JobNewItem mJobLastDetailItem;
     private JobCurrentItem mJobCurrentItem;
 
@@ -103,6 +106,8 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                                                 isAlreadyRegister = false;
                                                 onUpdateUIStatusJob(0);
                                                 mDialogConfirm.dismiss();
+                                            } else if (response.getResponse() == Response.UNAUTHORIZED) {
+                                                NGVUtils.showAuthorized(WorkDetailActivity.this, MainActivity.mViewRoot, mPrefHelper);
                                             } else {
                                                 Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
                                             }

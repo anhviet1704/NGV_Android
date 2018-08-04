@@ -75,6 +75,10 @@ public interface ApiServices {
     Observable<BaseObj<JobNewResponse>> getMaidJobLasted(@Path("lang") String lang, @Field("osin_id") int osin_id, @Field("limit") int limit, @Field("mode") int mode, @Query("page") int page);
 
     @FormUrlEncoded
+    @POST("api/{lang}/osin/job/search")
+    Observable<BaseObj<JobNewResponse>> getMaidJobSearch(@Path("lang") String lang, @Field("osin_id") int osin_id, @Field("limit") int limit, @Query("text") String text);
+
+    @FormUrlEncoded
     @POST("api/{lang}/osin/job/history")
     Observable<BaseList<JobCurrentItem>> getMaidJobHistory(@Path("lang") String lang, @Field("osin_id") int osin_id, @Field("status") int status);
 

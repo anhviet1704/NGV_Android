@@ -34,11 +34,14 @@
                 android:background="@drawable/box_light_blue_full_6dp"
                 android:drawablePadding="12dp"
                 android:drawableStart="@drawable/ic_search"
-                android:paddingBottom="7dp"
                 android:hint="@string/tv_home_009"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:paddingBottom="7dp"
                 android:paddingEnd="12dp"
                 android:paddingStart="12dp"
                 android:paddingTop="6dp"
+                android:singleLine="true"
                 android:textColor="#1C2D51"
                 android:textColorHint="#98A2B0"
                 android:textSize="14sp"
@@ -60,10 +63,36 @@
     </com.github.florent37.shapeofview.shapes.RoundRectView>
 
 
+    <LinearLayout
+        android:id="@+id/view_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.ivankocijan.magicviews.views.MagicTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="@string/tv_login_005"
+            android:textColor="#1C2D51"
+            android:textSize="18sp"
+            app:typeFace="HelveticaNeue_Regular.otf" />
+
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_search"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </LinearLayout>
 

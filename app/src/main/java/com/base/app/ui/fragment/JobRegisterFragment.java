@@ -16,9 +16,12 @@ import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobRegisterAdapter;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobRegisterFragmentVM;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -34,6 +37,8 @@ import javax.inject.Inject;
 public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, FragmentJobListBinding> {
     @Inject
     LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
 
     private List<JobCurrentItem> mDataList = new ArrayList<>();
 
@@ -78,6 +83,8 @@ public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, Fra
                         mDataList = listResponseObj.getObj();
                         mWorkAdapter.onUpdateData(mDataList);
                         mDialogLoading.dismiss();
+                    } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
+                        NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
             }
         });

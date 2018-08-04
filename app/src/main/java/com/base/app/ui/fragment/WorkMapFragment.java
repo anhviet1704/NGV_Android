@@ -19,6 +19,7 @@ import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.model.joblasted.JobNewResponse;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobMapAdapter;
 import com.base.app.ui.callback.OnClickItem;
@@ -27,6 +28,8 @@ import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.ui.callback.OnLocationResult;
 import com.base.app.utils.DialogMaster;
 import com.base.app.utils.MapHelper;
+import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkMapFragmentVM;
 import com.google.android.gms.maps.GoogleMap;
@@ -55,6 +58,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
     private Circle circle;
     @Inject
     LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
     private DialogMaster mDialogRadius;
     private List<JobNewItem> mJobsMap;
     private MarkerOptions options = new MarkerOptions();
@@ -127,15 +132,6 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                         Toast.makeText(getContext(), getString(R.string.tv_error_02), Toast.LENGTH_SHORT).show();
                     }
                 });
-                /*mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-                    @Override
-                    public void onCameraMove() {
-                        if (mMap.getCameraPosition().zoom < 18)
-                            circle.setVisible(false);
-                        else
-                            circle.setVisible(true);
-                    }
-                });*/
             }
 
         });
@@ -218,6 +214,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                                 onAddMarker(mJobsMap);
                                 mWorkAdapter.onUpdateData(mJobsMap);
                                 onUpdateUI(mLocation, mRadius);
+                            } else if (response.getResponse() == Response.UNAUTHORIZED) {
+                                NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                             }
                         mDialogLoading.dismiss();
                     }

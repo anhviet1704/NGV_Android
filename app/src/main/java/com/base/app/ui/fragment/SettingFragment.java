@@ -121,6 +121,7 @@ public class SettingFragment extends Fragment {
                 mPrefHelper.putString(AppCons.LOGIN_PASSWORD, "");
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent, ActivityOptionsCompat.makeClipRevealAnimation(view, 0, 0, 0, 0).toBundle());
+                getActivity().finish();
                 break;
         }
     }

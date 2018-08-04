@@ -19,6 +19,7 @@ import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.adapter.SearchAdapter;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnClickSearch;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.ivankocijan.magicviews.views.MagicEditText;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -118,6 +119,7 @@ public class DialogMaster<T> {
             public void onClickItem(View v, Object object) {
                 mClick.onClickItem(v, object);
                 mEtSearch.setText("");
+                KeyboardUtils.hideSoftInput(mEtSearch);
                 mDialog.dismiss();
             }
         });
@@ -135,6 +137,7 @@ public class DialogMaster<T> {
             @Override
             public void onClick(View v) {
                 mViewSearch.setVisibility(View.VISIBLE);
+                KeyboardUtils.showSoftInput(mEtSearch);
             }
         });
         mTvClose.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +145,7 @@ public class DialogMaster<T> {
             public void onClick(View v) {
                 mEtSearch.setText("");
                 mViewSearch.setVisibility(View.GONE);
+                KeyboardUtils.hideSoftInput(mEtSearch);
             }
         });
 

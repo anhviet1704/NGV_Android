@@ -25,4 +25,9 @@ public class WorkListFragmentVM extends ViewModel {
         mJobs = mRepository.getjobsNew(osin_id, limit, mode, page);
         return mJobs;
     }
+
+    public SingleLiveEvent<ResponseObj<JobNewResponse>> getMaidJobSearch(int osin_id, int limit, String input) {
+        mJobs = mRepository.getMaidJobSearch(osin_id, limit, input);
+        return mJobs;
+    }
 }

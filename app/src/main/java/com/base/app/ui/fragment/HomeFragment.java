@@ -9,10 +9,12 @@ import android.view.View;
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentHomeBinding;
+import com.base.app.model.LoginItem;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.callback.OnClickSearch;
 import com.base.app.utils.DialogSearch;
+import com.base.app.utils.PrefHelper;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
@@ -22,11 +24,17 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeFragment extends BaseFragment<WorkListFragmentVM, FragmentHomeBinding> {
+    @Inject
+    LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
 
     public static HomeFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -58,18 +66,18 @@ public class HomeFragment extends BaseFragment<WorkListFragmentVM, FragmentHomeB
         bind.ivSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogSearch mDialogSearch = new DialogSearch(getContext());
+                DialogSearch mDialogSearch = new DialogSearch(getActivity(), viewModel, mLoginItem, mPrefHelper);
                 mDialogSearch.onShowSearch(new OnClickSearch() {
                     @Override
                     public void onClickItem(View v, Object object) {
                         EventBus.getDefault().postSticky((JobNewItem) object);
                         Intent intent = new Intent(getContext(), WorkDetailActivity.class);
                         ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(v, 0, 0, 0, 0);
-                        startActivity(intent, options.toBundle());
+                        startActivity(intent);
                     }
                 });
                 mDialogSearch.show();
-                mDialogSearch.setDataSearch(WorkListFragment.getData());
+                //mDialogSearch.setDataSearch(WorkListFragment.getData());
             }
         });
     }

@@ -13,10 +13,13 @@ import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.adapter.TimeLineAdapter;
 import com.base.app.ui.callback.OnClickFinish;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.DialogJobMgr;
+import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobListFragmentVM;
 
@@ -30,6 +33,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
 
     @Inject
     LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
     private List<JobCurrentItem> mDataList = new ArrayList<>();
 
     public static JobListFragment newInstance() {
@@ -108,6 +113,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                         if (mDataList.size() > 0)
                             JobFragment.onUpdateFirstJob(mDataList.get(0));
                         mDialogLoading.dismiss();
+                    } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
+                        NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
             }
         });

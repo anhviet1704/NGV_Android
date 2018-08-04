@@ -16,9 +16,12 @@ import com.base.app.databinding.FragmentJobListBinding;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
+import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.activity.WorkDetailActivity;
 import com.base.app.ui.adapter.JobFinishAdapter;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.JobFinishFragmentVM;
 import com.ethanhua.skeleton.SkeletonScreen;
@@ -35,6 +38,9 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
 
     @Inject
     LoginItem mLoginItem;
+
+    @Inject
+    PrefHelper mPrefHelper;
 
     private List<JobCurrentItem> mDataList = new ArrayList<>();
 
@@ -78,6 +84,8 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mWorkAdapter.onUpdateData(mDataList);
+                    } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
+                        NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
                     mDialogLoading.hide();
                 }

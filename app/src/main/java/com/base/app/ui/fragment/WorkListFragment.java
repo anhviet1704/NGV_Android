@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.base.app.R;
@@ -24,6 +25,8 @@ import com.base.app.ui.adapter.JobListAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.utils.AppCons;
 import com.base.app.utils.DialogHelper;
+import com.base.app.utils.NGVUtils;
+import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.blankj.utilcode.util.ActivityUtils;
@@ -43,6 +46,8 @@ import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentWorkListBinding> {
     @Inject
     LoginItem mLoginItem;
+    @Inject
+    PrefHelper mPrefHelper;
     private static List<JobNewItem> mWorkItems = new ArrayList<>();
     private int page = 1;
     private int lastPage = 1;
@@ -52,10 +57,6 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
         WorkListFragment fragment = new WorkListFragment();
         //fragment.setArguments(args);
         return fragment;
-    }
-
-    public static List<JobNewItem> getData() {
-        return mWorkItems;
     }
 
     @Override
@@ -115,14 +116,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                                 }
                             }
                         } else if (response.getResponse() == Response.UNAUTHORIZED) {
-                            final DialogHelper mDialogErr = new DialogHelper(getContext());
-                            mDialogErr.onShowDialogConfirm(MainActivity.mViewRoot, new OnClickItem() {
-                                @Override
-                                public void onClickItem(View v, int pos) {
-                                    ActivityUtils.finishAllActivities();
-                                    startActivity(new Intent(getContext(), LoginActivity.class));
-                                }
-                            });
+                            NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                         }
                         page++;
                         mDialogLoading.dismiss();

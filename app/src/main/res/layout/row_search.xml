@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_root"
@@ -11,6 +11,7 @@
     <com.ivankocijan.magicviews.views.MagicTextView
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         android:layout_marginBottom="22dp"
         android:layout_marginStart="16dp"
@@ -18,6 +19,7 @@
         android:gravity="center_vertical"
         android:textColor="#223254"
         android:textSize="14sp"
+        android:text="asdasdasd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView2"
         app:layout_constraintHorizontal_bias="0.5"
@@ -31,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginEnd="12dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_select"
@@ -41,4 +43,4 @@
         app:layout_constraintStart_toEndOf="@+id/tv_name"
         app:layout_constraintTop_toTopOf="@+id/tv_name" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -14,8 +14,11 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobBinding;
 import com.base.app.model.JobCurrentItem;
+import com.base.app.utils.PrefHelper;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.ivankocijan.magicviews.views.MagicTextView;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -17,6 +17,7 @@ import com.base.app.module.AppDatabase;
 import com.base.app.utils.AppCons;
 import com.base.app.utils.Response;
 import com.base.app.utils.SingleLiveEvent;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.util.List;
 
@@ -118,7 +119,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mLogin.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mLogin.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mLogin.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -156,7 +160,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mChangePass.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mChangePass.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mChangePass.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
     }
@@ -185,7 +192,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mCountries.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mCountries.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mCountries.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -219,7 +229,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mRoles.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mRoles.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mRoles.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -253,7 +266,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mOffices.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mOffices.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mOffices.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -287,7 +303,10 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        mRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            mRegister.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -321,7 +340,10 @@ public class RegisterRepo {
                     }
                     @Override
                     public void onError(Throwable e) {
-                        upload.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                        if (((HttpException) e).code() == 401)
+                            upload.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            upload.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
         return upload;

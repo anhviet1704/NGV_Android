@@ -14,6 +14,7 @@ import com.base.app.databinding.ActivityChangePassBinding;
 import com.base.app.model.LoginItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.utils.AppCons;
+import com.base.app.utils.NGVUtils;
 import com.base.app.utils.PrefHelper;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.ChangePassActivityVM;
@@ -58,24 +59,16 @@ public class ChangePassActivity extends BaseActivity<ChangePassActivityVM, Activ
                                         if (responseObj.getResponse() == Response.SUCCESS) {
                                             mPrefHelper.putString(AppCons.LOGIN_PASSWORD, newPass);
                                             finish();
+                                        } else if (responseObj.getResponse() == Response.UNAUTHORIZED) {
+                                            NGVUtils.showAuthorized(ChangePassActivity.this, MainActivity.mViewRoot, mPrefHelper);
                                         } else {
-                                            Toast.makeText(ChangePassActivity.this, "Thu lai", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ChangePassActivity.this, responseObj.getErr(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
                             }
                     }
                 });
-
-                /*viewModel.updatePassWord(bind.etPassword.getText().toString()).observe(ForgotPassActivity.this, new Observer<ApiResponse<SchoolYearItem>>() {
-                    @Override
-                    public void onChanged(@Nullable ApiResponse<SchoolYearItem> schoolYearItemApiResponse) {
-                        Intent intent = new Intent(ForgotPassActivity.this, VerifyActivity.class);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.btFinish, 0, 0, 0, 0);
-                        startActivity(intent, options.toBundle());
-                    }
-                });*/
-
             }
         });
 

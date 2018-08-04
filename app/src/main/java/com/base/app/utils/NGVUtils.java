@@ -11,10 +11,14 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.base.app.R;
+import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.MainActivity;
 import com.base.app.ui.callback.OnClickGroup;
+import com.base.app.ui.callback.OnClickItem;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.bumptech.glide.load.MultiTransformation;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -42,6 +46,19 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 public class NGVUtils {
 
+    public static void showAuthorized(Activity context, ViewGroup viewRoot, PrefHelper prefHelper) {
+        DialogHelper mDialogErr = new DialogHelper(context);
+        mDialogErr.onShowDialogErr(viewRoot, new OnClickItem() {
+            @Override
+            public void onClickItem(View v, int pos) {
+                ActivityUtils.finishAllActivities();
+                context.startActivity(new Intent(context, LoginActivity.class));
+                prefHelper.putString(AppCons.LOGIN_USERNAME, "");
+                prefHelper.putString(AppCons.LOGIN_PASSWORD, "");
+            }
+        });
+        mDialogErr.show();
+    }
     public void setLocale(Application app, String lang) {
         Locale myLocale = new Locale(lang);
         Resources res = app.getResources();
@@ -268,4 +285,5 @@ public class NGVUtils {
         }
         return sValue;
     }
+
 }

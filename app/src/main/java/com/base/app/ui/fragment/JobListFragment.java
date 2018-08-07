@@ -67,13 +67,12 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                     @Override
                     public void onClickFinish() {
                         //Comment for test
-                        /*viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
+                        viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
                                 mDialogJob.onUpdateUI(3);
                             }
-                        });*/
-                        mDialogJob.onUpdateUI(3);
+                        });
                     }
 
                     @Override
@@ -108,10 +107,18 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
                 if (listResponseObj != null)
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
-                        mDataList = listResponseObj.getObj();
-                        mTimeLineAdapter.onUpdateData(mDataList);
-                        if (mDataList.size() > 0)
-                            JobFragment.onUpdateFirstJob(mDataList.get(0));
+                        if (listResponseObj.getObj().size() > 0) {
+                            JobFragment.onUpdateFirstJob(listResponseObj.getObj().get(0));
+                            if (listResponseObj.getObj().size() >= 1) {
+                                //mDataList = listResponseObj.getObj().subList(1, listResponseObj.getObj().size());
+                                mDataList = listResponseObj.getObj();
+                                mTimeLineAdapter.onUpdateData(mDataList);
+                                bind.viewNodata.setVisibility(View.GONE);
+                            } else {
+                                bind.viewNodata.setVisibility(View.VISIBLE);
+                            }
+
+                        }
                         mDialogLoading.dismiss();
                     } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
                         NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);

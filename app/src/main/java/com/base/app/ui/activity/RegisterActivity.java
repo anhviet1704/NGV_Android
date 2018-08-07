@@ -3,6 +3,7 @@ package com.base.app.ui.activity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.arch.lifecycle.Observer;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import com.base.app.utils.NGVUtils;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.RegisterActivityVM;
 import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -44,6 +48,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -312,28 +317,32 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                                 .compressToFileAsFlowable(new File(uri.getPath()))
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer<File>() {
-                                    @Override
-                                    public void accept(File file) throws Exception {
-                                        RequestBody body = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-                                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(fileName, fileName, body);
-                                        viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<UploadItem>>() {
-                                            @Override
-                                            public void onChanged(@Nullable ResponseObj<UploadItem> objectResponseObj) {
-                                                if (objectResponseObj != null)
-                                                    if (objectResponseObj.getResponse() == Response.SUCCESS)
-                                                        Toast.makeText(RegisterActivity.this, "upload file success + hide loading", Toast.LENGTH_SHORT).show();
-                                                    else
-                                                        Toast.makeText(RegisterActivity.this, "upload file failse + " + objectResponseObj.getErr(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
+                                .subscribe(file -> {
+                                    File compressedImage = file;
+                                    ContentResolver cR = getContentResolver();
+                                    MimeTypeMap mime = MimeTypeMap.getSingleton();
+                                    String type = mime.getExtensionFromMimeType(cR.getType(uri));
+                                    String type2 = cR.getType(uri);
+                                    Log.d("vinh123", "file size = " + getReadableFileSize(compressedImage.length()));
+                                    RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), compressedImage);
+                                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", fileName, body);
+                                    viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<UploadItem>>() {
+                                        @Override
+                                        public void onChanged(@Nullable ResponseObj<UploadItem> objectResponseObj) {
+                                            if (objectResponseObj != null)
+                                                if (objectResponseObj.getResponse() == Response.SUCCESS)
+                                                    Toast.makeText(RegisterActivity.this, "upload file success + hide loading", Toast.LENGTH_SHORT).show();
+                                                else
+                                                    Toast.makeText(RegisterActivity.this, "upload file failse + " + objectResponseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }, new Consumer<Throwable>() {
                                     @Override
                                     public void accept(Throwable throwable) throws Exception {
                                         Toast.makeText(getApplicationContext(), "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                        String mime = getContentResolver().getType(selectedUri);
 
                     }
                 })
@@ -343,6 +352,15 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                 .create();
         bottomSheetDialogFragment.show(getSupportFragmentManager());
 
+    }
+
+    public String getReadableFileSize(long size) {
+        if (size <= 0) {
+            return "0";
+        }
+        final String[] units = new String[]{"B", "KB", "MB", "GB", "TB"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1024));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1024, digitGroups)) + " " + units[digitGroups];
     }
 
     private void onSetupWorkType() {

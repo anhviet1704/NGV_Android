@@ -52,6 +52,8 @@ public abstract class BaseActivity<T extends ViewModel, B extends ViewDataBindin
         mDialogLoading = new MaterialDialog.Builder(this)
                 //.title(R.string.tv_login_005)
                 .content(R.string.tv_login_005)
+                .cancelable(false)
+                .canceledOnTouchOutside(false)
                 .progress(true, 0)
                 .build();
         onInit(savedInstanceState);

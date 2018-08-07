@@ -83,7 +83,6 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                 else
                     return false;
             }
-
             @Override
             public void onLoadMore() {
                 onLoadJob();
@@ -103,7 +102,6 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                         if (response.getResponse() == Response.SUCCESS) {
                             lastPage = response.getObj().getLastPage();
                             if (response.getObj().getData().size() > 0) {
-                                Log.d("vinh123", "page = " + page + " size = " + response.getObj().getData().size() + " size total = " + mWorkItems.size());
                                 mWorkItems.addAll(response.getObj().getData());
                                 for (JobNewItem item : response.getObj().getData()) {
                                     JobCell cell = new JobCell(item);

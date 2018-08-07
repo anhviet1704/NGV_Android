@@ -12,6 +12,7 @@
     <string name="tv_error_03">Lỗi</string>
     <string name="tv_error_04">Đã xảy ra lỗi xác thực, vui lòng đăng nhập lại</string>
     <string name="tv_error_05">Đồng ý</string>
+    <string name="tv_error_06">Không có dữ liệu</string>
 
     <string name="tv_login_001"><u>Đăng ký tài khoản</u></string>
     <string name="tv_login_002">Số điện thoại</string>

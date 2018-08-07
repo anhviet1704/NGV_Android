@@ -64,6 +64,8 @@ public abstract class BaseFragment<T extends ViewModel, B extends ViewDataBindin
                 //.title(R.string.tv_login_005)
                 .content(R.string.tv_login_005)
                 .progress(true, 0)
+                .cancelable(false)
+                .canceledOnTouchOutside(false)
                 .build();
         onInit(savedInstanceState);
     }

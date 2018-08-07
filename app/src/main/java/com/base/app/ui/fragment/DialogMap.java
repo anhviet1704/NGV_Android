@@ -189,7 +189,7 @@ public class DialogMap extends DialogFragment {
         List<LatLng> path = new ArrayList();
 
         //Execute Directions API request
-        GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyBrPt88vvoPDDn_imh-RzCXl5Ha2F2LYig").build();
+        GeoApiContext context = new GeoApiContext.Builder().apiKey("AIzaSyC35b_IfGP6zwwkJ4MFHk3qPyX72eAbi3E").build();
         DirectionsApiRequest req = DirectionsApi.getDirections(context, "41.385064,2.173403", "40.416775,-3.70379");
         try {
             DirectionsResult res = req.await();

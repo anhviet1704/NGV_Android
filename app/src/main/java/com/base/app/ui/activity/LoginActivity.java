@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -140,11 +141,17 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
                                         AppModule.setLoginItem(loginItemResponseObj.getObj());
                                         mPrefHelper.putString(AppCons.LOGIN_USERNAME, bind.etUsername.getText().toString().trim());
                                         mPrefHelper.putString(AppCons.LOGIN_PASSWORD, bind.etPassword.getText().toString().trim());
-                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                        ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.ivLogin, 0, 0, 0, 0);
-                                        startActivity(intent, options.toBundle());
-                                        mDialogLoading.dismiss();
-                                        finish();
+                                        new Handler().postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.ivLogin, 0, 0, 0, 0);
+                                                startActivity(intent, options.toBundle());
+                                                mDialogLoading.dismiss();
+                                                finish();
+                                            }
+                                        }, 1000);
+
                                     } else {
                                         mDialogLoading.dismiss();
                                         Toast.makeText(LoginActivity.this, loginItemResponseObj.getErr(), Toast.LENGTH_SHORT).show();

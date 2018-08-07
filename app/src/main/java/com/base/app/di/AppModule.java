@@ -64,15 +64,12 @@ public class AppModule {
                 .addInterceptor(interceptor)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .connectTimeout(30, TimeUnit.SECONDS)
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Interceptor.Chain chain) throws IOException {
-                        Request original = chain.request();
-                        Request request = original.newBuilder()
-                                .header("token", mToken)
-                                .method(original.method(), original.body()).build();
-                        return chain.proceed(request);
-                    }
+                .addInterceptor(chain -> {
+                    Request original = chain.request();
+                    Request request = original.newBuilder()
+                            .header("token", mToken)
+                            .method(original.method(), original.body()).build();
+                    return chain.proceed(request);
                 }).build();
     }
 

@@ -285,7 +285,7 @@ public class RegisterRepo {
 
         mApiServices.postRegister(AppCons.LANGUAGE,
                 registerObj.getPhone(),
-                "",
+                registerObj.getPassword(),
                 registerObj.getAddress(),
                 registerObj.getFullname(),
                 registerObj.getLat(),

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class RegisterObj {
     private String phone;
+    private String password;
     private String fullname;
     private String email;
     private String address;
@@ -20,6 +21,14 @@ public class RegisterObj {
     private int status;
 
     public RegisterObj() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {

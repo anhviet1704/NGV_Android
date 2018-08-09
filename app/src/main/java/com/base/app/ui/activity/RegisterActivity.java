@@ -41,6 +41,7 @@ import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -196,6 +197,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     }
                     RegisterObj registerObj = new RegisterObj();
                     registerObj.setFullname(bind.etName.getText().toString());
+                    registerObj.setPassword(bind.etPassword.getText().toString());
                     registerObj.setBirthday(bind.etBirthday.getText().toString());
                     registerObj.setCountry(mOfCountryId);
                     registerObj.setPhone(bind.etPhone.getText().toString());
@@ -203,8 +205,8 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     registerObj.setOffice(mOfficeId);
                     registerObj.setStatus(1);//set active
                     registerObj.setGender(mGenderId);
-                    registerObj.setIdentity_img(mUploadFiles.toString());
-                    registerObj.setJob_id(mUploadCategory.toString());
+                    registerObj.setIdentity_img(new Gson().toJsonTree(mUploadFiles).toString());
+                    registerObj.setJob_id(new Gson().toJsonTree(mUploadCategory).toString());
                     registerObj.setAddress(bind.etAddress.getText().toString());
                     registerObj.setLat(lat);
                     registerObj.setLon(lon);

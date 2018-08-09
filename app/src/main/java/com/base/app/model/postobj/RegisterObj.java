@@ -1,53 +1,25 @@
 package com.base.app.model.postobj;
 
+import com.base.app.model.BaseValueItem;
+
+import java.util.List;
+
 public class RegisterObj {
     private String phone;
     private String fullname;
     private String email;
     private String address;
+    private double lat;
+    private double lon;
     private String birthday;
     private int gender;
-    private String identity_id;
-    private String role;
-    private String description;
     private String country;
-    private String avatar;
-    private int score;
     private String office;
-    private String profile_img;
     private String identity_img;
-    private String family_register_img;
+    private String job_id;
     private int status;
 
     public RegisterObj() {
-    }
-
-    public RegisterObj(String phone, String fullname, String email, String address, String birthday, int gender, String identity_id, String role, String description, String country, String avatar, int score, String office, String profile_img, String identity_img, String family_register_img, int status) {
-        this.phone = phone;
-        this.fullname = fullname;
-        this.email = email;
-        this.address = address;
-        this.birthday = birthday;
-        this.gender = gender;
-        this.identity_id = identity_id;
-        this.role = role;
-        this.description = description;
-        this.country = country;
-        this.avatar = avatar;
-        this.score = score;
-        this.office = office;
-        this.profile_img = profile_img;
-        this.identity_img = identity_img;
-        this.family_register_img = family_register_img;
-        this.status = status;
-    }
-
-    public String getOffice() {
-        return office;
-    }
-
-    public void setOffice(String office) {
-        this.office = office;
     }
 
     public String getPhone() {
@@ -82,6 +54,22 @@ public class RegisterObj {
         this.address = address;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
     public String getBirthday() {
         return birthday;
     }
@@ -98,30 +86,6 @@ public class RegisterObj {
         this.gender = gender;
     }
 
-    public String getIdentity_id() {
-        return identity_id;
-    }
-
-    public void setIdentity_id(String identity_id) {
-        this.identity_id = identity_id;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getCountry() {
         return country;
     }
@@ -130,28 +94,12 @@ public class RegisterObj {
         this.country = country;
     }
 
-    public String getAvatar() {
-        return avatar;
+    public String getOffice() {
+        return office;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
-    public String getProfile_img() {
-        return profile_img;
-    }
-
-    public void setProfile_img(String profile_img) {
-        this.profile_img = profile_img;
+    public void setOffice(String office) {
+        this.office = office;
     }
 
     public String getIdentity_img() {
@@ -162,12 +110,12 @@ public class RegisterObj {
         this.identity_img = identity_img;
     }
 
-    public String getFamily_register_img() {
-        return family_register_img;
+    public String getJob_id() {
+        return job_id;
     }
 
-    public void setFamily_register_img(String family_register_img) {
-        this.family_register_img = family_register_img;
+    public void setJob_id(String job_id) {
+        this.job_id = job_id;
     }
 
     public int getStatus() {

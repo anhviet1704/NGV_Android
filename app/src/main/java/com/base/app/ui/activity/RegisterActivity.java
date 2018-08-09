@@ -12,7 +12,6 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.DatePicker;
@@ -23,11 +22,11 @@ import com.base.app.automap.PlaceItem;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityRegisterBinding;
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.CategoryItem;
 import com.base.app.model.CountryResponse;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.RoleItem;
 import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.ui.adapter.WorkTypeAdapter;
@@ -38,7 +37,6 @@ import com.base.app.utils.NGVUtils;
 import com.base.app.utils.Response;
 import com.base.app.viewmodel.RegisterActivityVM;
 import com.blankj.utilcode.util.FileUtils;
-import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -72,7 +70,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     private String mOfCountryId;
     private int mGenderId = -1;
     private CountryResponse mCountryItem;
-    private List<RoleItem> mRoles = new ArrayList<>();
+    private List<CategoryItem> mCategoryItems = new ArrayList<>();
     private List<BaseValueItem> mOffices = new ArrayList<>();
     private List<BaseValueItem> mGender = new ArrayList<>();
     private List<BaseValueItem> mCountries = new ArrayList<>();
@@ -84,6 +82,12 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     LoginItem mLoginItem;
     private Uri selectedUri;
     PlaceItem mPlaceItem;
+    List<BaseValueItem> mUploadFiles = new ArrayList<>();
+    List<BaseValueItem> mUploadCategory = new ArrayList<>();
+    private String fileName1;
+    private String fileName2;
+    private double lat;
+    private double lon;
 
     @Override
     protected int getLayoutResId() {
@@ -185,10 +189,9 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                         || TextUtils.isEmpty(bind.tvDepartment.getText().toString())) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.tv_error_01), Toast.LENGTH_SHORT).show();
                 } else {
-                    String upRoles = "";
-                    for (int i = 0; i < mRoles.size(); i++) {
-                        if (mRoles.get(i).isCheck()) {
-                            upRoles = upRoles + "," + mRoles.get(i).getId();
+                    for (int i = 0; i < mCategoryItems.size(); i++) {
+                        if (mCategoryItems.get(i).isCheck()) {
+                            mUploadCategory.add(new BaseValueItem(String.valueOf(i), String.valueOf(mCategoryItems.get(i).getId())));
                         }
                     }
                     RegisterObj registerObj = new RegisterObj();
@@ -197,30 +200,24 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     registerObj.setCountry(mOfCountryId);
                     registerObj.setPhone(bind.etPhone.getText().toString());
                     registerObj.setEmail(bind.etEmail.getText().toString());
-                    registerObj.setRole(upRoles.substring(1));
                     registerObj.setOffice(mOfficeId);
                     registerObj.setStatus(1);//set active
-                    //null param
-                    registerObj.setAddress(bind.etAddress.getText().toString());
-                    registerObj.setAvatar("");
-                    registerObj.setDescription("");
-                    registerObj.setFamily_register_img("");
                     registerObj.setGender(mGenderId);
-                    registerObj.setIdentity_id("");
-                    registerObj.setIdentity_img("");
-                    registerObj.setProfile_img("");
-                    registerObj.setScore(0);
-
+                    registerObj.setIdentity_img(mUploadFiles.toString());
+                    registerObj.setJob_id(mUploadCategory.toString());
+                    registerObj.setAddress(bind.etAddress.getText().toString());
+                    registerObj.setLat(lat);
+                    registerObj.setLon(lon);
                     onRegister(viewModel, registerObj);
                 }
 
             }
         });
-        viewModel.getRoles().observe(RegisterActivity.this, new Observer<ResponseObj<List<RoleItem>>>() {
+        viewModel.getCategories().observe(RegisterActivity.this, new Observer<ResponseObj<List<CategoryItem>>>() {
             @Override
-            public void onChanged(@Nullable ResponseObj<List<RoleItem>> listResponseObj) {
+            public void onChanged(@Nullable ResponseObj<List<CategoryItem>> listResponseObj) {
                 if (listResponseObj.getResponse() == Response.SUCCESS) {
-                    mRoles = listResponseObj.getObj();
+                    mCategoryItems = listResponseObj.getObj();
                     onSetupWorkType();
                 } else {
                     Toast.makeText(RegisterActivity.this, listResponseObj.getErr(), Toast.LENGTH_SHORT).show();
@@ -306,13 +303,16 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                     @SuppressLint("CheckResult")
                     @Override
                     public void onImageSelected(final Uri uri) {
-                        if (mPosOfImage == 1) {
-                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivFrontCard);
-                        } else if (mPosOfImage == 2) {
-                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivBackCard);
-                        }
                         final String fileName = NGVUtils.onGenFileName(FileUtils.getFileExtension(FileUtils.getFileName(uri.getPath())));
                         selectedUri = uri;
+                        if (mPosOfImage == 1) {
+                            fileName1 = fileName;
+                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivFrontCard);
+                        } else if (mPosOfImage == 2) {
+                            fileName2 = fileName;
+                            Glide.with(RegisterActivity.this).load(new File(uri.getPath())).apply(NGVUtils.onGetRound(6)).into(bind.ivBackCard);
+                        }
+
                         new Compressor(getApplicationContext())
                                 .compressToFileAsFlowable(new File(uri.getPath()))
                                 .subscribeOn(Schedulers.io())
@@ -323,17 +323,20 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
                                     MimeTypeMap mime = MimeTypeMap.getSingleton();
                                     String type = mime.getExtensionFromMimeType(cR.getType(uri));
                                     String type2 = cR.getType(uri);
-                                    Log.d("vinh123", "file size = " + getReadableFileSize(compressedImage.length()));
                                     RequestBody body = RequestBody.create(MediaType.parse("image/jpeg"), compressedImage);
                                     MultipartBody.Part filePart = MultipartBody.Part.createFormData("image", fileName, body);
                                     viewModel.uploadFile(filePart).observe(RegisterActivity.this, new Observer<ResponseObj<UploadItem>>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj<UploadItem> objectResponseObj) {
                                             if (objectResponseObj != null)
-                                                if (objectResponseObj.getResponse() == Response.SUCCESS)
-                                                    Toast.makeText(RegisterActivity.this, "upload file success + hide loading", Toast.LENGTH_SHORT).show();
-                                                else
-                                                    Toast.makeText(RegisterActivity.this, "upload file failse + " + objectResponseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                                if (objectResponseObj.getResponse() == Response.SUCCESS) {
+                                                    if (fileName1.equals(objectResponseObj.getObj().getFileNameUpload())) {
+                                                        mUploadFiles.add(new BaseValueItem("1", objectResponseObj.getObj().getImageName()));
+                                                    } else if (fileName2.equals(objectResponseObj.getObj().getFileNameUpload())) {
+                                                        mUploadFiles.add(new BaseValueItem("2", objectResponseObj.getObj().getImageName()));
+                                                    }
+                                                } else
+                                                    Toast.makeText(RegisterActivity.this, objectResponseObj.getErr(), Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }, new Consumer<Throwable>() {
@@ -364,11 +367,11 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     }
 
     private void onSetupWorkType() {
-        mWorkAdapter = new WorkTypeAdapter(RegisterActivity.this, mRoles, new OnClickItem() {
+        mWorkAdapter = new WorkTypeAdapter(RegisterActivity.this, mCategoryItems, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
-                mRoles.get(pos).setCheck(!mRoles.get(pos).isCheck());
-                mWorkAdapter.onUpdateData(mRoles);
+                mCategoryItems.get(pos).setCheck(!mCategoryItems.get(pos).isCheck());
+                mWorkAdapter.onUpdateData(mCategoryItems);
 
             }
         });
@@ -383,5 +386,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
     public void onEvent(PlaceItem item) {
         mPlaceItem = item;
         bind.etAddress.setText(mPlaceItem.getDes());
+        lat = mPlaceItem.getLat();
+        lon = mPlaceItem.getLng();
     }
 }

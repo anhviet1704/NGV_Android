@@ -6,13 +6,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import com.base.app.di.DaggerAppComponent;
 import com.base.app.utils.AppCons;
 import com.base.app.utils.PrefHelper;
 import com.blankj.utilcode.util.Utils;
-import com.facebook.accountkit.AccountKit;
 import com.ivankocijan.magicviews.MagicViews;
 
 import java.util.Locale;

@@ -7,10 +7,10 @@ import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
 import com.base.app.data.ApiServices;
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.CategoryItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.RoleItem;
 import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.module.AppDatabase;
@@ -29,13 +29,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
+import retrofit2.http.Field;
 
 @Singleton
 public class RegisterRepo {
 
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mCountries;
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices;
-    private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles;
+    private MutableLiveData<ResponseObj<List<CategoryItem>>> mCategories;
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister;
     private SingleLiveEvent<ResponseObj<LoginItem>> mLogin;
     private SingleLiveEvent<ResponseObj> mChangePass;
@@ -46,7 +47,7 @@ public class RegisterRepo {
 
     public RegisterRepo(ApiServices mApiServices, AppDatabase mDatabase) {
         this.mCountries = new MutableLiveData<>();
-        this.mRoles = new MutableLiveData<>();
+        this.mCategories = new MutableLiveData<>();
         this.mOffices = new MutableLiveData<>();
         this.mRegister = new MutableLiveData<>();
         this.mLogin = new SingleLiveEvent<>();
@@ -75,14 +76,14 @@ public class RegisterRepo {
         return mOffices;
     }
 
-    public MutableLiveData<ResponseObj<List<RoleItem>>> getRoles() {
-        if (mRoles.getValue() != null) {
-            if (mRoles.getValue().getResponse() == Response.FAILED)
-                getRolesFromServer();
+    public MutableLiveData<ResponseObj<List<CategoryItem>>> getCategories() {
+        if (mCategories.getValue() != null) {
+            if (mCategories.getValue().getResponse() == Response.FAILED)
+                getCategoryFromServer();
         } else {
-            getRolesFromServer();
+            getCategoryFromServer();
         }
-        return mRoles;
+        return mCategories;
     }
 
     public MutableLiveData<ResponseObj<RegisterItem>> postRegister(RegisterObj registerObj) {
@@ -206,33 +207,33 @@ public class RegisterRepo {
 
     }
 
-    private void getRolesFromServer() {
+    private void getCategoryFromServer() {
         mApiServices.getRoles(AppCons.LANGUAGE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseList<RoleItem>>() {
+                .subscribe(new Observer<BaseList<CategoryItem>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable = d;
                     }
 
                     @Override
-                    public void onNext(BaseList<RoleItem> repsonse) {
+                    public void onNext(BaseList<CategoryItem> repsonse) {
                         if (repsonse.getSuccess())
-                            mRoles.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                            mCategories.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
                         else if (repsonse.getCode() == 401) {
-                            mRoles.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
+                            mCategories.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
                         } else {
-                            mRoles.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                            mCategories.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         if (((HttpException) e).code() == 401)
-                            mRoles.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                            mCategories.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
-                            mRoles.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+                            mCategories.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
 
                     @Override
@@ -281,7 +282,23 @@ public class RegisterRepo {
     }
 
     private void postRegisterServer(final RegisterObj registerObj) {
-        mApiServices.postRegister(AppCons.LANGUAGE, registerObj)
+
+        mApiServices.postRegister(AppCons.LANGUAGE,
+                registerObj.getPhone(),
+                "",
+                registerObj.getAddress(),
+                registerObj.getFullname(),
+                registerObj.getLat(),
+                registerObj.getLon(),
+                registerObj.getBirthday(),
+                registerObj.getCountry(),
+                registerObj.getEmail(),
+                registerObj.getGender(),
+                registerObj.getIdentity_img(),
+                registerObj.getOffice(),
+                registerObj.getStatus(),
+                registerObj.getJob_id()
+        )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseObj<RegisterItem>>() {
@@ -338,6 +355,7 @@ public class RegisterRepo {
                             upload.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
                         }
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         if (((HttpException) e).code() == 401)

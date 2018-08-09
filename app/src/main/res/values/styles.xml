@@ -31,6 +31,4 @@
         <item name="android:layout_marginEnd">16dp</item>
     </style>
 
-    <style name="AppLoginTheme" parent="Theme.AccountKit" />
-
 </resources>

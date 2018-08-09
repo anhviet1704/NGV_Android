@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.base.app.R;
-import com.base.app.model.RoleItem;
-import com.base.app.model.RoleItem;
+import com.base.app.model.CategoryItem;
 import com.base.app.ui.callback.OnClickItem;
-import com.base.app.utils.NGVUtils;
-import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
 
 import java.util.List;
@@ -22,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class WorkTypeAdapter extends RecyclerView.Adapter<WorkTypeAdapter.MyViewHolder> {
 
-    private List<RoleItem> mRoleItems;
+    private List<CategoryItem> mRoleItems;
     private Context context;
     private OnClickItem clickItem;
 
@@ -38,7 +35,7 @@ public class WorkTypeAdapter extends RecyclerView.Adapter<WorkTypeAdapter.MyView
         }
     }
 
-    public WorkTypeAdapter(Context context, List<RoleItem> mRoleItems, OnClickItem clickItem) {
+    public WorkTypeAdapter(Context context, List<CategoryItem> mRoleItems, OnClickItem clickItem) {
         this.clickItem = clickItem;
         this.context = context;
         this.mRoleItems = mRoleItems;
@@ -53,8 +50,8 @@ public class WorkTypeAdapter extends RecyclerView.Adapter<WorkTypeAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        RoleItem mItem = mRoleItems.get(position);
-        holder.tvName.setText(mItem.getValue());
+        CategoryItem mItem = mRoleItems.get(position);
+        holder.tvName.setText(mItem.getName());
         if (mItem.isCheck()) {
             holder.ivCheck.setImageResource(R.drawable.ic_check);
         } else {
@@ -73,7 +70,7 @@ public class WorkTypeAdapter extends RecyclerView.Adapter<WorkTypeAdapter.MyView
         return mRoleItems.size();
     }
 
-    public void onUpdateData(List<RoleItem> mRoleItems) {
+    public void onUpdateData(List<CategoryItem> mRoleItems) {
         this.mRoleItems = mRoleItems;
         notifyDataSetChanged();
     }

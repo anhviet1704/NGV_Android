@@ -5,9 +5,9 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.CategoryItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
-import com.base.app.model.RoleItem;
 import com.base.app.model.UploadItem;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.repo.RegisterRepo;
@@ -26,7 +26,7 @@ public class RegisterActivityVM extends ViewModel {
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mCountries = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<RegisterItem>> mRegister = new MutableLiveData<>();
     private MutableLiveData<ResponseObj<List<BaseValueItem>>> mOffices = new MutableLiveData<>();
-    private MutableLiveData<ResponseObj<List<RoleItem>>> mRoles = new MutableLiveData<>();
+    private MutableLiveData<ResponseObj<List<CategoryItem>>> mRoles = new MutableLiveData<>();
     private SingleLiveEvent<ResponseObj<UploadItem>> mUpload = new SingleLiveEvent<>();
 
     @Inject
@@ -46,8 +46,8 @@ public class RegisterActivityVM extends ViewModel {
         return mOffices;
     }
 
-    public MutableLiveData<ResponseObj<List<RoleItem>>> getRoles() {
-        mRoles = mRepository.getRoles();
+    public MutableLiveData<ResponseObj<List<CategoryItem>>> getCategories() {
+        mRoles = mRepository.getCategories();
         return mRoles;
     }
 

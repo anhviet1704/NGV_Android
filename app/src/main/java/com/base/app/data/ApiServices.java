@@ -3,20 +3,24 @@ package com.base.app.data;
 import com.base.app.base.BaseList;
 import com.base.app.base.BaseObj;
 import com.base.app.model.BaseValueItem;
+import com.base.app.model.CategoryItem;
 import com.base.app.model.JobCurrentItem;
 import com.base.app.model.JobDetail;
 import com.base.app.model.JobItem;
 import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
-import com.base.app.model.RoleItem;
 import com.base.app.model.UploadItem;
 import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.model.postobj.RegisterObj;
+
+import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -34,9 +38,24 @@ public interface ApiServices {
     @POST("api/{lang}/osin/login")
     Observable<BaseObj<LoginItem>> postLogin(@Path("lang") String lang, @Field("phone") String Phone, @Field("password") String Password);
 
-    //@FormUrlEncoded
+    @FormUrlEncoded
     @POST("api/{lang}/osin/register")
-    Observable<BaseObj<RegisterItem>> postRegister(@Path("lang") String lang, @Body RegisterObj obj);
+    Observable<BaseObj<RegisterItem>> postRegister(@Path("lang") String lang,
+                                                   @Field("phone") String phone,
+                                                   @Field("password") String password,
+                                                   @Field("address") String address,
+                                                   @Field("fullname") String fullname,
+                                                   @Field("lat") double lat,
+                                                   @Field("lon") double lon,
+                                                   @Field("birthday") String birthday,
+                                                   @Field("country") String country,
+                                                   @Field("email") String email,
+                                                   @Field("gender") int gender,
+                                                   @Field("identity_img") String identity_img,
+                                                   @Field("office") String office,
+                                                   @Field("status") int status,
+                                                   @Field("job_id") String job_id
+    );
 
 
     @GET("api/{lang}/countries/list")
@@ -49,8 +68,8 @@ public interface ApiServices {
     @GET("api/{lang}/office/list")
     Observable<BaseList<BaseValueItem>> getOffices(@Path("lang") String lang);
 
-    @GET("api/{lang}/osin/roles")
-    Observable<BaseList<RoleItem>> getRoles(@Path("lang") String lang);
+    @GET("api/{lang}/osin/job/get-list-category")
+    Observable<BaseList<CategoryItem>> getRoles(@Path("lang") String lang);
 
     //Info job
 

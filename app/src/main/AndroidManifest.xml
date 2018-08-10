@@ -80,6 +80,9 @@
         <activity
             android:name=".ui.activity.MapActivity"
             android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.ContactActivity"
+            android:theme="@style/AppThemeNoToolBar" />
     </application>
 
 </manifest>

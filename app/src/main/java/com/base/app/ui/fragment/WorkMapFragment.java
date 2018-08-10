@@ -207,7 +207,7 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                 .observe(getActivity(), new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
                     public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {
-                        if (response != null)
+                        if (response != null) {
                             if (response.getResponse() == Response.SUCCESS) {
                                 mMap.clear();
                                 mJobsMap = response.getObj().getData();
@@ -217,7 +217,8 @@ public class WorkMapFragment extends BaseFragment<WorkMapFragmentVM, FragmentWor
                             } else if (response.getResponse() == Response.UNAUTHORIZED) {
                                 NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                             }
-                        mDialogLoading.dismiss();
+                            mDialogLoading.dismiss();
+                        }
                     }
                 });
     }

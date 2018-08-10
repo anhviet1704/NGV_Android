@@ -83,6 +83,7 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                 else
                     return false;
             }
+
             @Override
             public void onLoadMore() {
                 onLoadJob();
@@ -98,26 +99,28 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                 .observe(this, new Observer<ResponseObj<JobNewResponse>>() {
                     @Override
                     public void onChanged(@Nullable ResponseObj<JobNewResponse> response) {
-                        bind.rvWork.hideLoadMoreView();
-                        if (response.getResponse() == Response.SUCCESS) {
-                            lastPage = response.getObj().getLastPage();
-                            if (response.getObj().getData().size() > 0) {
-                                mWorkItems.addAll(response.getObj().getData());
-                                for (JobNewItem item : response.getObj().getData()) {
-                                    JobCell cell = new JobCell(item);
-                                    cell.setOnCellClickListener(item1 -> {
-                                        EventBus.getDefault().postSticky(item1);
-                                        Intent intent = new Intent(getContext(), WorkDetailActivity.class);
-                                        startActivity(intent);
-                                    });
-                                    bind.rvWork.addCell(cell);
+                        if (response != null) {
+                            bind.rvWork.hideLoadMoreView();
+                            if (response.getResponse() == Response.SUCCESS) {
+                                lastPage = response.getObj().getLastPage();
+                                if (response.getObj().getData().size() > 0) {
+                                    mWorkItems.addAll(response.getObj().getData());
+                                    for (JobNewItem item : response.getObj().getData()) {
+                                        JobCell cell = new JobCell(item);
+                                        cell.setOnCellClickListener(item1 -> {
+                                            EventBus.getDefault().postSticky(item1);
+                                            Intent intent = new Intent(getContext(), WorkDetailActivity.class);
+                                            startActivity(intent);
+                                        });
+                                        bind.rvWork.addCell(cell);
+                                    }
                                 }
+                            } else if (response.getResponse() == Response.UNAUTHORIZED) {
+                                NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                             }
-                        } else if (response.getResponse() == Response.UNAUTHORIZED) {
-                            NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
+                            page++;
+                            mDialogLoading.dismiss();
                         }
-                        page++;
-                        mDialogLoading.dismiss();
                     }
 
                 });

@@ -87,7 +87,7 @@ public class JobFinishFragment extends BaseFragment<JobFinishFragmentVM, Fragmen
                     } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
                         NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
-                    mDialogLoading.hide();
+                    mDialogLoading.dismiss();
                 }
 
             }

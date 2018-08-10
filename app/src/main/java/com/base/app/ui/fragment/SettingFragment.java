@@ -18,6 +18,7 @@ import com.base.app.R;
 import com.base.app.model.LoginItem;
 import com.base.app.ui.activity.AboutActivity;
 import com.base.app.ui.activity.ChangePassActivity;
+import com.base.app.ui.activity.ContactActivity;
 import com.base.app.ui.activity.LanguageActivity;
 import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.ProfileActivity;
@@ -128,9 +129,6 @@ public class SettingFragment extends Fragment {
 
     @OnClick(R.id.view_call_phone)
     public void onViewClicked() {
-        Intent i = new Intent(Intent.ACTION_DIAL);
-        String p = "tel:" + "0933533776";
-        i.setData(Uri.parse(p));
-        startActivity(i);
+        startActivity(new Intent(getActivity(), ContactActivity.class));
     }
 }

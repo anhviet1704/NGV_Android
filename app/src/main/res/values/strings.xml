@@ -65,6 +65,7 @@
     <string name="tv_home_008">Đóng</string>
     <string name="tv_home_009">Tìm kiếm</string>
     <string name="tv_home_010">%1d giờ %2d phút</string>
+    <string name="tv_home_011">Tìm người giúp việc</string>
 
     <string name="tv_work_001">Đăng ký công việc</string>
     <string name="tv_work_002">Thời gian</string>
@@ -93,6 +94,8 @@
     <string name="tv_work_025">Địa chỉ: %s</string>
     <string name="tv_work_026">Ngày đăng ký: %s</string>
     <string name="tv_work_027">Đã thanh toán: %s</string>
+    <string name="tv_work_028">Thành tiền: %s</string>
+    <string name="tv_work_029">đ</string>
 
     <string name="tv_setting_001">Ví thanh toán</string>
     <string name="tv_setting_002">Đổi mật khẩu</string>
@@ -110,6 +113,14 @@
     <string name="tv_setting_014">Ngôn ngữ</string>
     <string name="tv_setting_015">Chọn ngôn ngữ này</string>
     <string name="tv_setting_016">Liên hệ tổng đài</string>
+    <string name="tv_setting_017">Thông tin liên hệ</string>
+    <string name="tv_setting_018">Hotline</string>
+    <string name="tv_setting_019">Số điện thoại</string>
+    <string name="tv_setting_020">Email</string>
+    <string name="tv_setting_021">Trụ sở</string>
+    <string name="tv_setting_022">Gọi hỗ trợ</string>
+    <string name="tv_setting_023">Thông tin cá nhân</string>
+    <string name="tv_setting_024">Vui lòng chọn</string>
 
     <string name="tv_user_001">Thành viên chính thức</string>
     <string name="tv_user_002">Lịch sử công việc</string>

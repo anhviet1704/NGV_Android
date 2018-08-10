@@ -3,7 +3,7 @@ package com.base.app.module;
 import com.base.app.ui.fragment.HomeFragment;
 import com.base.app.ui.fragment.JobFinishFragment;
 import com.base.app.ui.fragment.JobFragment;
-import com.base.app.ui.fragment.JobListFragment;
+import com.base.app.ui.fragment.JobCurrentFragment;
 import com.base.app.ui.fragment.JobRegisterFragment;
 import com.base.app.ui.fragment.NotificationFragment;
 import com.base.app.ui.fragment.SettingFragment;
@@ -34,7 +34,7 @@ public abstract class FragmentBuilderModule {
     abstract WorkMapFragment WorkMapFragment();
 
     @ContributesAndroidInjector
-    abstract JobListFragment JobListFragment();
+    abstract JobCurrentFragment JobListFragment();
 
     @ContributesAndroidInjector
     abstract JobRegisterFragment JobRegisterFragment();

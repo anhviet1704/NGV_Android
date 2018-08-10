@@ -59,6 +59,7 @@ public class NGVUtils {
         });
         mDialogErr.show();
     }
+
     public void setLocale(Application app, String lang) {
         Locale myLocale = new Locale(lang);
         Resources res = app.getResources();
@@ -102,6 +103,11 @@ public class NGVUtils {
     public static String formatCurrency(Context ctx, double value) {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         return formatter.format(value) + ctx.getResources().getString(R.string.tv_work_022);
+    }
+
+    public static String formatCurrencyOnly(Context ctx, double value) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        return formatter.format(value) + ctx.getResources().getString(R.string.tv_work_029);
     }
 
     public static ArrayList<Integer> getIntegerArray(ArrayList<String> stringArray) {
@@ -196,6 +202,23 @@ public class NGVUtils {
         } else {
             return ctx.getResources().getString(R.string.tv_home_010, hours, minutes);
         }
+    }
+
+    public static double onCaculatorTimeToInt(Context ctx, String startTime, String endTime) {
+        DateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        Date date1 = null;
+        Date date2 = null;
+        try {
+            date1 = dateFormat.parse(startTime);
+            date2 = dateFormat.parse(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long milliseconds = date2.getTime() - date1.getTime();
+        int seconds = (int) (milliseconds / 1000) % 60;
+        double minutes = (int) ((milliseconds / (1000 * 60)) % 60);
+        double hours = (int) ((milliseconds / (1000 * 60 * 60)) % 24);
+        return hours + (minutes / 60);
     }
 
     public static String onCaculatorDate(Context ctx, String date) {

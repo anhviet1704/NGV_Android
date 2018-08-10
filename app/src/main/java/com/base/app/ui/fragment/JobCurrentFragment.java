@@ -29,7 +29,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 
-public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJobListBinding> {
+public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, FragmentJobListBinding> {
 
     @Inject
     LoginItem mLoginItem;
@@ -37,9 +37,9 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
     PrefHelper mPrefHelper;
     private List<JobCurrentItem> mDataList = new ArrayList<>();
 
-    public static JobListFragment newInstance() {
+    public static JobCurrentFragment newInstance() {
         Bundle bundle = new Bundle();
-        JobListFragment fragment = new JobListFragment();
+        JobCurrentFragment fragment = new JobCurrentFragment();
         //fragment.setArguments(bundle);
         return fragment;
     }
@@ -110,8 +110,8 @@ public class JobListFragment extends BaseFragment<JobListFragmentVM, FragmentJob
                         if (listResponseObj.getObj().size() > 0) {
                             JobFragment.onUpdateFirstJob(listResponseObj.getObj().get(0));
                             if (listResponseObj.getObj().size() >= 1) {
-                                //mDataList = listResponseObj.getObj().subList(1, listResponseObj.getObj().size());
-                                mDataList = listResponseObj.getObj();
+                                mDataList = listResponseObj.getObj().subList(1, listResponseObj.getObj().size());
+                                //mDataList = listResponseObj.getObj();
                                 mTimeLineAdapter.onUpdateData(mDataList);
                                 bind.viewNodata.setVisibility(View.GONE);
                             } else {

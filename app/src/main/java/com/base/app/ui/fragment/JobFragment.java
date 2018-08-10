@@ -14,11 +14,8 @@ import com.base.app.R;
 import com.base.app.base.BaseFragment;
 import com.base.app.databinding.FragmentJobBinding;
 import com.base.app.model.JobCurrentItem;
-import com.base.app.utils.PrefHelper;
 import com.base.app.viewmodel.WorkListFragmentVM;
 import com.ivankocijan.magicviews.views.MagicTextView;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -81,7 +78,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
     private void onSetupView() {
         getChildFragmentManager().beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .replace(R.id.view_content, JobListFragment.newInstance(), null)
+                .replace(R.id.view_content, JobCurrentFragment.newInstance(), null)
                 .commit();
 
     }
@@ -104,7 +101,7 @@ public class JobFragment extends BaseFragment<WorkListFragmentVM, FragmentJobBin
                 tvJobList.setTextColor(Color.parseColor("#FFFFFF"));
                 getChildFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .replace(R.id.view_content, JobListFragment.newInstance(), null)
+                        .replace(R.id.view_content, JobCurrentFragment.newInstance(), null)
                         .commit();
                 break;
             case R.id.tv_job_register:

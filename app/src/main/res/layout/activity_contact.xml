@@ -1,76 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.ivankocijan.magicviews.views.MagicTextView
-        android:id="@+id/textView2"
+
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="@string/tv_setting_010"
-        android:textColor="#1C2D51"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:typeFace="HelveticaNeue_Medium.otf" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:src="@drawable/img_giabluravata" />
-
-        <ImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:src="@drawable/ic_avatar"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
-    <com.ivankocijan.magicviews.views.MagicTextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_logo_medium"
+        app:layout_constraintBottom_toTopOf="@+id/roundRectView6"
+        app:layout_constraintEnd_toStartOf="@+id/magicTextView5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ivankocijan.magicviews.views.MagicTextView
+        android:id="@+id/magicTextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textColor="#73809B"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/relativeLayout"
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="#84B8FF"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:typeFace="HelveticaNeue_Regular.otf" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:typeFace="HelveticaNeue_Bold.otf" />
+
+    <com.ivankocijan.magicviews.views.MagicTextView
+        android:id="@+id/magicTextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/tv_home_011"
+        android:textColor="#98A2B0"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/magicTextView5"
+        app:layout_constraintStart_toStartOf="@+id/magicTextView5"
+        app:layout_constraintTop_toBottomOf="@+id/magicTextView5"
+        app:typeFace="HelveticaNeue_Light.otf" />
 
 
     <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/roundRectView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintTop_toTopOf="parent"
         app:shape_roundRect_borderColor="#D2DFE8"
         app:shape_roundRect_borderWidth="0.5dp"
         app:shape_roundRect_bottomLeftRadius="6dp"
@@ -103,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="11dp"
-                    android:text="@string/tv_setting_023"
+                    android:text="@string/tv_setting_017"
                     android:textColor="#223254"
                     android:textSize="16sp"
                     app:typeFace="HelveticaNeue_Regular.otf" />
@@ -120,17 +113,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="@string/tv_setting_006"
+                    android:text="@string/tv_setting_018"
                     android:textColor="#223254"
                     android:textSize="14sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
 
                 <com.ivankocijan.magicviews.views.MagicTextView
-                    android:id="@+id/tv_birthday"
+                    android:id="@+id/tv_hotline"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#73809B"
+                    android:text="0933533776"
                     android:textSize="16sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
             </LinearLayout>
@@ -145,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="@string/tv_setting_007"
+                    android:text="@string/tv_setting_019"
                     android:textColor="#223254"
                     android:textSize="14sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
@@ -155,6 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:text="0933533776"
                     android:textColor="#73809B"
                     android:textSize="16sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
@@ -170,7 +165,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="@string/tv_setting_008"
+                    android:text="@string/tv_setting_020"
                     android:textColor="#223254"
                     android:textSize="14sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
@@ -181,6 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:textColor="#73809B"
+                    android:text="abc@gmail.com"
                     android:textSize="16sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
             </LinearLayout>
@@ -195,7 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
-                    android:text="@string/tv_setting_009"
+                    android:text="@string/tv_setting_021"
                     android:textColor="#223254"
                     android:textSize="14sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
@@ -205,6 +201,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:text="100 Hoàng Hoa Thám, Q. Tân Bình, TP.HCM"
                     android:textColor="#73809B"
                     android:textSize="16sp"
                     app:typeFace="HelveticaNeue_Light.otf" />
@@ -216,12 +213,58 @@
 
     <ImageView
         android:id="@+id/iv_back"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
+
+    <com.ivankocijan.magicviews.views.MagicButton
+        android:id="@+id/bt_call"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/gradient_6dp"
+        android:elevation="1dp"
+        android:gravity="center"
+        android:paddingBottom="14dp"
+        android:paddingTop="16dp"
+        android:text="@string/tv_setting_022"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/bt_email"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundRectView6"
+        app:typeFace="HelveticaNeue_Medium.otf" />
+
+    <com.ivankocijan.magicviews.views.MagicButton
+        android:id="@+id/bt_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/gradient_6dp"
+        android:elevation="1dp"
+        android:gravity="center"
+        android:paddingBottom="14dp"
+        android:paddingTop="16dp"
+        android:text="@string/tv_setting_020"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/bt_call"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/bt_call"
+        app:typeFace="HelveticaNeue_Medium.otf" />
 
 </android.support.constraint.ConstraintLayout>

@@ -150,9 +150,11 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
             isAlreadyRegister = true;
         }
         onUpdateUIStatusJob(obj.getOsinJobStatus());
-        String time = obj.getStartDate() + obj.getStartTime() + "-" + obj.getEndTime();
+        String time = obj.getStartDate() + " " + obj.getStartTime() + "-" + obj.getEndTime();
         bind.tvWorkName.setText(obj.getJobName());
         bind.tvWorkPrice.setText(NGVUtils.formatCurrency(this, obj.getFee()));
+        double priceSum = NGVUtils.onCaculatorTimeToInt(this, obj.getStartTime(), obj.getEndTime()) * obj.getFee();
+        bind.tvWorkPriceSum.setText(String.format(getString(R.string.tv_work_028), NGVUtils.formatCurrencyOnly(this, priceSum)));
         bind.tvWorkTime.setText(obj.getStartDate());
         bind.tvUserName.setText(obj.getOwnerFullName());
         bind.tvUserAddress.setText(obj.getOwnerAddress());

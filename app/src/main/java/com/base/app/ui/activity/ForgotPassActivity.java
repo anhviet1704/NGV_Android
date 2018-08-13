@@ -66,28 +66,8 @@ public class ForgotPassActivity extends BaseActivity<ForgotPassActivityVM, Activ
         final Intent intent = new Intent(this, AccountKitActivity.class);
         AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(
                 LoginType.PHONE, AccountKitActivity.ResponseType.TOKEN); // or .ResponseType.CODE
-//        UIManager uiManager = new SkinManager(                LoginType.PHONE,                SkinManager.Skin.TRANSLUCENT,                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ? getResources().getColor(R.color.colorPrimary,null):getResources().getColor(R.color.colorPrimary)),
-//                R.drawable.background,
-//                SkinManager.Tint.WHITE,
-//                0.55
-//        );
-//         If you want default country code
-//        // configurationBuilder.setDefaultCountryCode("IN");
-//        //configurationBuilder.setUIManager(uiManager);
         intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configurationBuilder.build());
         startActivityForResult(intent, APP_REQUEST_CODE);
-        /*final Intent intent = new Intent(this, AccountKitActivity.class);
-        AccountKitConfiguration.AccountKitConfigurationBuilder configurationBuilder = new AccountKitConfiguration.AccountKitConfigurationBuilder(loginType, AccountKitActivity.ResponseType.TOKEN);
-        if (loginType == LoginType.EMAIL) {
-            configurationBuilder.setInitialEmail(login);
-        } else {
-            PhoneNumber phoneNumber = new PhoneNumber("VI", login, "+84");
-            configurationBuilder.setInitialPhoneNumber(phoneNumber);
-        }
-        configurationBuilder.setDefaultCountryCode("VI");
-        final AccountKitConfiguration configuration = configurationBuilder.build();
-        intent.putExtra(AccountKitActivity.ACCOUNT_KIT_ACTIVITY_CONFIGURATION, configuration);
-        startActivityForResult(intent, APP_REQUEST_CODE);*/
     }
 
     @Override

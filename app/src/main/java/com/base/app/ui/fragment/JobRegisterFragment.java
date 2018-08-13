@@ -78,14 +78,15 @@ public class JobRegisterFragment extends BaseFragment<JobRegisterFragmentVM, Fra
         viewModel.getListJobRegister(mLoginItem.getId(), 1).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
-                if (listResponseObj != null)
+                if (listResponseObj != null) {
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         mDataList = listResponseObj.getObj();
                         mWorkAdapter.onUpdateData(mDataList);
-                        mDialogLoading.dismiss();
                     } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
                         NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
+                    mDialogLoading.dismiss();
+                }
             }
         });
     }

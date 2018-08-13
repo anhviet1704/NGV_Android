@@ -83,13 +83,14 @@
             android:id="@+id/tv_have_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_below="@+id/et_password"
+            android:layout_marginEnd="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/tv_register_024"
             android:textColor="#1C89FF"
             android:textSize="16sp"
-            android:layout_marginEnd="16dp"
-            android:layout_alignParentEnd="true"
+            android:visibility="gone"
             app:typeFace="HelveticaNeue_Light.otf" />
 
         <com.ivankocijan.magicviews.views.MagicButton

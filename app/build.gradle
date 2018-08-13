@@ -117,7 +117,7 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
     implementation 'jp.wasabeef:recyclerview-animators:2.3.0'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
-
+    //facebook
     implementation 'com.facebook.android:account-kit-sdk:4.35.0'
     implementation 'com.google.android.gms:play-services-base:15.0.1'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'

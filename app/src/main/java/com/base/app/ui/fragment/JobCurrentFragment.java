@@ -105,7 +105,7 @@ public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, Fragment
         viewModel.getJobCurent(mLoginItem.getId()).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {
-                if (listResponseObj != null)
+                if (listResponseObj != null) {
                     if (listResponseObj.getResponse() == Response.SUCCESS) {
                         if (listResponseObj.getObj().size() > 0) {
                             JobFragment.onUpdateFirstJob(listResponseObj.getObj().get(0));
@@ -119,10 +119,11 @@ public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, Fragment
                             }
 
                         }
-                        mDialogLoading.dismiss();
                     } else if (listResponseObj.getResponse() == Response.UNAUTHORIZED) {
                         NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
                     }
+                    mDialogLoading.dismiss();
+                }
             }
         });
     }

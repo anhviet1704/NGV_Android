@@ -168,12 +168,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityVM, ActivityR
         bind.etAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getOffices().observe(RegisterActivity.this, new Observer<ResponseObj<List<BaseValueItem>>>() {
-                    @Override
-                    public void onChanged(@Nullable ResponseObj<List<BaseValueItem>> listResponseObj) {
-                        startActivity(new Intent(RegisterActivity.this, AddressActivity.class));
-                    }
-                });
+                startActivity(new Intent(RegisterActivity.this, AddressActivity.class));
             }
         });
         bind.btFinish.setOnClickListener(new View.OnClickListener() {

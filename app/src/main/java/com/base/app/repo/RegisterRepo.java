@@ -12,6 +12,7 @@ import com.base.app.model.LoginItem;
 import com.base.app.model.RegisterItem;
 import com.base.app.model.ResponseObj;
 import com.base.app.model.UploadItem;
+import com.base.app.model.joblasted.JobNewResponse;
 import com.base.app.model.postobj.RegisterObj;
 import com.base.app.module.AppDatabase;
 import com.base.app.utils.AppCons;
@@ -120,7 +121,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mLogin.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mLogin.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -161,7 +162,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mChangePass.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mChangePass.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -193,7 +194,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mCountries.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mCountries.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -230,7 +231,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mCategories.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mCategories.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -267,7 +268,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mOffices.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mOffices.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -320,7 +321,7 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mRegister.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -358,12 +359,43 @@ public class RegisterRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             upload.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             upload.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
                     }
                 });
         return upload;
+    }
+
+    public SingleLiveEvent<ResponseObj> onForgotPassword(String osin_id, String password) {
+        SingleLiveEvent<ResponseObj> mJobs = new SingleLiveEvent<>();
+        mApiServices.onForgotPassword(AppCons.LANGUAGE, osin_id, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<BaseObj>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(BaseObj repsonse) {
+                        if (repsonse.getSuccess())
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
+                        else
+                            mJobs.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
+                            mJobs.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
+                        else
+                            mJobs.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
+
+                    }
+                });
+        return mJobs;
     }
 }

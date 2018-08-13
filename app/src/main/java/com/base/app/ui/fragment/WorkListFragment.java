@@ -117,6 +117,8 @@ public class WorkListFragment extends BaseFragment<WorkListFragmentVM, FragmentW
                                 }
                             } else if (response.getResponse() == Response.UNAUTHORIZED) {
                                 NGVUtils.showAuthorized(getActivity(), MainActivity.mViewRoot, mPrefHelper);
+                            } else if (response.getResponse() == Response.FAILED) {
+
                             }
                             page++;
                             mDialogLoading.dismiss();

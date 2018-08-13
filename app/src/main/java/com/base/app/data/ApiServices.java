@@ -65,6 +65,10 @@ public interface ApiServices {
     @POST("api/{lang}/osin/changePassword")
     Single<BaseObj> postChangePasss(@Path("lang") String lang, @Field("osin_id") int osin_id, @Field("old_password") String old_password, @Field("new_password") String new_password, @Field("new_password_confirmation") String new_password_confirmation);
 
+    @FormUrlEncoded
+    @POST("api/{lang}/osin/forgotPassword")
+    Single<BaseObj> onForgotPassword(@Path("lang") String lang, @Field("osin_id") String osin_id, @Field("password") String password);
+
     @GET("api/{lang}/office/list")
     Observable<BaseList<BaseValueItem>> getOffices(@Path("lang") String lang);
 

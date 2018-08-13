@@ -11,6 +11,7 @@ import com.base.app.di.DaggerAppComponent;
 import com.base.app.utils.AppCons;
 import com.base.app.utils.PrefHelper;
 import com.blankj.utilcode.util.Utils;
+import com.facebook.accountkit.AccountKit;
 import com.ivankocijan.magicviews.MagicViews;
 
 import java.util.Locale;
@@ -47,6 +48,7 @@ public class MyApp extends Application implements HasActivityInjector {
         Configuration conf = res.getConfiguration();
         conf.locale = myLocale;
         res.updateConfiguration(conf, dm);
+        AccountKit.initialize(getApplicationContext());
     }
 
     @Override

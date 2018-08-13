@@ -95,7 +95,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobs.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobs.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -133,7 +133,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobs.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobs.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -169,7 +169,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobDetail.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobDetail.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -200,7 +200,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobRegister.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -227,7 +227,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobCancel.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobCancel.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -254,7 +254,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJob.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJob.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -281,7 +281,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJob.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJob.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -315,16 +315,14 @@ public class JobRepo {
                     public void onNext(BaseList<JobCurrentItem> repsonse) {
                         if (repsonse.getSuccess())
                             mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.SUCCESS));
-                        else if (repsonse.getCode() == 401) {
-                            mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.UNAUTHORIZED, repsonse.getMessage()));
-                        } else
+                        else
                             mJobCurent.setValue(new ResponseObj(repsonse.getData(), Response.FAILED, repsonse.getMessage()));
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobCurent.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobCurent.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -371,7 +369,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobStatusRegister.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobStatusRegister.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -407,7 +405,7 @@ public class JobRepo {
 
                     @Override
                     public void onError(Throwable e) {
-                        if (((HttpException) e).code() == 401)
+                        if (e instanceof HttpException && ((HttpException) e).code() == 401)
                             mJobs.setValue(new ResponseObj(null, Response.UNAUTHORIZED, e.getMessage()));
                         else
                             mJobs.setValue(new ResponseObj(null, Response.FAILED, e.getMessage()));
@@ -420,4 +418,5 @@ public class JobRepo {
                 });
         return mJobs;
     }
+
 }

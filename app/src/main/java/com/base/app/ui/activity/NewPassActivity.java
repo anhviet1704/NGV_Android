@@ -1,15 +1,23 @@
 package com.base.app.ui.activity;
 
+import android.arch.lifecycle.Observer;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
 import com.base.app.databinding.ActivityNewPassBinding;
-import com.base.app.viewmodel.ForgotPassActivityVM;
+import com.base.app.model.ResponseObj;
+import com.base.app.utils.Response;
+import com.base.app.viewmodel.NewPassActivityVM;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.StringUtils;
 
 
-public class NewPassActivity extends BaseActivity<ForgotPassActivityVM, ActivityNewPassBinding> {
+public class NewPassActivity extends BaseActivity<NewPassActivityVM, ActivityNewPassBinding> {
 
 
     @Override
@@ -18,8 +26,8 @@ public class NewPassActivity extends BaseActivity<ForgotPassActivityVM, Activity
     }
 
     @Override
-    protected Class<ForgotPassActivityVM> getViewModel() {
-        return ForgotPassActivityVM.class;
+    protected Class<NewPassActivityVM> getViewModel() {
+        return NewPassActivityVM.class;
     }
 
     @Override
@@ -27,17 +35,30 @@ public class NewPassActivity extends BaseActivity<ForgotPassActivityVM, Activity
         bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String pass = bind.etPassword.getText().toString();
+                String passConfirm = bind.etPasswordConfirm.getText().toString();
+                if (StringUtils.isTrimEmpty(pass) || StringUtils.isTrimEmpty(passConfirm)) {
 
-                /*viewModel.updatePassWord(bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ApiResponse<SchoolYearItem>>() {
-                    @Override
-                    public void onChanged(@Nullable ApiResponse<SchoolYearItem> schoolYearItemApiResponse) {
-                        Intent intent = new Intent(NewPassActivity.this, RegisterConfirmActivity.class);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.btFinish, 0, 0, 0, 0);
-                        startActivity(intent, options.toBundle());
-                    }
-                });*/
+                } else {
+                    if (pass.equals(passConfirm))
+                        viewModel.onForgotPassword("", bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ResponseObj>() {
+                            @Override
+                            public void onChanged(@Nullable ResponseObj responseObj) {
+                                if (responseObj != null) {
+                                    if (responseObj.getResponse() == Response.SUCCESS) {
+                                        ActivityUtils.finishAllActivities();
+                                        startActivity(new Intent(NewPassActivity.this, LoginActivity.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(NewPassActivity.this, getString(R.string.tv_error_01), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        });
+                }
+
+
             }
         });
-
     }
 }

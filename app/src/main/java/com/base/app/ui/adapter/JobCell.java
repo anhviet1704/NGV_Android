@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.model.joblasted.JobNewItem;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -48,7 +49,7 @@ public class JobCell extends SimpleCell<JobNewItem, JobCell.ViewHolder> implemen
             url = mWorkItem.getJobImg().get(0).getValue();
         } catch (Exception e) {
         }
-        Glide.with(context).load(url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.img_picture)).into(holder.ivDes);
+        Glide.with(context).load(AppCons.HOST_URL + url).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.img_picture)).into(holder.ivDes);
     }
 
     @Override

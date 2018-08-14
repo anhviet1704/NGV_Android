@@ -10,5 +10,6 @@ public class AppCons {
     public static final String LOGIN_PASSWORD = "PasswordLogin";
     public static String LANGUAGE = "vi";
     public static String LANGUAGE_KEY = "Language_App";
-
+    // public static String HOST_URL = "http://ngv.lbl-t.com/images/osin/";
+    public static String HOST_URL = "http://ngv.lbl-t.com/uploads/tmp_images/";
 }

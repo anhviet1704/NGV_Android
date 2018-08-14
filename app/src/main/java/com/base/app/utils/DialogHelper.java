@@ -110,7 +110,7 @@ public class DialogHelper<T> {
         tvName.setText(osinItem.getOsinFullName());
         tvStatus.setText(osinItem.getRoleName());
         tvBirthday.setText(osinItem.getBirthday());
-        Glide.with(mContext).load(osinItem.getAvatar()).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(ivAvatar);
+        Glide.with(mContext).load(AppCons.HOST_URL + osinItem.getAvatar()).apply(NGVUtils.onGetRound(6).placeholder(R.drawable.ic_avatar)).into(ivAvatar);
         mAdapter = new MasterAdapter(new OnClickMaster() {
             @Override
             public void onClickItem(int pos) {

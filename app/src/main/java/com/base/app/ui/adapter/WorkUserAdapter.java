@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import com.base.app.R;
 import com.base.app.model.OsinItem;
 import com.base.app.ui.callback.OnClickItem;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -59,7 +60,7 @@ public class WorkUserAdapter extends RecyclerView.Adapter<WorkUserAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         OsinItem mOsinItem = mOsinItems.get(position);
         holder.tvName.setText(mOsinItem.getOsinFullName());
-        Glide.with(context).load(mOsinItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(holder.ivAvatar);
+        Glide.with(context).load(AppCons.HOST_URL + mOsinItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(holder.ivAvatar);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -10,13 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.base.app.R;
+import com.base.app.model.joblasted.JobImg;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 
 public class ImageFragment extends Fragment {
 
     private ImageView mIvContent;
-    private String url;
+    private JobImg item;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,15 +30,15 @@ public class ImageFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mIvContent = view.findViewById(R.id.iv_content);
-        Glide.with(getActivity()).load(url).apply(NGVUtils.onGetRound(0)).into(mIvContent);
+        Glide.with(getActivity()).load(AppCons.HOST_URL + item.getValue()).apply(NGVUtils.onGetRound(0)).into(mIvContent);
     }
 
-    public String getDetail() {
-        return url;
+    public JobImg getDetail() {
+        return item;
     }
 
-    public void setDetail(String detail) {
-        this.url = detail;
+    public void setDetail(JobImg detail) {
+        this.item = detail;
     }
 
 }

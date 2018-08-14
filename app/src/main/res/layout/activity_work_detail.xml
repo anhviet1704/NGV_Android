@@ -19,19 +19,21 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
+                android:descendantFocusability="blocksDescendants"
                 android:layout_height="match_parent">
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/viewPager"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="#aaa"
+                    android:background="@drawable/gradient_login"
                     app:layout_constraintDimensionRatio="H,3:2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <com.rd.PageIndicatorView
                     android:id="@+id/pageIndicatorView"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
@@ -395,6 +397,9 @@
                     android:id="@+id/rv_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:paddingBottom="78dp"
                     android:paddingEnd="16dp"
                     android:paddingStart="16dp"

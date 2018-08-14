@@ -18,6 +18,7 @@ import com.base.app.model.JobDetail;
 import com.base.app.model.LoginItem;
 import com.base.app.model.OsinItem;
 import com.base.app.model.ResponseObj;
+import com.base.app.model.joblasted.JobImg;
 import com.base.app.model.joblasted.JobNewItem;
 import com.base.app.ui.adapter.ViewpagerWorkAdapter;
 import com.base.app.ui.adapter.WorkUserAdapter;
@@ -50,7 +51,6 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
     private JobNewItem mJobLastDetailItem;
     private JobCurrentItem mJobCurrentItem;
 
-    private List<String> listItem = new ArrayList<>();
     private ViewpagerWorkAdapter fragmentAdapter;
     private WorkUserAdapter mUserAdapter;
     private List<OsinItem> mOsinItems;
@@ -84,11 +84,11 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     if (response.getResponse() == Response.SUCCESS) {
                         mJobDetail = response.getObj();
                         onUpdateUI(mJobDetail);
+                        onSetupViewPager(mJobDetail.getJobImg());
                         mDialogLoading.dismiss();
                     }
             }
         });
-        onSetupViewPager();
         onSetupRvUser();
         bind.tvSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,15 +165,9 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
         mUserAdapter.onUpdateData(mOsinItems);
     }
 
-    private void onSetupViewPager() {
-        listItem.add("https://i.imgur.com/PpZlIRy.jpg");
-        listItem.add("https://i.imgur.com/USo6P0c.jpg");
-        listItem.add("https://i.imgur.com/8Lz9Np9.jpg");
-        listItem.add("https://i.imgur.com/PpZlIRy.jpg");
-        listItem.add("https://i.imgur.com/USo6P0c.jpg");
-        listItem.add("https://i.imgur.com/8Lz9Np9.jpg");
-
-        fragmentAdapter = new ViewpagerWorkAdapter(this, getSupportFragmentManager(), listItem);
+    private void onSetupViewPager(List<JobImg> jobImg) {
+        if (jobImg.size() > 1) bind.pageIndicatorView.setVisibility(View.VISIBLE);
+        fragmentAdapter = new ViewpagerWorkAdapter(this, getSupportFragmentManager(), jobImg);
         bind.viewPager.setAdapter(fragmentAdapter);
         bind.viewPager.setCurrentItem(0);
         bind.viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

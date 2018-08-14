@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 
 import com.base.app.R;
 import com.base.app.model.LoginItem;
+import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicTextView;
@@ -50,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         AndroidInjection.inject(this);
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
-        Glide.with(this).load(mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
+        Glide.with(this).load(AppCons.HOST_URL + mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
         tvName.setText(mLoginItem.getFullname());
         tvBirthday.setText(mLoginItem.getBirthday());
         tvPhone.setText(mLoginItem.getPhone());

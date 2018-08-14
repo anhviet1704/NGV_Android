@@ -87,7 +87,7 @@ public class SettingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         AndroidSupportInjection.inject(this);
         tvName.setText(mLoginItem.getFullname());
-        Glide.with(this).load(mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
+        Glide.with(this).load(AppCons.HOST_URL + mLoginItem.getAvatar()).apply(NGVUtils.onGetCircleCrop().placeholder(R.drawable.ic_avatar)).into(ivAvatar);
     }
 
     @Override

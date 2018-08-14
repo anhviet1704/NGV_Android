@@ -5,16 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.base.app.model.joblasted.JobImg;
 import com.base.app.ui.fragment.ImageFragment;
 
 import java.util.List;
 
 public class ViewpagerWorkAdapter extends FragmentStatePagerAdapter {
     private Context ctx;
-    private List<String> data;
+    private List<JobImg> data;
     private Fragment[] fragments;
 
-    public ViewpagerWorkAdapter(Context ctx, FragmentManager fm, List<String> data) {
+    public ViewpagerWorkAdapter(Context ctx, FragmentManager fm, List<JobImg> data) {
         super(fm);
         this.ctx = ctx;
         this.data = data;
@@ -24,7 +25,7 @@ public class ViewpagerWorkAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = null;
-        String items = data.get(position);
+        JobImg items = data.get(position);
 
 
         ImageFragment dinamisFragment = new ImageFragment();

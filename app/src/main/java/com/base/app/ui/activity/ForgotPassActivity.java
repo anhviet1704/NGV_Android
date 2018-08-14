@@ -96,6 +96,7 @@ public class ForgotPassActivity extends BaseActivity<ForgotPassActivityVM, Activ
                                 if (phoneNumberString.contains(bind.etPassword.getText().toString().substring(1))) {
                                     Intent intent = new Intent(ForgotPassActivity.this, NewPassActivity.class);
                                     ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.btFinish, 0, 0, 0, 0);
+                                    intent.putExtra("phone", bind.etPassword.getText().toString());
                                     startActivity(intent, options.toBundle());
                                 } else {
                                     Toast.makeText(ForgotPassActivity.this, getString(R.string.tv_error_04), Toast.LENGTH_SHORT).show();

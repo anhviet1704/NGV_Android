@@ -23,7 +23,7 @@ public class NewPassActivityVM extends ViewModel {
     }
 
 
-    public SingleLiveEvent<ResponseObj> onForgotPassword(String osin_id, String password) {
-        return mRepository.onForgotPassword(osin_id, password);
+    public SingleLiveEvent<ResponseObj> onForgotPassword(String phone, String password) {
+        return mRepository.onForgotPassword(phone, password);
     }
 }

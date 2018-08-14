@@ -67,7 +67,7 @@ public interface ApiServices {
 
     @FormUrlEncoded
     @POST("api/{lang}/osin/forgotPassword")
-    Single<BaseObj> onForgotPassword(@Path("lang") String lang, @Field("osin_id") String osin_id, @Field("password") String password);
+    Single<BaseObj> onForgotPassword(@Path("lang") String lang, @Field("phone") String phone, @Field("password") String password);
 
     @GET("api/{lang}/office/list")
     Observable<BaseList<BaseValueItem>> getOffices(@Path("lang") String lang);

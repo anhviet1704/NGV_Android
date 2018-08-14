@@ -19,6 +19,7 @@ import com.blankj.utilcode.util.StringUtils;
 
 public class NewPassActivity extends BaseActivity<NewPassActivityVM, ActivityNewPassBinding> {
 
+    String phone = "";
 
     @Override
     protected int getLayoutResId() {
@@ -32,6 +33,10 @@ public class NewPassActivity extends BaseActivity<NewPassActivityVM, ActivityNew
 
     @Override
     protected void onInit(Bundle instance) {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            phone = extras.getString("phone");
+        }
         bind.btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,11 +46,12 @@ public class NewPassActivity extends BaseActivity<NewPassActivityVM, ActivityNew
 
                 } else {
                     if (pass.equals(passConfirm))
-                        viewModel.onForgotPassword("", bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ResponseObj>() {
+                        viewModel.onForgotPassword(phone, bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
                                 if (responseObj != null) {
                                     if (responseObj.getResponse() == Response.SUCCESS) {
+                                        Toast.makeText(NewPassActivity.this, getString(R.string.tv_login_006), Toast.LENGTH_SHORT).show();
                                         ActivityUtils.finishAllActivities();
                                         startActivity(new Intent(NewPassActivity.this, LoginActivity.class));
                                         finish();

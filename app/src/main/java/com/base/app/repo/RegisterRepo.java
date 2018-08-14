@@ -368,9 +368,9 @@ public class RegisterRepo {
         return upload;
     }
 
-    public SingleLiveEvent<ResponseObj> onForgotPassword(String osin_id, String password) {
+    public SingleLiveEvent<ResponseObj> onForgotPassword(String phone, String password) {
         SingleLiveEvent<ResponseObj> mJobs = new SingleLiveEvent<>();
-        mApiServices.onForgotPassword(AppCons.LANGUAGE, osin_id, password)
+        mApiServices.onForgotPassword(AppCons.LANGUAGE, phone, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<BaseObj>() {

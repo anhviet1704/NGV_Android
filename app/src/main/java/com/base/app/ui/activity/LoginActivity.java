@@ -150,7 +150,7 @@ public class LoginActivity extends BaseActivity<LoginActivityVM, ActivityLoginBi
                                                 mDialogLoading.dismiss();
                                                 finish();
                                             }
-                                        }, 2000);
+                                        }, 5000);
 
                                     } else {
                                         mDialogLoading.dismiss();

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.model.JobCurrentItem;
@@ -21,6 +22,7 @@ import com.base.app.ui.callback.OnClickItem;
 import com.base.app.ui.callback.OnClickMaster;
 import com.base.app.ui.callback.OnClickRegisterJob;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.ivankocijan.magicviews.views.MagicButton;
 import com.ivankocijan.magicviews.views.MagicEditText;
@@ -226,7 +228,11 @@ public class DialogHelper<T> {
         btFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClick.onClickRegister(etSumPrice.getText().toString());
+                if (!StringUtils.isTrimEmpty(etSumPrice.getText().toString())) {
+                    mClick.onClickRegister(etSumPrice.getText().toString());
+                } else {
+                    Toast.makeText(mContext, mContext.getString(R.string.tv_error_01), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

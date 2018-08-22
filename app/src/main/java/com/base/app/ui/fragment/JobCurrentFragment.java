@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.base.app.R;
 import com.base.app.base.BaseFragment;
@@ -36,6 +37,7 @@ public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, Fragment
     @Inject
     PrefHelper mPrefHelper;
     private List<JobCurrentItem> mDataList = new ArrayList<>();
+    private TimeLineAdapter mTimeLineAdapter;
 
     public static JobCurrentFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -59,39 +61,64 @@ public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, Fragment
         mDialogLoading.show();
         bind.rvJob.setLayoutManager(new LinearLayoutManager(getActivity()));
         bind.rvJob.setHasFixedSize(true);
-        final TimeLineAdapter mTimeLineAdapter = new TimeLineAdapter(mDataList, new OnClickItem() {
+        mTimeLineAdapter = new TimeLineAdapter(mDataList, new OnClickItem() {
             @Override
             public void onClickItem(View v, int pos) {
                 DialogJobMgr mDialogJob = new DialogJobMgr(getActivity());
                 mDialogJob.onShowDialogFinish(JobFragment.getRoot(), mDataList.get(pos), new OnClickFinish() {
                     @Override
                     public void onClickFinish() {
-                        //Comment for test
+                        mDialogLoading.show();
                         viewModel.finishJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
-                                mDialogJob.onUpdateUI(3);
+                                if (responseObj != null) {
+                                    mDialogLoading.dismiss();
+                                    if (responseObj.getResponse() == Response.SUCCESS) {
+                                        mDialogJob.onUpdateUI(3);
+                                        onGetJobs();
+                                    } else {
+                                        Toast.makeText(getContext(), responseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         });
                     }
 
                     @Override
                     public void onClickRate(int type) {
+                        mDialogLoading.show();
                         //1: hài lòng, 2:không hài lòng
                         viewModel.rateJob(mLoginItem.getId(), mDataList.get(pos).getOwnerJobId(), type).observe(getActivity(), new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
-                                mDialogJob.dismiss();
+                                if (responseObj != null) {
+                                    mDialogLoading.dismiss();
+                                    if (responseObj.getResponse() == Response.SUCCESS) {
+                                        mDialogJob.dismiss();
+                                    } else {
+                                        Toast.makeText(getContext(), responseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         });
                     }
 
                     @Override
                     public void onClickCancel() {
+                        mDialogLoading.show();
                         viewModel.cancelJob(mDataList.get(pos).getOwnerJobId(), mLoginItem.getId()).observe(getActivity(), new Observer<ResponseObj>() {
                             @Override
                             public void onChanged(@Nullable ResponseObj responseObj) {
-                                mDialogJob.dismiss();
+                                if (responseObj != null) {
+                                    mDialogLoading.dismiss();
+                                    if (responseObj.getResponse() == Response.SUCCESS) {
+                                        mDialogJob.dismiss();
+                                        onGetJobs();
+                                    } else {
+                                        Toast.makeText(getContext(), responseObj.getErr(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         });
                     }
@@ -101,7 +128,11 @@ public class JobCurrentFragment extends BaseFragment<JobListFragmentVM, Fragment
             }
         });
         bind.rvJob.setAdapter(mTimeLineAdapter);
+        onGetJobs();
 
+    }
+
+    private void onGetJobs() {
         viewModel.getJobCurent(mLoginItem.getId()).observe(this, new Observer<ResponseObj<List<JobCurrentItem>>>() {
             @Override
             public void onChanged(@Nullable ResponseObj<List<JobCurrentItem>> listResponseObj) {

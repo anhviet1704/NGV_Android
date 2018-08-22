@@ -98,19 +98,24 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogConfirm.onShowDialogConfirm(bind.viewRoot, new OnClickItem() {
                         @Override
                         public void onClickItem(View v, int pos) {
+                            mDialogLoading.show();
                             viewModel.cancelJob(owner_job_id, mLoginItem.getId())
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
-                                            if (response.getResponse() == Response.SUCCESS) {
-                                                isAlreadyRegister = false;
-                                                onUpdateUIStatusJob(0);
-                                                mDialogConfirm.dismiss();
-                                            } else if (response.getResponse() == Response.UNAUTHORIZED) {
-                                                NGVUtils.showAuthorized(WorkDetailActivity.this, MainActivity.mViewRoot, mPrefHelper);
-                                            } else {
-                                                Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                            if (response != null) {
+                                                mDialogLoading.dismiss();
+                                                if (response.getResponse() == Response.SUCCESS) {
+                                                    isAlreadyRegister = false;
+                                                    onUpdateUIStatusJob(0);
+                                                    mDialogConfirm.dismiss();
+                                                } else if (response.getResponse() == Response.UNAUTHORIZED) {
+                                                    NGVUtils.showAuthorized(WorkDetailActivity.this, MainActivity.mViewRoot, mPrefHelper);
+                                                } else {
+                                                    Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                                }
                                             }
+
                                         }
                                     });
                         }
@@ -121,16 +126,20 @@ public class WorkDetailActivity extends BaseActivity<WorkDetailActivityVM, Activ
                     mDialogRegisterJob.onShowRegisterJob(bind.viewRoot, mJobDetail, new OnClickRegisterJob() {
                         @Override
                         public void onClickRegister(String deal) {
+                            mDialogLoading.show();
                             viewModel.registerJob(owner_job_id, mLoginItem.getId(), deal)
                                     .observe(WorkDetailActivity.this, new Observer<ResponseObj>() {
                                         @Override
                                         public void onChanged(@Nullable ResponseObj response) {
-                                            if (response.getResponse() == Response.SUCCESS) {
-                                                isAlreadyRegister = true;
-                                                onUpdateUIStatusJob(1);
-                                                mDialogRegisterJob.dismiss();
-                                            } else {
-                                                Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                            if (response != null) {
+                                                mDialogLoading.dismiss();
+                                                if (response.getResponse() == Response.SUCCESS) {
+                                                    isAlreadyRegister = true;
+                                                    onUpdateUIStatusJob(1);
+                                                    mDialogRegisterJob.dismiss();
+                                                } else {
+                                                    Toast.makeText(WorkDetailActivity.this, response.getErr(), Toast.LENGTH_SHORT).show();
+                                                }
                                             }
                                         }
                                     });

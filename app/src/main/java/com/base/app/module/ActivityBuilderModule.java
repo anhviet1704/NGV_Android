@@ -9,7 +9,7 @@ import com.base.app.ui.activity.NewPassActivity;
 import com.base.app.ui.activity.ProfileActivity;
 import com.base.app.ui.activity.RegisterActivity;
 import com.base.app.ui.activity.VerifyActivity;
-import com.base.app.ui.activity.WalletActivity;
+import com.base.app.ui.activity.wallet.WalletActivity;
 import com.base.app.ui.activity.WorkDetailActivity;
 
 import dagger.Module;

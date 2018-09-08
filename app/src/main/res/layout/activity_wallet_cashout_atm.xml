@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/view_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F8FAFF"
+        android:orientation="vertical">
+
+        <com.github.florent37.shapeofview.shapes.RoundRectView
+            android:id="@+id/view_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shape_roundRect_borderColor="#73809B"
+            app:shape_roundRect_borderWidth="0dp"
+            app:shape_roundRect_bottomLeftRadius="0dp"
+            app:shape_roundRect_bottomRightRadius="0dp"
+            app:shape_roundRect_topLeftRadius="0dp"
+            app:shape_roundRect_topRightRadius="0dp">
+
+            <com.ivankocijan.magicviews.views.MagicTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F8FAFF"
+                android:gravity="center"
+                android:text="@string/tv_wallet_015"
+                android:textColor="#1C2D51"
+                android:textSize="18sp"
+                app:typeFace="HelveticaNeue_Regular.otf" />
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="13dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_back" />
+        </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#EDEDED"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_toolbar" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp">
+
+                <com.ivankocijan.magicviews.views.MagicEditText
+                    android:id="@+id/et_phone"
+                    style="@style/EdittextStyle"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_edit"
+                    android:hint="@string/tv_user_007"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:id="@+id/view_500k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:elevation="0dp"
+                    app:layout_constraintStart_toStartOf="@+id/et_phone"
+                    app:layout_constraintTop_toBottomOf="@+id/et_phone"
+                    app:shape_roundRect_borderColor="#9098A9"
+                    app:shape_roundRect_borderWidth="0.5dp"
+                    app:shape_roundRect_bottomLeftRadius="3dp"
+                    app:shape_roundRect_bottomRightRadius="3dp"
+                    app:shape_roundRect_topLeftRadius="3dp"
+                    app:shape_roundRect_topRightRadius="3dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#F8FAFF"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="6dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/tv_wallet_017"
+                        android:textColor="#223254"
+                        android:textSize="14sp"
+                        app:typeFace="HelveticaNeue_Medium.otf" />
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:id="@+id/view_1tr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:elevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_500k"
+                    app:layout_constraintStart_toEndOf="@+id/view_500k"
+                    app:layout_constraintTop_toTopOf="@+id/view_500k"
+                    app:shape_roundRect_borderColor="#9098A9"
+                    app:shape_roundRect_borderWidth="0.5dp"
+                    app:shape_roundRect_bottomLeftRadius="3dp"
+                    app:shape_roundRect_bottomRightRadius="3dp"
+                    app:shape_roundRect_topLeftRadius="3dp"
+                    app:shape_roundRect_topRightRadius="3dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#F8FAFF"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="6dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/tv_wallet_018"
+                        android:textColor="#223254"
+                        android:textSize="14sp"
+                        app:typeFace="HelveticaNeue_Medium.otf" />
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:id="@+id/view_2tr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:elevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_500k"
+                    app:layout_constraintStart_toEndOf="@+id/view_1tr"
+                    app:layout_constraintTop_toTopOf="@+id/view_500k"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:shape_roundRect_borderColor="#9098A9"
+                    app:shape_roundRect_borderWidth="0.5dp"
+                    app:shape_roundRect_bottomLeftRadius="3dp"
+                    app:shape_roundRect_bottomRightRadius="3dp"
+                    app:shape_roundRect_topLeftRadius="3dp"
+                    app:shape_roundRect_topRightRadius="3dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#F8FAFF"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="6dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/tv_wallet_019"
+                        android:textColor="#223254"
+                        android:textSize="14sp"
+                        app:typeFace="HelveticaNeue_Medium.otf" />
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.github.florent37.shapeofview.shapes.RoundRectView
+                    android:id="@+id/view_tr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:elevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/view_500k"
+                    app:layout_constraintStart_toEndOf="@+id/view_2tr"
+                    app:layout_constraintTop_toTopOf="@+id/view_500k"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:shape_roundRect_borderColor="#9098A9"
+                    app:shape_roundRect_borderWidth="0.5dp"
+                    app:shape_roundRect_bottomLeftRadius="3dp"
+                    app:shape_roundRect_bottomRightRadius="3dp"
+                    app:shape_roundRect_topLeftRadius="3dp"
+                    app:shape_roundRect_topRightRadius="3dp">
+
+                    <com.ivankocijan.magicviews.views.MagicTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#F8FAFF"
+                        android:gravity="center"
+                        android:paddingBottom="3dp"
+                        android:paddingEnd="6dp"
+                        android:paddingStart="6dp"
+                        android:paddingTop="5dp"
+                        android:text="@string/tv_wallet_020"
+                        android:textColor="#223254"
+                        android:textSize="14sp"
+                        app:typeFace="HelveticaNeue_Medium.otf" />
+                </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/magicTextView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:background="#F8FAFF"
+                    android:gravity="center"
+                    android:text="@string/tv_wallet_021"
+                    android:textColor="#1C2D51"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/view_500k"
+                    app:layout_constraintTop_toBottomOf="@+id/view_500k"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:background="#D3D7E0"
+                    app:layout_constraintBottom_toBottomOf="@+id/magicTextView8"
+                    app:layout_constraintStart_toEndOf="@+id/magicTextView8"
+                    app:layout_constraintTop_toTopOf="@+id/magicTextView8" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_banks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/magicTextView8" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/magicTextView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="#F8FAFF"
+                    android:gravity="center"
+                    android:text="@string/tv_wallet_022"
+                    android:textColor="#1C2D51"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/view_500k"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_banks"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="16dp"
+                    android:background="#D3D7E0"
+                    app:layout_constraintBottom_toBottomOf="@+id/magicTextView9"
+                    app:layout_constraintStart_toEndOf="@+id/magicTextView9"
+                    app:layout_constraintTop_toTopOf="@+id/magicTextView9" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/magicTextView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:text="@string/tv_wallet_023"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/view_500k"
+                    app:layout_constraintTop_toBottomOf="@+id/magicTextView9"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_money_avaialbe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:gravity="center"
+                    android:text="200.000"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/magicTextView10"
+                    app:layout_constraintStart_toEndOf="@+id/barrier2"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/magicTextView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:text="@string/tv_wallet_024"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/view_500k"
+                    app:layout_constraintTop_toBottomOf="@+id/magicTextView10"
+                    app:typeFace="HelveticaNeue_Light.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicTextView
+                    android:id="@+id/tv_money_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:gravity="center"
+                    android:text="100.000"
+                    android:textColor="#223254"
+                    android:textSize="14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/magicTextView11"
+                    app:layout_constraintStart_toEndOf="@+id/barrier2"
+                    app:typeFace="HelveticaNeue_Regular.otf" />
+
+                <com.ivankocijan.magicviews.views.MagicButton
+                    android:id="@+id/bt_finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/et_password"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/gradient_6dp"
+                    android:elevation="1dp"
+                    android:gravity="center"
+                    android:paddingBottom="14dp"
+                    android:paddingEnd="118dp"
+                    android:paddingStart="118dp"
+                    android:paddingTop="16dp"
+                    android:text="@string/tv_wallet_025"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/magicTextView11"
+                    app:typeFace="HelveticaNeue_Medium.otf" />
+
+                <android.support.constraint.Barrier
+                    android:id="@+id/barrier2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="right"
+                    app:constraint_referenced_ids="magicTextView11,magicTextView10" />
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+    </LinearLayout>
+</layout>

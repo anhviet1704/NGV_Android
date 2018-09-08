@@ -143,4 +143,20 @@
     <string name="tv_wallet_007">Nạp vào</string>
     <string name="tv_wallet_008">Rút ra</string>
     <string name="tv_wallet_009">Thanh toán</string>
+    <string name="tv_wallet_010">Thêm liên kết</string>
+    <string name="tv_wallet_011">Liên kết để tiếp tục nạp</string>
+    <string name="tv_wallet_012">Liên kết</string>
+    <string name="tv_wallet_013">Lịch sử</string>
+    <string name="tv_wallet_014">Rút tiền</string>
+    <string name="tv_wallet_015">ATM/Internet Banking</string>
+    <string name="tv_wallet_016">Thẻ tín dụng</string>
+    <string name="tv_wallet_017">500.000</string>
+    <string name="tv_wallet_018">1.000.000</string>
+    <string name="tv_wallet_019">2.000.000</string>
+    <string name="tv_wallet_020">3.000.000</string>
+    <string name="tv_wallet_021">Chọn ngân hàng thanh toán</string>
+    <string name="tv_wallet_022">Tạm tính</string>
+    <string name="tv_wallet_023">Tài khoản hiện có</string>
+    <string name="tv_wallet_024">Tài khoản tạm tính</string>
+    <string name="tv_wallet_025">Nạp</string>
 </resources>

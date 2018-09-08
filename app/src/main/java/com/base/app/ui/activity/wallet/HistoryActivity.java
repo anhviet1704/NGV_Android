@@ -1,28 +1,54 @@
-package com.base.app.ui.activity;
+package com.base.app.ui.activity.wallet;
 
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.base.app.R;
 import com.base.app.base.BaseActivity;
-import com.base.app.databinding.ActivityWalletBinding;
 import com.base.app.model.WorkItem;
 import com.base.app.ui.adapter.HistoryAdapter;
 import com.base.app.ui.callback.OnClickItem;
 import com.base.app.viewmodel.WalletActivityVM;
+import com.github.florent37.shapeofview.shapes.RoundRectView;
+import com.ivankocijan.magicviews.views.MagicTextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class WalletActivity extends BaseActivity<WalletActivityVM, ActivityWalletBinding> {
 
+public class HistoryActivity extends BaseActivity<WalletActivityVM, ViewDataBinding> {
+
+
+    @BindView(R.id.iv_back)
+    ImageView mIvBack;
+    @BindView(R.id.view_toolbar)
+    RoundRectView mViewToolbar;
+    @BindView(R.id.view2)
+    View mView2;
+    @BindView(R.id.tv_type)
+    MagicTextView mTvType;
+    @BindView(R.id.iv_prev)
+    ImageView mIvPrev;
+    @BindView(R.id.iv_next)
+    ImageView mIvNext;
+    @BindView(R.id.rv_history)
+    RecyclerView mRvHistory;
+    @BindView(R.id.view_root)
+    ConstraintLayout mViewRoot;
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_wallet;
+        return R.layout.activity_wallet_history;
     }
 
     @Override
@@ -32,20 +58,7 @@ public class WalletActivity extends BaseActivity<WalletActivityVM, ActivityWalle
 
     @Override
     protected void onInit(Bundle instance) {
-        /*bind.btFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                *//*viewModel.updatePassWord(bind.etPassword.getText().toString()).observe(NewPassActivity.this, new Observer<ApiResponse<SchoolYearItem>>() {
-                    @Override
-                    public void onChanged(@Nullable ApiResponse<SchoolYearItem> schoolYearItemApiResponse) {
-                        Intent intent = new Intent(NewPassActivity.this, RegisterConfirmActivity.class);
-                        ActivityOptionsCompat options = ActivityOptionsCompat.makeClipRevealAnimation(bind.btFinish, 0, 0, 0, 0);
-                        startActivity(intent, options.toBundle());
-                    }
-                });*//*
-            }
-        });*/
 
         List<WorkItem> mWorkItems = new ArrayList<>();
         mWorkItems.add(new WorkItem(1, "askjdhakjs"));
@@ -65,8 +78,21 @@ public class WalletActivity extends BaseActivity<WalletActivityVM, ActivityWalle
                 startActivity(intent, options.toBundle());*/
             }
         });
-        bind.rvHistory.setLayoutManager(new LinearLayoutManager(this));
-        bind.rvHistory.setItemAnimator(new DefaultItemAnimator());
-        bind.rvHistory.setAdapter(mWorkAdapter);
+        mRvHistory.setLayoutManager(new LinearLayoutManager(this));
+        mRvHistory.setItemAnimator(new DefaultItemAnimator());
+        mRvHistory.setAdapter(mWorkAdapter);
+    }
+
+    @OnClick({R.id.iv_back, R.id.iv_prev, R.id.iv_next})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_back:
+                finish();
+                break;
+            case R.id.iv_prev:
+                break;
+            case R.id.iv_next:
+                break;
+        }
     }
 }

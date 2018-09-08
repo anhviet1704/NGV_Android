@@ -2,7 +2,6 @@ package com.base.app.ui.fragment;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -22,7 +21,7 @@ import com.base.app.ui.activity.ContactActivity;
 import com.base.app.ui.activity.LanguageActivity;
 import com.base.app.ui.activity.LoginActivity;
 import com.base.app.ui.activity.ProfileActivity;
-import com.base.app.ui.activity.WalletActivity;
+import com.base.app.ui.activity.wallet.WalletActivity;
 import com.base.app.utils.AppCons;
 import com.base.app.utils.NGVUtils;
 import com.base.app.utils.PrefHelper;

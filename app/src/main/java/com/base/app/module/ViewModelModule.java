@@ -12,6 +12,7 @@ import com.base.app.viewmodel.ForgotPassActivityVM;
 import com.base.app.viewmodel.JobFinishFragmentVM;
 import com.base.app.viewmodel.JobListFragmentVM;
 import com.base.app.viewmodel.JobRegisterFragmentVM;
+import com.base.app.viewmodel.LinkActivityVM;
 import com.base.app.viewmodel.WalletActivityVM;
 import com.base.app.viewmodel.WorkDetailActivityVM;
 import com.base.app.viewmodel.WorkListFragmentVM;
@@ -28,6 +29,11 @@ import dagger.multibindings.IntoMap;
 
 @Module
 public abstract class ViewModelModule {
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LinkActivityVM.class)
+    abstract ViewModel LinkActivityVM(LinkActivityVM viewModel);
 
     @Binds
     @IntoMap

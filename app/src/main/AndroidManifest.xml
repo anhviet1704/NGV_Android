@@ -90,7 +90,7 @@
             android:name=".ui.activity.ChangePassActivity"
             android:theme="@style/AppThemeNoToolBar" />
         <activity
-            android:name=".ui.activity.WalletActivity"
+            android:name=".ui.activity.wallet.WalletActivity"
             android:theme="@style/AppThemeNoToolBar" />
         <activity
             android:name=".ui.activity.AddressActivity"
@@ -100,6 +100,24 @@
             android:theme="@style/AppThemeNoToolBar" />
         <activity
             android:name=".ui.activity.ContactActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.LinkActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.CashOutActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.CashOutATMActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.CashOutCreaditActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.HistoryActivity"
+            android:theme="@style/AppThemeNoToolBar" />
+        <activity
+            android:name=".ui.activity.wallet.AddBankActivity"
             android:theme="@style/AppThemeNoToolBar" />
     </application>
 

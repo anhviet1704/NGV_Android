@@ -48,12 +48,12 @@ public class AddBankActivity extends BaseActivity<WalletActivityVM, ViewDataBind
 
     }
 
-    @OnClick({R.id.iv_back})
+   /* @OnClick({R.id.iv_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
         }
-    }
+    }*/
 }

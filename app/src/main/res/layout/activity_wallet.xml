@@ -49,29 +49,19 @@
             android:id="@+id/iv_cash_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="22dp"
-            android:src="@drawable/ic_nap"
+            android:src="@drawable/ic_rut"
             app:layout_constraintEnd_toStartOf="@+id/iv_cash_history"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/iv_link"
-            app:layout_constraintTop_toBottomOf="@+id/view_toolbar" />
-
-        <ImageView
-            android:id="@+id/iv_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_lienket"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_cash_out"
-            app:layout_constraintEnd_toStartOf="@+id/iv_cash_out"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/iv_cash_out" />
+            app:layout_constraintTop_toBottomOf="@+id/view_toolbar" />
 
         <ImageView
             android:id="@+id/iv_cash_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_ruttien"
+            android:src="@drawable/ic_history"
             app:layout_constraintBottom_toBottomOf="@+id/iv_cash_out"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -79,26 +69,12 @@
             app:layout_constraintTop_toTopOf="@+id/iv_cash_out" />
 
         <com.ivankocijan.magicviews.views.MagicTextView
-            android:id="@+id/magicTextView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="@string/tv_wallet_001"
-            android:textColor="#223254"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/iv_link"
-            app:layout_constraintStart_toStartOf="@+id/iv_link"
-            app:layout_constraintTop_toBottomOf="@+id/iv_link"
-            app:typeFace="HelveticaNeue_Regular.otf" />
-
-        <com.ivankocijan.magicviews.views.MagicTextView
             android:id="@+id/magicTextView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="@string/tv_wallet_002"
+            android:text="@string/tv_wallet_003"
             android:textColor="#223254"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_cash_out"
@@ -111,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="@string/tv_wallet_003"
+            android:text="@string/tv_wallet_027"
             android:textColor="#223254"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_cash_history"
@@ -150,7 +126,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:gravity="center"
-                    android:text="100.000"
+                    android:text="0"
                     android:textColor="#1C2D51"
                     android:textSize="36sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +151,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="@string/tv_wallet_004"
                     android:textColor="#1C2D51"

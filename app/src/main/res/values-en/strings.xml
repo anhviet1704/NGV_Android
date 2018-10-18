@@ -1,20 +1,25 @@
 <resources>
-    <string name="app_name">NGV</string>
+    <string name="app_name">NGV Maid</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-    <string name="FACEBOOK_APP_ID">319409295264859</string>
-    <string name="ACCOUNT_KIT_CLIENT_TOKEN">fdd999d2726df1108d8ac99951055e25</string>
+    <string name="FACEBOOK_APP_ID">820951104960870</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">3e9681621a56901e9abf9514ecd2cfae</string>
 
     <string name="tv_error_01">Vui lòng nhập đủ thông tin</string>
     <string name="tv_error_02">Vui lòng cấp quyền cho ứng dụng</string>
+    <string name="tv_error_03">Lỗi</string>
+    <string name="tv_error_04">Đã xảy ra lỗi xác thực, vui lòng đăng nhập lại</string>
+    <string name="tv_error_05">Đồng ý</string>
+    <string name="tv_error_06">Không có dữ liệu</string>
 
     <string name="tv_login_001"><u>Đăng ký tài khoản</u></string>
     <string name="tv_login_002">Số điện thoại</string>
     <string name="tv_login_003">Mật khẩu</string>
     <string name="tv_login_004">Quên mật khẩu</string>
     <string name="tv_login_005">Đang tải dữ liệu</string>
+    <string name="tv_login_006">Đổi mật khẩu thành công, vui lòng đăng nhập lại</string>
 
     <string name="tv_register_001">Đăng ký tài khoản</string>
     <string name="tv_register_002">Xin chào, để bắt đầu tham gia bạn vui lòng cung cấp một vài thông tin!</string>
@@ -40,7 +45,7 @@
     <string name="tv_register_022">Nhập mã xác nhận</string>
     <string name="tv_register_023"><u>Gửi lại mã</u></string>
     <string name="tv_register_024"><u>Đã có mã</u></string>
-    <string name="tv_register_025">lấy mã xác nhận</string>
+    <string name="tv_register_025">Lấy mã xác nhận</string>
     <string name="tv_register_027">Nhập số điện thoại bạn dùng đăng ký trước đó với hệ thống!</string>
     <string name="tv_register_028">Chọn công việc thực hiện</string>
     <string name="tv_register_029">Gửi chào giá</string>
@@ -61,6 +66,7 @@
     <string name="tv_home_008">Đóng</string>
     <string name="tv_home_009">Tìm kiếm</string>
     <string name="tv_home_010">%1d giờ %2d phút</string>
+    <string name="tv_home_011">Tìm người giúp việc</string>
 
     <string name="tv_work_001">Đăng ký công việc</string>
     <string name="tv_work_002">Thời gian</string>
@@ -89,12 +95,14 @@
     <string name="tv_work_025">Địa chỉ: %s</string>
     <string name="tv_work_026">Ngày đăng ký: %s</string>
     <string name="tv_work_027">Đã thanh toán: %s</string>
+    <string name="tv_work_028">Thành tiền: %s</string>
+    <string name="tv_work_029">đ</string>
 
-    <string name="tv_setting_001">Payment</string>
-    <string name="tv_setting_002">Change password</string>
-    <string name="tv_setting_003">Change language</string>
-    <string name="tv_setting_004">About</string>
-    <string name="tv_setting_005">Log out</string>
+    <string name="tv_setting_001">Ví thanh toán</string>
+    <string name="tv_setting_002">Đổi mật khẩu</string>
+    <string name="tv_setting_003">Đổi ngôn ngữ</string>
+    <string name="tv_setting_004">Giới thiệu ứng dụng</string>
+    <string name="tv_setting_005">Đăng xuất</string>
     <string name="tv_setting_006">Ngày sinh</string>
     <string name="tv_setting_007">Số điện thoại</string>
     <string name="tv_setting_008">Email</string>
@@ -105,6 +113,15 @@
     <string name="tv_setting_013">Tiếng Anh</string>
     <string name="tv_setting_014">Ngôn ngữ</string>
     <string name="tv_setting_015">Chọn ngôn ngữ này</string>
+    <string name="tv_setting_016">Liên hệ tổng đài</string>
+    <string name="tv_setting_017">Thông tin liên hệ</string>
+    <string name="tv_setting_018">Hotline</string>
+    <string name="tv_setting_019">Số điện thoại</string>
+    <string name="tv_setting_020">Email</string>
+    <string name="tv_setting_021">Trụ sở</string>
+    <string name="tv_setting_022">Gọi hỗ trợ</string>
+    <string name="tv_setting_023">Thông tin cá nhân</string>
+    <string name="tv_setting_024">Vui lòng chọn</string>
 
     <string name="tv_user_001">Thành viên chính thức</string>
     <string name="tv_user_002">Lịch sử công việc</string>
@@ -126,4 +143,149 @@
     <string name="tv_wallet_007">Nạp vào</string>
     <string name="tv_wallet_008">Rút ra</string>
     <string name="tv_wallet_009">Thanh toán</string>
+    <string name="tv_wallet_010">Thêm liên kết</string>
+    <string name="tv_wallet_011">Liên kết để tiếp tục nạp</string>
+    <string name="tv_wallet_012">Liên kết</string>
+    <string name="tv_wallet_013">Lịch sử</string>
+    <string name="tv_wallet_014">Rút tiền</string>
+    <string name="tv_wallet_015">ATM/Internet Banking</string>
+    <string name="tv_wallet_016">Thẻ tín dụng</string>
+    <string name="tv_wallet_017">500.000</string>
+    <string name="tv_wallet_018">1.000.000</string>
+    <string name="tv_wallet_019">2.000.000</string>
+    <string name="tv_wallet_020">3.000.000</string>
+    <string name="tv_wallet_021">Chọn ngân hàng thanh toán</string>
+    <string name="tv_wallet_022">Tạm tính</string>
+    <string name="tv_wallet_023">Tài khoản hiện có</string>
+    <string name="tv_wallet_024">Tài khoản tạm tính</string>
+    <string name="tv_wallet_025">Nạp</string>
+    <string name="tv_wallet_026">Nhập số tiền</string>
+    <string name="tv_wallet_027">Lịch sử\ngiao dịch</string>
+    <string name="tv_wallet_028">Nạp tiền</string>
+    <string name="tv_wallet_029">Liên kết thẻ thành công</string>
+    <string name="tv_wallet_030">Nạp tiền thành công</string>
+    <string name="tv_wallet_031">Thành công</string>
+    <string name="tv_wallet_032">Nạp vào ví +%s</string>
+    <string name="tv_wallet_033">Ngân hàng liên kết</string>
+    <string name="tv_wallet_034">Thành công</string>
+    <string name="tv_wallet_035">Thất bại</string>
+    <string name="tv_wallet_036">Đang chờ</string>
+    <string name="tv_wallet_037">Tài khoản</string>
+    <string name="tv_wallet_038">Mã số</string>
+    <string name="tv_wallet_039"><u>Hủy liên kết</u></string>
+    <string name="tv_wallet_040">Giao dịch số %s đã thành công</string>
+    <string name="tv_wallet_041">Giao dịch số %s đang chờ xử lý</string>
+    <string name="tv_wallet_042">Giao dịch số %s đã thất bại</string>
+
+    <string name="error_01">Lỗi không xác định</string>
+    <string name="error_02">merchant_id không tồn tại</string>
+    <string name="error_04">checksum không đúng</string>
+    <string name="error_05">Không ghi nhận được đơn hàng trên cổng thanh toán</string>
+    <string name="error_06">token_code không tồn tại hoặc không hợp lệ</string>
+    <string name="error_07">Đơn hàng chưa được thanh toán</string>
+    <string name="error_09">receiver_email không tồn tại</string>
+    <string name="error_11">receiver_email đang bị khóa hoặc phong tỏa không thể giao dịch</string>
+    <string name="error_20">function không đúng</string>
+    <string name="error_21">version không đúng hoặc không tồn tại</string>
+    <string name="error_22">Thiếu tham số đầu vào</string>
+    <string name="error_23">order_code mã đơn hàng không hợp lệ</string>
+    <string name="error_24">total_amount không hợp lệ</string>
+    <string name="error_25">currency không hợp lệ</string>
+    <string name="error_26">language không hợp lệ</string>
+    <string name="error_27">return_url không hợp lệ</string>
+    <string name="error_28">cancel_url không hợp lệ</string>
+    <string name="error_29">notify_url không hợp lệ</string>
+    <string name="error_30">buyer_fullname không hợp lệ</string>
+    <string name="error_31">buyer_email không hợp lệ</string>
+    <string name="error_32">buyer_mobile không hợp lệ</string>
+    <string name="error_33">buyer_address không hợp lệ</string>
+
+    <string-array name="alepay_bank_code">
+        <item>AGB</item>
+        <item>BAB</item>
+        <item>BIDV</item>
+        <item>EXB</item>
+        <item>MSB</item>
+        <item>STB</item>
+        <item>SGB</item>
+        <item>NCB</item>
+        <item>PGB</item>
+        <item>GPB</item>
+        <item>ICB</item>
+        <item>TCB</item>
+        <item>TPB</item>
+        <item>VAB</item>
+        <item>VIB</item>
+        <item>VCB</item>
+        <item>DAB</item>
+        <item>MB</item>
+        <item>ACB</item>
+        <item>HDB</item>
+        <item>VPB</item>
+        <item>OJB</item>
+        <item>SHB</item>
+        <item>NAB</item>
+        <item>BVB</item>
+        <item>CTB</item>
+        <item>KLB</item>
+        <item>GDB</item>
+        <item>PVcomBank</item>
+        <item>KB</item>
+        <item>GTB</item>
+        <item>SCB</item>
+        <item>SHNB</item>
+        <item>HSB</item>
+        <item>SC</item>
+        <item>ANZ</item>
+        <item>ABB</item>
+        <item>GAB</item>
+        <item>OCB</item>
+        <item>SEA</item>
+        <item>NVB</item>
+    </string-array>
+    <string-array name="alepay_bank_name">
+        <item>Ngân hàng Nông nghiệp và Phát triển Nông thôn (Agribank)</item>
+        <item>Ngân hàng TMCP Bắc Á (Bac A Bank)</item>
+        <item>Ngân hàng Đầu tư và Phát triển Việt Nam (BIDV)</item>
+        <item>Ngân hàng TMCP Xuất Nhập Khẩu (Eximbank)</item>
+        <item>Ngân hàng TMCP Hàng Hải (MaritimeBank)</item>
+        <item>Ngân hàng TMCP Sài Gòn Thương Tín (Sacombank)</item>
+        <item>Ngân hàng Sài Gòn Công Thương (Saigon Bank)</item>
+        <item>Ngân Hàng Quốc Dân</item>
+        <item>Ngân Hàng TMCP Xăng Dầu Petrolimex (PGBank)</item>
+        <item>Ngân Hàng Dầu Khí Toàn Cầu (GPBank)</item>
+        <item>Ngân hàng TMCP Công Thương (VietinBank)</item>
+        <item>Ngân hàng TMCP Kỹ Thương (Techcombank)</item>
+        <item>Ngân hàng TMCP Tiên Phong (TienPhongBank)</item>
+        <item>Ngân hàng TMCP Việt Á (VietABank)</item>
+        <item>Ngân hàng TMCP Quốc tế (VIB)</item>
+        <item>Ngân hàng TMCP Ngoại Thương Việt Nam (Vietcombank)</item>
+        <item>Ngân hàng TMCP Đông Á (DongA Bank)</item>
+        <item>Ngân hàng TMCP Quân Đội (MB)</item>
+        <item>Ngân hàng TMCP Á Châu (ACB)</item>
+        <item>Ngân hàng TMCP Phát Triển Nhà TP. Hồ Chí Minh (HDBank)</item>
+        <item>Ngân hàng TMCP Việt Nam Thịnh Vượng(VPBank)</item>
+        <item>Ngân hàng TMCP Đại Dương (OceanBank)</item>
+        <item>Ngân hàng TMCP Sài Gòn - Hà Nội (SHB)</item>
+        <item>Ngân hàng Nam Á (NamABank)</item>
+        <item>Ngân hàng Bảo Việt</item>
+        <item>Ngân hàng Citibank</item>
+        <item>Ngân hàng TMCP Kiên Long</item>
+        <item>Ngân hàng Thương mại Cổ phần Bản Việt</item>
+        <item>Ngân hàng TMCP Đại Chúng Việt Nam</item>
+        <item>Ngân hàng KB Kookmin</item>
+        <item>Global Trust Bank</item>
+        <item>Ngân hàng TMCP Sài Gòn</item>
+        <item>Ngân hàng SHINHAN</item>
+        <item>Ngân hàng HSBC Việt Nam</item>
+        <item>Ngân hàng Standard Chartered Bank</item>
+        <item>Ngân hàng ANZ</item>
+        <item>Ngân hàng TMCP An Bình</item>
+        <item>Ngân hàng TMCP Đại Á</item>
+        <item>Ngân Hàng Phương Đông Việt Nam</item>
+        <item>Ngân hàng Đại Dương</item>
+        <item>Ngân hàng TMCP Quốc Dân</item>
+    </string-array>
+
+
 </resources>
